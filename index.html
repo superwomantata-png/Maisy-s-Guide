@@ -1,0 +1,1861 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7ecd7">
+<title>小鼠波波交通工具 · 亲子共读指南</title>
+<style>
+:root{
+  --bg:#fdf6e8;
+  --bg-alt:#fbeed3;
+  --ink:#3a2c1a;
+  --ink-soft:#7b6a52;
+  --line:#e8dbc0;
+  --card:#ffffff;
+  --shadow:0 2px 10px rgba(120,90,40,.08),0 12px 24px -12px rgba(120,90,40,.14);
+  --radius:18px;
+  --font-body:16px;
+  --font-script:20px;
+  --font-h:22px;
+  --pad:16px;
+  --gap:14px;
+  --accent:#e08a3c;
+  --accent-soft:#fce4c4;
+  --chip:#f2e2c1;
+  --chip-ink:#7a5a20;
+  --bus:#7cc576;
+  --race:#e74c3c;
+  --train:#5db7de;
+  --plane:#3498db;
+  --fire:#c0392b;
+  --digger:#f39c12;
+  --amb:#16a085;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#2a2216;
+    --bg-alt:#372c1c;
+    --ink:#f4e6cc;
+    --ink-soft:#c2ae8b;
+    --line:#4a3c26;
+    --card:#3a2e1e;
+    --shadow:0 2px 10px rgba(0,0,0,.4),0 12px 24px -12px rgba(0,0,0,.5);
+    --accent:#f0a558;
+    --accent-soft:#5a3f22;
+    --chip:#4c3b20;
+    --chip-ink:#f0c890;
+  }
+}
+body.elder{
+  --font-body:20px;
+  --font-script:26px;
+  --font-h:26px;
+  --pad:20px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  font-size:var(--font-body);
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+  padding-bottom:60px;
+}
+/* Sticky header container: 把 topbar + tabs 打包整体 sticky，避免 tabs top 硬编码在窄屏溢出 */
+.sticky-header{
+  position:sticky;top:0;z-index:20;
+  background:var(--bg);
+}
+/* Top bar */
+.topbar{
+  background:var(--bg);
+  border-bottom:1px solid var(--line);
+  padding:10px var(--pad) 8px;
+}
+.topbar h1{
+  font-size:var(--font-h);
+  margin:0 0 8px;
+  font-weight:800;
+  letter-spacing:.01em;
+}
+.topbar h1 .emoji{margin-right:6px}
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:8px;
+  font-size:14px;
+}
+.toolbar button{
+  border:1px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  border-radius:20px;
+  padding:6px 12px;
+  font-size:13px;
+  cursor:pointer;
+  transition:all .15s;
+  font-family:inherit;
+}
+.toolbar button.on{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+.toolbar button:active{transform:scale(.96)}
+/* Tabs（不再单独 sticky，由 .sticky-header 统一管理） */
+.tabs{
+  display:flex;gap:6px;
+  overflow-x:auto;
+  padding:8px var(--pad) 8px;
+  scrollbar-width:none;
+  background:var(--bg);
+  border-bottom:1px solid var(--line);
+  -webkit-overflow-scrolling:touch;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;
+  border:2px solid var(--line);
+  background:var(--card);
+  color:var(--ink);
+  border-radius:14px;
+  padding:8px 14px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .15s;
+  font-family:inherit;
+  white-space:nowrap;
+}
+.tab .emoji{margin-right:4px}
+.tab.active{color:#fff;transform:translateY(-1px)}
+.tab.intro.active{background:var(--accent);border-color:var(--accent)}
+.tab.bus.active{background:var(--bus);border-color:var(--bus)}
+.tab.race.active{background:var(--race);border-color:var(--race)}
+.tab.train.active{background:var(--train);border-color:var(--train)}
+.tab.fire.active{background:var(--fire);border-color:var(--fire)}
+/* Section */
+main{padding:var(--pad)}
+.section{display:none;animation:fade .25s ease}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2.book-title{
+  font-size:24px;font-weight:800;margin:8px 0 4px;
+  display:flex;align-items:center;gap:8px;
+}
+h2.book-title .dot{
+  width:12px;height:12px;border-radius:50%;
+}
+.book-sub{
+  color:var(--ink-soft);font-size:14px;margin:0 0 var(--gap);
+}
+.book-meta{
+  background:var(--bg-alt);
+  border-radius:var(--radius);
+  padding:12px 14px;
+  margin:0 0 var(--gap);
+  font-size:14px;
+  line-height:1.6;
+  border:1px solid var(--line);
+}
+.book-meta b{color:var(--accent)}
+/* Page card */
+.page{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:14px 16px 12px;
+  margin:0 0 var(--gap);
+  box-shadow:var(--shadow);
+  border-top:4px solid var(--accent);
+}
+.page.bus{border-top-color:var(--bus)}
+.page.race{border-top-color:var(--race)}
+.page.train{border-top-color:var(--train)}
+.page.fire{border-top-color:var(--fire)}
+.page-head{
+  display:flex;align-items:center;gap:8px;
+  margin:0 0 10px;
+  font-weight:700;
+  font-size:15px;
+  color:var(--ink-soft);
+}
+.page-num{
+  background:var(--chip);
+  color:var(--chip-ink);
+  padding:2px 10px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:700;
+}
+.page-title{flex:1;font-size:14px;font-weight:600}
+.script{
+  font-size:var(--font-script);
+  font-weight:700;
+  line-height:1.55;
+  margin:6px 0 4px;
+  color:var(--ink);
+}
+.script b, .script strong{color:var(--accent);font-weight:800}
+.action{
+  display:inline-block;
+  color:var(--ink-soft);
+  font-size:13px;
+  font-weight:500;
+  background:var(--accent-soft);
+  padding:1px 8px;
+  border-radius:8px;
+  margin:0 3px;
+}
+.pinyin{
+  color:var(--ink-soft);
+  font-size:14px;
+  margin:2px 0 10px;
+  padding-left:6px;
+  border-left:3px solid var(--chip);
+  display:none;
+}
+body.show-pinyin .pinyin{display:block}
+.anchors{
+  display:flex;flex-wrap:wrap;gap:6px;
+  margin:8px 0;
+}
+.chip{
+  background:var(--chip);
+  color:var(--chip-ink);
+  padding:3px 10px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:600;
+}
+.tpr{
+  margin:8px 0 6px;
+  padding:8px 10px;
+  background:var(--bg-alt);
+  border-radius:10px;
+  font-size:14px;
+  color:var(--ink);
+}
+.tpr::before{content:"🎭 ";margin-right:2px}
+.why-toggle{
+  cursor:pointer;
+  color:var(--accent);
+  font-size:13px;
+  font-weight:600;
+  padding:4px 0;
+  user-select:none;
+  display:inline-block;
+}
+.why-toggle::before{content:"💡 ";}
+.why-toggle::after{content:" ▸";font-size:11px;transition:transform .2s;display:inline-block}
+.why-toggle.open::after{transform:rotate(90deg)}
+.why{
+  display:none;
+  font-size:13px;
+  color:var(--ink-soft);
+  line-height:1.6;
+  padding:6px 0 2px;
+  border-top:1px dashed var(--line);
+  margin-top:4px;
+}
+.why.open{display:block}
+body.elder .why-toggle, body.elder .why{display:none !important}
+
+/* Intro / static */
+.intro-block{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:16px 18px;
+  margin:0 0 var(--gap);
+  box-shadow:var(--shadow);
+}
+.intro-block h3{
+  font-size:18px;margin:0 0 8px;
+  color:var(--accent);
+  display:flex;align-items:center;gap:6px;
+}
+.intro-block h3 .emoji{font-size:20px}
+.intro-block p, .intro-block li{font-size:15px;line-height:1.7}
+.intro-block ul{padding-left:22px;margin:6px 0}
+.intro-block ol{padding-left:22px;margin:6px 0}
+.principle{
+  background:var(--bg-alt);
+  border-radius:12px;
+  padding:10px 12px;
+  margin:8px 0;
+  font-size:15px;
+}
+.principle b{color:var(--accent)}
+.elder-tips{
+  background:linear-gradient(135deg,#ffe4b8,#ffcf85);
+  color:#5a3a10;
+  border-radius:14px;
+  padding:14px 16px;
+  margin:10px 0;
+}
+@media (prefers-color-scheme: dark){
+  .elder-tips{
+    background:linear-gradient(135deg,#5c4223,#7a5928);
+    color:#ffe6b8;
+  }
+}
+.elder-tips h4{margin:0 0 8px;font-size:16px}
+.elder-tips ol{padding-left:22px;margin:4px 0}
+.warn-list li{margin:6px 0;font-size:14px}
+.warn-list .bad{color:#c0392b;font-weight:700;margin-right:4px}
+.warn-list .good{color:#27ae60;font-weight:700;margin-right:4px}
+
+/* Schedule table */
+.sched{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+  margin:8px 0;
+}
+.sched th, .sched td{
+  border:1px solid var(--line);
+  padding:8px 6px;
+  text-align:center;
+}
+.sched th{background:var(--bg-alt);color:var(--accent);font-weight:700}
+
+/* Book list */
+.booklist{list-style:none;padding:0;margin:8px 0}
+.booklist li{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;
+  border-bottom:1px solid var(--line);
+  font-size:15px;
+}
+.booklist li:last-child{border-bottom:none}
+.booklist .em{font-size:22px}
+.booklist .name{flex:1;font-weight:600}
+.booklist .st{font-size:12px;padding:2px 8px;border-radius:10px}
+.booklist .done{background:#d4edda;color:#155724}
+.booklist .pending{background:#e4e6ea;color:#666}
+@media (prefers-color-scheme: dark){
+  .booklist .done{background:#2d5a3a;color:#a8e0b5}
+  .booklist .pending{background:#3a3a3a;color:#aaa}
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:24px 16px 40px;
+  color:var(--ink-soft);
+  font-size:12px;
+  line-height:1.6;
+}
+footer .hearts{font-size:18px;margin:6px 0}
+
+/* ===== v3 新增组件 ===== */
+
+/* 每本书副标题下的一句话重定位 */
+.book-redefine{
+  background:var(--bg-alt);
+  border-left:4px solid var(--accent);
+  padding:10px 14px;
+  border-radius:0 12px 12px 0;
+  margin:0 0 var(--gap);
+  font-size:14px;
+  line-height:1.6;
+  color:var(--ink);
+}
+.book-redefine b{color:var(--accent)}
+.page.bus ~ .book-redefine, .section[data-id=bus] .book-redefine{border-left-color:var(--bus)}
+.section[data-id=race] .book-redefine{border-left-color:var(--race)}
+.section[data-id=train] .book-redefine{border-left-color:var(--train)}
+
+/* 本页重点色带 */
+.page-focus{
+  background:var(--accent);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:12px;
+  margin:6px 0 10px;
+  font-size:14px;
+  line-height:1.5;
+  font-weight:600;
+}
+.page-focus .focus-not{opacity:.82;text-decoration:line-through;text-decoration-thickness:1px;margin-right:6px}
+.page-focus .focus-but{}
+.page-focus::before{content:"🎯 ";margin-right:2px}
+.page.bus .page-focus{background:var(--bus)}
+.page.race .page-focus{background:var(--race)}
+.page.train .page-focus{background:var(--train)}
+.page.fire .page-focus{background:var(--fire)}
+body.elder .page-focus{font-size:16px}
+
+/* 短语列表（家长照读稿：分栏 grid + 双标注音） */
+.phrase-list{
+  margin:10px 0;
+  padding:12px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:8px;
+}
+@media (min-width: 640px){
+  .phrase-list{grid-template-columns:repeat(3, minmax(0, 1fr));}
+}
+body.elder .phrase-list{grid-template-columns:repeat(2, minmax(0, 1fr));}
+.phrase-item{
+  padding:8px 10px;
+  background:var(--bg-alt);
+  border-radius:10px;
+  min-width:0;
+}
+.phrase-en{
+  font-size:var(--font-script);
+  font-weight:700;
+  color:var(--ink);
+  line-height:1.3;
+  letter-spacing:.01em;
+  word-break:break-word;
+}
+.phrase-zh{
+  font-size:13px;
+  color:var(--ink-soft);
+  margin-top:3px;
+  line-height:1.5;
+  display:none;
+  letter-spacing:.02em;
+  word-break:break-word;
+}
+.phrase-zh .hz{color:var(--ink);opacity:.75}
+.phrase-ipa{
+  display:none;
+  font-size:13px;
+  color:var(--accent);
+  margin-top:3px;
+  line-height:1.5;
+  font-family:"Charis SIL","Doulos SIL","Lucida Sans Unicode","Segoe UI",serif;
+  letter-spacing:.03em;
+  word-break:break-word;
+}
+/* 默认（爸妈模式）+ 注音开：显示 IPA */
+body.show-pinyin:not(.elder) .phrase-ipa{display:block}
+/* 老人模式 + 注音开：显示拼音，隐藏 IPA */
+body.elder.show-pinyin .phrase-zh{display:block}
+body.elder .phrase-ipa{display:none !important}
+body.elder .phrase-zh{font-size:15px;color:var(--ink)}
+
+/* 家长-孩子对答（微信风格：头像外侧 + 左右分明） */
+.qa-block{
+  margin:10px 0;
+  padding:12px 10px 14px;
+  background:var(--bg-alt);
+  border-radius:12px;
+}
+.qa-block::before{
+  content:"💬 一起聊";
+  display:block;
+  font-size:12px;
+  color:var(--ink-soft);
+  margin-bottom:10px;
+  letter-spacing:.04em;
+  font-weight:600;
+}
+.qa-round{display:flex;flex-direction:column;gap:12px}
+.qa-turn{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+}
+.qa-turn.parent{justify-content:flex-start}
+.qa-turn.child{justify-content:flex-end;flex-direction:row-reverse}
+.qa-avatar{
+  flex-shrink:0;
+  width:44px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+}
+.qa-avatar .emoji{
+  font-size:28px;
+  line-height:1;
+}
+.qa-avatar .who{
+  font-size:11px;
+  color:var(--ink-soft);
+  font-weight:600;
+  letter-spacing:.05em;
+}
+.qa-bubble{
+  max-width:calc(100% - 60px);
+  padding:8px 12px;
+  border-radius:14px;
+  font-size:15px;
+  line-height:1.5;
+}
+.qa-turn.parent .qa-bubble{
+  background:#f5c65e;
+  color:#3a2410;
+  border-top-left-radius:4px;
+}
+.qa-turn.child .qa-bubble{
+  background:#7cc576;
+  color:#0f3a1a;
+  border-top-right-radius:4px;
+}
+@media (prefers-color-scheme:dark){
+  .qa-turn.parent .qa-bubble{background:#8a6a20;color:#fff4cf}
+  .qa-turn.child .qa-bubble{background:#3d7345;color:#e8ffe5}
+}
+body.elder .qa-bubble{font-size:17px}
+body.elder .qa-avatar .emoji{font-size:34px}
+
+/* Anchors 重点词（英+中双语） */
+.anchors-label{
+  font-size:12px;
+  color:var(--ink-soft);
+  margin:10px 0 4px;
+  letter-spacing:.04em;
+  font-weight:600;
+}
+.chip .chip-zh{
+  font-size:12px;
+  color:var(--chip-ink);
+  opacity:.7;
+  font-weight:500;
+  margin-left:3px;
+}
+body.elder .chip .chip-zh{font-size:14px;opacity:1}
+
+/* 故事原文逐句（每本书顶部） */
+.story-lines{
+  margin:0 0 var(--gap);
+  padding:12px 14px 10px;
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border-left:4px solid var(--accent);
+}
+.section[data-id=race] .story-lines{border-left-color:var(--race)}
+.section[data-id=bus] .story-lines{border-left-color:var(--bus)}
+.section[data-id=train] .story-lines{border-left-color:var(--train)}
+.section[data-id=fire] .story-lines{border-left-color:var(--fire)}
+.story-lines::before{
+  content:"📖 故事原文";
+  display:block;
+  font-size:13px;
+  color:var(--ink-soft);
+  font-weight:700;
+  margin-bottom:8px;
+  letter-spacing:.05em;
+}
+.sl{
+  padding:6px 0;
+  border-bottom:1px dashed var(--line);
+}
+.sl:last-child{border-bottom:none}
+.sl-en{
+  font-size:15px;
+  font-weight:600;
+  color:var(--ink);
+  line-height:1.5;
+}
+.sl-zh{
+  font-size:13px;
+  color:var(--ink-soft);
+  line-height:1.5;
+  margin-top:2px;
+}
+body.elder .sl-en{font-size:18px}
+body.elder .sl-zh{font-size:15px;color:var(--ink)}
+
+/* 五层阅读法（intro） */
+.five-layers{margin:6px 0 0}
+.layer{
+  display:flex;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.layer:last-child{border-bottom:none}
+.layer-num{
+  flex-shrink:0;
+  width:34px;height:34px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:17px;
+}
+.layer-body{flex:1;min-width:0}
+.layer-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.4}
+.layer-desc{font-size:14px;color:var(--ink-soft);margin-bottom:6px;line-height:1.6}
+.layer-examples{display:flex;flex-wrap:wrap;gap:5px}
+.layer-examples .ex{
+  background:var(--chip);
+  color:var(--chip-ink);
+  padding:3px 9px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:500;
+}
+.five-layers-intro{
+  background:var(--accent-soft);
+  color:var(--ink);
+  padding:10px 14px;
+  border-radius:12px;
+  margin-bottom:10px;
+  font-size:14px;
+  line-height:1.7;
+}
+</style>
+</head>
+<body class="show-pinyin">
+
+<div class="sticky-header">
+  <div class="topbar">
+    <h1><span class="emoji">📖</span>小鼠波波亲子共读</h1>
+    <div class="toolbar">
+      <button id="btn-elder" class="btn-toggle">👴 老人模式</button>
+      <button id="btn-pinyin" class="btn-toggle on">🔤 注音</button>
+      <button id="btn-layers" class="btn-toggle">📚 五层法</button>
+      <button id="btn-why" class="btn-toggle">💡 展开原理</button>
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</div>
+
+<main>
+  <!-- Intro section -->
+  <section class="section active" data-id="intro">
+
+    <div class="intro-block">
+      <h3><span class="emoji">🎯</span>目标：让孩子爱上书</h3>
+      <p>启蒙成功不是孩子能背单词，而是——<b>他主动把书拿给你说 "Read!"</b>。<br>
+        2 岁窗口最珍贵的不是词汇量，是"我喜欢读书"这个身份认同。</p>
+      <p style="font-size:14px;color:var(--ink-soft);margin-top:8px">👦 孩子零基础 · 👨‍👩‍👧 主家长英语流利 · 👴 老人也能带读（点上面"老人模式"）</p>
+    </div>
+
+    <div class="intro-block" id="five-layers-block">
+      <h3><span class="emoji">📚</span>五层阅读法：一本书分 5 遍读</h3>
+      <div class="five-layers-intro">
+        一本书<b>不用一次读完</b>。5 分钟为限，5 遍分开读，每次侧重不同层次——这符合 2 岁认知特点：注意力短、动作先于故事、喜欢重复、参与感强。
+      </div>
+      <div class="five-layers">
+        <div class="layer">
+          <div class="layer-num">1</div>
+          <div class="layer-body">
+            <div class="layer-name">只看图（培养观察力）</div>
+            <div class="layer-desc">不读文字，只指图问问题，让孩子自己发现画面。2 岁孩子最爱做的事就是 Find / Point to / Where is。</div>
+            <div class="layer-examples">
+              <span class="ex">Where is...?</span>
+              <span class="ex">What color?</span>
+              <span class="ex">Who's this?</span>
+              <span class="ex">Can you find...?</span>
+              <span class="ex">Point to...</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num">2</div>
+          <div class="layer-body">
+            <div class="layer-name">拟声词大集合（不解释，直接演）</div>
+            <div class="layer-desc">拟声词跨语言最容易学。说 Vroom 时手推小车从孩子腿上"开"过去——这就是英语输入，不需要翻译。</div>
+            <div class="layer-examples">
+              <span class="ex">Vroom!</span>
+              <span class="ex">Zoom!</span>
+              <span class="ex">Splash!</span>
+              <span class="ex">Toot-toot!</span>
+              <span class="ex">Honk!</span>
+              <span class="ex">Beep!</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num">3</div>
+          <div class="layer-body">
+            <div class="layer-name">每页照读稿（短语式，不追求整句）</div>
+            <div class="layer-desc">见每本书的页级卡片。<b>不逐字念原文</b>——2 岁孩子听的是节奏和情境。家长可以按顺序说，也可以只说重点。</div>
+            <div class="layer-examples">
+              <span class="ex">Look! Maisy!</span>
+              <span class="ex">Ready. Set. GO!</span>
+              <span class="ex">Yay!</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num">4</div>
+          <div class="layer-body">
+            <div class="layer-name">加动作 TPR（身体记住的比耳朵深 10 倍）</div>
+            <div class="layer-desc">Total Physical Response —— 每个词配一个动作。说 Go 就跑，说 Stop 就停。孩子会主动模仿。</div>
+            <div class="layer-examples">
+              <span class="ex">Go 跑</span>
+              <span class="ex">Stop 停</span>
+              <span class="ex">Fast 快</span>
+              <span class="ex">Slow 慢</span>
+              <span class="ex">Turn 转</span>
+              <span class="ex">Clap 拍手</span>
+              <span class="ex">Wave 挥手</span>
+              <span class="ex">Cheer 欢呼</span>
+            </div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-num">5</div>
+          <div class="layer-body">
+            <div class="layer-name">扩展到生活（让绘本走出书本）</div>
+            <div class="layer-desc">读完不要就结束——回到生活里继续玩。把英语和真实动作、情境建立连接，比再读一遍效果还好。</div>
+            <div class="layer-examples">
+              <span class="ex">家里小车玩 Ready-Set-Go</span>
+              <span class="ex">积木搭赛道</span>
+              <span class="ex">爸妈比赛跑给孩子看</span>
+              <span class="ex">睡前重演故事</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-block">
+      <h3><span class="emoji">🀄</span>中英文怎么混：情境优先、中文救急</h3>
+      <p style="font-size:14px">基于 Krashen 输入假说 + Cummins 双语理论，2 岁零基础娃的策略：</p>
+      <ul style="font-size:14px">
+        <li><b>英语为主</b>：故事内讲述、拟声、动作、社交套语全用英文</li>
+        <li><b>情境优先</b>：说英文同步做动作、指图、变表情</li>
+        <li><b>中文救急桥接</b>：孩子明显困惑时用<b>一句</b>中文点破 → 立刻回到英文重复</li>
+        <li>❌ "Splash 就是溅水的意思"（逐词翻译，破坏语感）</li>
+        <li>✅ "Splash splash!（拍水动作）就是这样在水里啪嗒啪嗒——splash splash!"（情境嵌入）</li>
+        <li><b>故事外情绪对话用中文</b>：读完可以说"刚才那本你喜不喜欢？"</li>
+      </ul>
+    </div>
+
+    <div class="intro-block">
+      <h3><span class="emoji">⚠️</span>家长常犯的 6 个错</h3>
+      <ul class="warn-list" style="list-style:none;padding-left:0">
+        <li><span class="bad">❌</span>每个英文单词都翻成中文 <span class="good">→ ✅</span> 只指图片、用动作</li>
+        <li><span class="bad">❌</span>追问 "Say bus!" <span class="good">→ ✅</span> 等孩子自己指、自己蹦词</li>
+        <li><span class="bad">❌</span>孩子跑开强拉回来读完 <span class="good">→ ✅</span> 有多少读多少，明天再来</li>
+        <li><span class="bad">❌</span>"你听不懂就是没认真" <span class="good">→ ✅</span> 理解词是表达词的 3~5 倍，他懂</li>
+        <li><span class="bad">❌</span>读一次就换新书 <span class="good">→ ✅</span> 重复 5~10 遍才是记忆黄金区</li>
+        <li><span class="bad">❌</span>发音焦虑不敢读 <span class="good">→ ✅</span> 你的英语再"差"也比 AI 有温度</li>
+      </ul>
+    </div>
+
+    <div class="elder-tips">
+      <h4>👴 给爷爷奶奶/外公外婆的 3 条最简版</h4>
+      <ol>
+        <li><b>照着上面拼音大声念就行</b>——发音不准孩子不会记住错的，2 岁孩子听的是语调不是发音</li>
+        <li><b>念的时候手指图、演动作</b>——像演戏一样，孩子会看着你的手学</li>
+        <li><b>孩子不看别追</b>——他跑开就把书合上，明天再读同一本，不换新的</li>
+      </ol>
+    </div>
+
+    <div class="intro-block">
+      <h3><span class="emoji">📅</span>一周排期示例</h3>
+      <table class="sched">
+        <tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+        <tr><td>Bus</td><td>Bus</td><td>Train</td><td>Train</td><td>Race</td><td>Race</td><td>孩子挑</td></tr>
+      </table>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:6px">
+        · 每次 5~10 分钟，孩子不想读立刻停<br>
+        · 睡前是黄金复习时段；饭后半小时适合引入新内容<br>
+        · 一本至少读 5 天，切忌打卡式换书
+      </p>
+    </div>
+
+    <div class="intro-block">
+      <h3><span class="emoji">🚦</span>启蒙成功的信号</h3>
+      <ul>
+        <li>看到公交会喊 "Bus! Vroom!"</li>
+        <li>看到红灯喊 "Stop!" 绿灯喊 "Go!"</li>
+        <li>你说 "Ready, set..." 他会接 "GO!"</li>
+        <li>他自己举起手臂说 "Up up up!"</li>
+        <li>他主动把 Maisy 的书拿给你说 "Read!"</li>
+      </ul>
+      <p style="font-size:14px;color:var(--ink-soft);margin-top:8px">以上任何一条出现，就是 2 岁英语启蒙的胜利。</p>
+    </div>
+
+    <div class="intro-block">
+      <h3><span class="emoji">📚</span>7 本清单</h3>
+      <ul class="booklist" id="booklist"></ul>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:8px">扫描完剩余 4 本，可以随时追加进来。</p>
+    </div>
+
+  </section>
+
+  <!-- Book sections will be rendered here -->
+  <div id="books-mount"></div>
+
+</main>
+
+<footer>
+  <div class="hearts">🚌 🏎️ 🚂 🎈</div>
+  给宝宝的第一份英语礼物<br>
+  基于 Krashen 输入假说 · Cummins 双语理论 · Tomasello 语用习得
+</footer>
+
+<script>
+/* ================= Book Data ================= */
+const books = [
+  {
+    id:'bus', title:"Maisy's Bus", emoji:'🚌', color:'#7cc576', klass:'bus',
+    subtitle:'波波开公交去海边',
+    redefine:'讲的是：<b>数数</b>（一个一个上来）· <b>社交套语</b>（Hello / Hop on）· <b>通勤规则</b>（红绿灯）· <b>集体唱歌</b>（Wheels on the Bus 儿歌）。',
+    storyLines:[
+      { en:'Today Maisy is driving her bus. Vroom vroom!', zh:'今天小鼠波波开着公交车。呜——呜——！' },
+      { en:'The bus stops. Hello, Dotty! Hop on!', zh:'公交车停下来。你好，Dotty！上车吧！' },
+      { en:'Next it\'s Cyril! Yum yum, food for a picnic!', zh:'下一个是 Cyril！好吃好吃，去野餐的食物！' },
+      { en:'Red light — stop! Green light — go! Honk honk!', zh:'红灯——停！绿灯——走！叭叭！' },
+      { en:'Hop on, Tallulah! Splash splash in the water!', zh:'上车吧 Tallulah！在水里啪嗒啪嗒！' },
+      { en:'Charley AND Eddie squeeze in. Squeeeeze!', zh:'Charley 和 Eddie 挤上车。挤——挤——挤！' },
+      { en:'Everyone sings — the wheels on the bus go round and round!', zh:'大家一起唱——公交车的轮子转啊转，转啊转！' },
+      { en:'Hooray! They\'re at the beach!', zh:'万岁！到海边啦！' }
+    ],
+    story:'波波开公交去海边 → 沿途接朋友 → 遇红绿灯 → 大家挤挤 → 一起唱歌 → 到海边玩水',
+    goldMine:'<b>Next it\'s ___</b>（可预测框架）· <b>Hello / Hop on</b>（社交套语）· <b>Honk! Beep!</b>（拟声）· <b>Wheels on the Bus</b>（英语童谣接入点）',
+    play:'Day1 只听语调 · Day2 每页指一个新物体 · Day3 家长读半句让孩子填 · Day4 全 TPR 演一遍 · Day5 用玩具车重演故事',
+    pages:[
+      {
+        num:'P1', title:'开场：波波开车去海边',
+        focus:{ but:'建立"要去哪里"的期待 · 目的地 = 海边' },
+        phrases:['Look!','A bus!','Vroom vroom!','Where to?','The beach!'],
+        pinyin:[
+          'lù kè（露克）！',
+          'ā（啊）· bā sī（巴斯）！',
+          'wū——wū——（呜——呜——）！',
+          'wēi ěr（威尔）· tú（图）？',
+          'dé（得）· bǐ qí（比奇）！'
+        ],
+        ipa:[
+          '/lʊk/',
+          '/ə bʌs/',
+          '/vruːm vruːm/',
+          '/wer tuː/',
+          '/ðə biːtʃ/'
+        ],
+        qa:[
+          { ask:'Where is Maisy going?', expect:'Beach! / 海边', response:'Yes! To the beach! Vroom!' }
+        ],
+        anchors:['bus|公交','drive|开车','beach|海边','where|去哪'],
+        tpr:'用玩具车做"开车"动作 → 手指沿桌面划过示意"路" → 说 "Bye-bye, house!"',
+        why:'目的地是 2 岁最敏感的问题类型——"要去哪里"是他每天都在问的问题。beach 一词配上海浪手势，就把新词挂在了已有的身体感觉上。'
+      },
+      {
+        num:'P2', title:'第一位乘客上车（Dotty）',
+        focus:{ but:'"Hello + 名字" 是本书主框架 · 每接一位朋友重复一次' },
+        phrases:['Stop!','Hello, Dotty!','Hop on!','One friend!'],
+        pinyin:[
+          'sī tuō pǔ（斯托普）！',
+          'hā lóu（哈喽）· duō dí（多蒂）！',
+          'hā pǔ（哈普）· āng（昂）！',
+          'wàn（万）· fù lěn de（复冷德）！'
+        ],
+        ipa:[
+          '/stɒp/',
+          '/həˈloʊ ˈdɒti/',
+          '/hɒp ɒn/',
+          '/wʌn frend/'
+        ],
+        qa:[
+          { ask:'Who\'s there?', expect:'Dotty!', response:'Hi Dotty! Hop on!' }
+        ],
+        anchors:['hello|你好','hop on|上车','first|第一位','friend|朋友'],
+        tpr:'伸出一根手指数 "One!" → 挥手做 hello 动作 → 拍拍旁边座位说 "Sit here!"',
+        why:'"Hello + 名字" 是本书主框架句 · 从这里开始每次接人重复一次，孩子第 4-5 次会自己接上 "Hello"——句法框架先行、词汇后填。'
+      },
+      {
+        num:'P3', title:'带野餐食物的 Cyril',
+        focus:{ but:'Next it\'s ___ 每页重复 · 节奏预测是最早的语法感来源' },
+        phrases:['Next!','Cyril!','Yum yum!','Picnic!'],
+        pinyin:[
+          'nài kè sī tè（耐克斯特）！',
+          'sài ruò（塞若）！',
+          'yà mǔ（呀姆）！',
+          'pí kè ní kè（皮克尼克）！'
+        ],
+        ipa:[
+          '/nekst/',
+          '/ˈsɪrəl/',
+          '/jʌm jʌm/',
+          '/ˈpɪknɪk/'
+        ],
+        qa:[
+          { ask:'What\'s in the basket?', expect:'Food! / 吃的', response:'Yum yum! For a picnic!' }
+        ],
+        anchors:['next|下一个','food|食物','picnic|野餐','yum|好吃'],
+        tpr:'假装从图里抓食物往嘴里塞 "Yum yum!" → 假装喂孩子 → 问 "You want some?"',
+        why:'Next it\'s ___ 的重复节奏让孩子在句法节奏里预测下一位 · 这种节奏预测是幼儿最早的语法感来源。'
+      },
+      {
+        num:'P4', title:'红绿灯 · Honk Beep',
+        focus:{ but:'红绿灯 = 2 岁最早理解的"规则" · Stop/Go 是最容易内化的反义词' },
+        phrases:['Red light!','Stop!','Green light!','Go!','Honk honk!','Beep beep!'],
+        pinyin:[
+          'ruì dé（瑞德）· lài tè（赖特）！',
+          'sī tuō pǔ（斯托普）！',
+          'gé lín（格林）· lài tè（赖特）！',
+          'gòu（够）！',
+          'hōng kè（轰克）！',
+          'bī pǔ（毕普）！'
+        ],
+        ipa:[
+          '/red laɪt/',
+          '/stɒp/',
+          '/ɡriːn laɪt/',
+          '/ɡoʊ/',
+          '/hɒŋk hɒŋk/',
+          '/biːp biːp/'
+        ],
+        qa:[
+          { ask:'Red light — what do we do?', expect:'Stop!', response:'Yes! We stop!' },
+          { ask:'Green light?', expect:'Go!', response:'Vroom vroom!' }
+        ],
+        anchors:['red|红','green|绿','stop|停','go|走','honk|喇叭'],
+        tpr:'玩红绿灯游戏——喊 "red light" 抱住孩子不动 · 喊 "green light" 举高高 · 反复几次',
+        why:'stop/go 是最容易内化的一对反义词。中英双通道 + 身体动作强化让规则更牢固。'
+      },
+      {
+        num:'P5', title:'Tallulah 上车要玩水',
+        focus:{ but:'身体动作定型 hop = 跳、splash = 拍水 · 能演的动词记 10 倍' },
+        phrases:['Hop on!','Hop hop hop!','Splash splash!','Water!'],
+        pinyin:[
+          'hā pǔ（哈普）· āng（昂）！',
+          'hā pǔ（哈普）！',
+          'sī pǔ lā shí（斯普拉什）！',
+          'wō tè（沃特）！'
+        ],
+        ipa:[
+          '/hɒp ɒn/',
+          '/hɒp hɒp hɒp/',
+          '/splæʃ splæʃ/',
+          '/ˈwɔːtər/'
+        ],
+        qa:[
+          { ask:'What\'s Tallulah going to do?', expect:'Splash!', response:'Yes! Splash in the water!' }
+        ],
+        anchors:['hop|跳','splash|溅水','water|水','wait|等'],
+        tpr:'抱孩子做"上车"跳跃动作 → 用手拍桌面/水面演 "splash splash!"',
+        why:'hop 和 splash 是能立刻演出来的动作动词，比 board/enter 适合 2 岁。能演的动词最容易记。'
+      },
+      {
+        num:'P6', title:'Charley AND Eddie 挤进来',
+        focus:{ but:'AND 是幼儿最早理解的连词 · squeeze 变成身体记忆' },
+        phrases:['Charley!','AND Eddie!','Two friends!','Squeeze!'],
+        pinyin:[
+          'chá lì（茶利）！',
+          'āng（昂）· dé（得）· āi dí（埃迪）！',
+          'tú（图）· fù lěn de sī（复冷德斯）！',
+          'sī guī zī（斯规兹）！'
+        ],
+        ipa:[
+          '/ˈtʃɑːrli/',
+          '/ænd ˈedi/',
+          '/tuː frendz/',
+          '/skwiːz/'
+        ],
+        qa:[
+          { ask:'How many friends now?', expect:'(数手指) Two!', response:'Yes! Charley AND Eddie!' }
+        ],
+        anchors:['and|和','two|两个','squeeze|挤','both|两个都'],
+        tpr:'抱紧孩子挤一挤 · 痒痒他一下 —— 让 squeeze 变成身体记忆',
+        why:'AND 不是从语法书学的，是从"我 AND 你"这种指认场景学的。配合"两个朋友一起挤"的情境，AND 直接落到孩子身上。'
+      },
+      {
+        num:'P7', title:'一起唱 Wheels on the Bus',
+        focus:{ but:'全书最好玩的一页 · 加动作比死记单词有用 3 倍' },
+        phrases:['Sing!','The wheels...','Round and round!','All day long!'],
+        pinyin:[
+          'xīng（星）！',
+          'dé（得）· wéi ěr sī（威尔斯）...',
+          'ruò yùn de（若温德）· āng de（昂德）· ruò yùn de（若温德）！',
+          'ào（奥）· dài（戴）· lǎng（朗）！'
+        ],
+        ipa:[
+          '/sɪŋ/',
+          '/ðə wiːlz/',
+          '/raʊnd ænd raʊnd/',
+          '/ɔːl deɪ lɒŋ/'
+        ],
+        qa:[
+          { ask:'The wheels on the bus go...', expect:'Round and round!', response:'Round and round! All day long!' }
+        ],
+        anchors:['wheels|轮子','round|转圈','sing|唱','song|歌'],
+        tpr:'唱整首《The Wheels on the Bus》（Super Simple Songs 版）· 双手做转圈动作 · 让孩子一起转',
+        why:'身体动作是记忆的骨架 · 唱 10 遍后孩子会先做转圈动作再说 round。这是英语儿歌最经典的入门曲。'
+      },
+      {
+        num:'P8', title:'到海边啦！',
+        focus:{ but:'叙事满足 · 从家到海边的闭环 · 收尾仪式感' },
+        phrases:['Hooray!','The beach!','Sunny day!','Splash splash!','Ice cream!'],
+        pinyin:[
+          'hū ruì（呼瑞）！',
+          'dé（得）· bǐ qí（比奇）！',
+          'sāng ní（桑尼）· dài（戴）！',
+          'sī pǔ lā shí（斯普拉什）！',
+          'āi sī（爱斯）· kè rīm（克瑞姆）！'
+        ],
+        ipa:[
+          '/hʊˈreɪ/',
+          '/ðə biːtʃ/',
+          '/ˈsʌni deɪ/',
+          '/splæʃ splæʃ/',
+          '/aɪs kriːm/'
+        ],
+        qa:[
+          { ask:'Where are we?', expect:'Beach!', response:'Yes! We\'re at the beach! Yay!' }
+        ],
+        anchors:['hooray|万岁','sunny|阳光','sand|沙子','ice cream|冰淇淋'],
+        tpr:'数一数海滩上所有动物 → 找波波在哪 → 指认太阳/海鸥/贝壳/冲浪板 → 收尾 "The end. Bye-bye, Maisy!"',
+        why:'从家到海边的闭环叙事 · 2 岁孩子对"绕一圈到达"有强烈满足感 · 固定收尾套路培养仪式感。'
+      }
+    ]
+  },
+
+  {
+    id:'race', title:"Maisy's Race Car", emoji:'🏎️', color:'#e74c3c', klass:'race',
+    subtitle:'波波赛车大赛',
+    redefine:'讲的是：<b>事件顺序</b>（准备→起跑→领先→暂停→继续→结束→庆祝）· <b>社会规则</b>（礼让、等待）· <b>情绪体验</b>（期待、加油、庆祝）。',
+    storyLines:[
+      { en:'Today Maisy and her friends are going to have a race. How exciting!', zh:'今天小鼠波波和朋友们要比赛。真让人期待！' },
+      { en:'Everyone lines up. Ready. Set. Go!', zh:'大家排好队。准备。预备。开始！' },
+      { en:'Maisy zooms out in front. Heads for the first bend.', zh:'小鼠波波飞速领先。冲向第一个弯道。' },
+      { en:'Eddie and Cyril are cheering. Who\'s that up ahead?', zh:'Eddie 和 Cyril 在为她加油。前面那是谁？' },
+      { en:'Slow down! Tortoise is crossing.', zh:'慢下来！乌龟正在过马路。' },
+      { en:'Race is back on. Tallulah takes the lead.', zh:'比赛继续。Tallulah 反超领先。' },
+      { en:'She\'s fast, but not fast enough. Charley wins!', zh:'她很快，但还不够快。Charley 赢了！' },
+      { en:'Ice cream! What a lot of fun!', zh:'冰淇淋！真好玩！' }
+    ],
+    story:'朋友们赛车 → 波波领先 → 乌龟过马路要慢 → 换 Tallulah 领先 → Charley 最后胜出 → 吃冰淇淋庆祝',
+    goldMine:'<b>Vroom!</b>（拟声）· 动词密集：<b>zoom / cross / slow down / take the lead / win</b> · <b>Ready, set, GO!</b>（游戏化指令）· <b>SLOW DOWN</b>（音量对比）',
+    play:'家里划一条"跑道"（沙发→餐桌）带孩子跑几轮 · 用玩具车重演比赛 · 每页做一次表情对比',
+    pages:[
+      {
+        num:'P1', title:'开场：今天要赛车',
+        focus:{ not:'讲 race 这个词', but:'先建立期待——"今天大家要玩赛车"' },
+        phrases:['Look!','Maisy!','Red car!','Wow!','A race!','Vroom!','Exciting!'],
+        pinyin:[
+          'lù kè（露克）！',
+          'méi xī（梅西）！',
+          'ruì dé（瑞德）· kǎ ěr（卡尔）！',
+          'wā ō（哇喔）！',
+          'ā ruì sī（啊瑞斯）！',
+          'wū——rōng（呜——嗡）！',
+          'yī kè sài tíng（伊克赛庭）！'
+        ],
+        ipa:[
+          '/lʊk/',
+          '/ˈmeɪzi/',
+          '/red kɑːr/',
+          '/waʊ/',
+          '/reɪs/',
+          '/vruːm/',
+          '/ɪkˈsaɪtɪŋ/'
+        ],
+        qa:[
+          { ask:'What color?', expect:'Red! / 红色', response:'Yes! Red car!' },
+          { ask:'Can you drive?', expect:'Vroom!（假装开车）', response:'Wow~ so fast!' }
+        ],
+        anchors:['race|比赛','friends|朋友','exciting|兴奋','red|红色','car|车'],
+        tpr:'指认小车 → 做期待表情让孩子模仿 → 让孩子挑一辆玩具车 "Which one?"',
+        why:'exciting 这种情绪词，孩子先学表情再学词。家长的脸就是最早的情感词典——你张大眼睛、抖抖手，他就理解了什么是 exciting。'
+      },
+      {
+        num:'P2', title:'起跑 · Ready Set GO',
+        focus:{ not:'读一遍就翻页', but:'全书最值得玩的一页 · 每次 GO 抱着孩子冲出去 · 可以玩十遍' },
+        phrases:['Ready.','Set.','GO!','Vroom!'],
+        pinyin:[
+          'ruì dí（瑞迪）。',
+          'sài tè（赛特）。',
+          'gòu（够）！',
+          'wū——rōng（呜——嗡）！'
+        ],
+        ipa:[
+          '/ˈredi/',
+          '/set/',
+          '/ɡoʊ/',
+          '/vruːm/'
+        ],
+        qa:[
+          { ask:'(轮到孩子当发令员) 你来喊！Ready...', expect:'Set... GO!', response:'(冲出去) Vroom!' }
+        ],
+        anchors:['ready|准备','set|预备','go|开始','vroom|呜·拟声'],
+        tpr:'玩起跑游戏——家长喊 "Ready... Set... GO!" 抱着孩子从沙发冲到餐桌。冲一次孩子笑一次。让孩子当发令员反过来喊。',
+        why:'Ready-Set-Go 是英语世界所有游戏/比赛/起跑的通用短语。学会这一组比死记 start 有用 100 倍——它是可以嵌入任何日常场景的高频套语。'
+      },
+      {
+        num:'P3', title:'波波领跑 · Zoom',
+        focus:{ not:'过弯道细节', but:'一个字：快！' },
+        phrases:['Maisy is FAST!','Zoom!','Who is first?','Maisy!'],
+        pinyin:[
+          'méi xī yī sī（梅西衣斯）· fā sī tè（法斯特）！',
+          'zǔ mǔ（组姆）！',
+          'hū yī sī（呼衣斯）· fù sī tè（复斯特）？',
+          'méi xī（梅西）！'
+        ],
+        ipa:[
+          '/ˈmeɪzi ɪz fæst/',
+          '/zuːm/',
+          '/huː ɪz fɜːrst/',
+          '/ˈmeɪzi/'
+        ],
+        qa:[
+          { ask:'Who is first?', expect:'Maisy!', response:'Yes! Maisy is FAST!' }
+        ],
+        anchors:['fast|快','zoom|嗖·拟声','first|第一','front|前面'],
+        tpr:'用玩具小车在地上画一个弯道跑一次 → 手指从起点滑到终点说 "Zoom~~"',
+        why:'"in front" 是空间关系词，2 岁孩子先理解身体的"前后"（我前面/我后面），再迁移到抽象的"车前面"——所以做动作时让自己站在孩子前面，指着自己说 "I\'m in front!"'
+      },
+      {
+        num:'P4', title:'加油 · Cheer',
+        focus:{ not:'看比赛细节', but:'重点是 Cheer（欢呼）· 借下一页做一次预测练习' },
+        phrases:['Yay!','Go Maisy!','Go!','Who\'s that?'],
+        pinyin:[
+          'yeī（耶）！',
+          'gòu（够）· méi xī（梅西）！',
+          'gòu（够）！',
+          'hū zī（呼兹）· zài tè（宰特）？'
+        ],
+        ipa:[
+          '/jeɪ/',
+          '/ɡoʊ ˈmeɪzi/',
+          '/ɡoʊ/',
+          '/huːz ðæt/'
+        ],
+        qa:[
+          { ask:'Who\'s that? (指前方)', expect:'Tortoise! / 乌龟', response:'Yes! Tortoise! (翻到下一页)' }
+        ],
+        anchors:['cheer|欢呼','yay|耶·拟声','who|谁','ahead|前方'],
+        tpr:'手举高做加油动作 → 拍拍手，孩子也会拍 → 问 "Who\'s that?" 引导找乌龟，为下一页做预测',
+        why:'"But wait...!" 后停 5 秒——2 岁孩子已经理解悬念，他会主动催你翻页。"下一页会发生什么？"是最早的预测练习，比逼他记单词有用得多。'
+      },
+      {
+        num:'P5', title:'SLOW DOWN！乌龟过马路',
+        focus:{ not:'乌龟过马路这件事', but:'整本书最有价值的一页 · 交通规则 · 社会规则 · 安全意识' },
+        phrases:['STOP.','Wait.','Tortoise first.','We wait.','Good job.'],
+        pinyin:[
+          'sī tuō pǔ（斯托普）。',
+          'wèi tè（喂特）。',
+          'tuō tuō yī sī（托托衣斯）· fù sī tè（复斯特）。',
+          'wēi（威）· wèi tè（喂特）。',
+          'gǔ dé（古德）· jiá bù（贾布）。'
+        ],
+        ipa:[
+          '/stɒp/',
+          '/weɪt/',
+          '/ˈtɔːrtəs fɜːrst/',
+          '/wiː weɪt/',
+          '/ɡʊd dʒɒb/'
+        ],
+        qa:[
+          { ask:'Who\'s crossing?', expect:'Tortoise! / 乌龟', response:'Yes! Tortoise! We wait.' }
+        ],
+        anchors:['stop|停','wait|等','tortoise|乌龟','first|优先','cross|过马路'],
+        tpr:'一起做停车动作 → 举手 → 说 "Stop." → 等乌龟走完 → 拍拍手 "Good job!"',
+        why:'2 岁开始理解"规则"——红绿灯是最早的规则之一。中英双通道 + 身体动作定型 stop/wait。这一页也是共情训练：为别人停下来。'
+      },
+      {
+        num:'P6', title:'Tallulah 反超',
+        focus:{ not:'只是"谁在跑"', but:'第一名会变化 · 家长故意猜错让孩子纠正' },
+        phrases:['Who\'s first now?','Maisy?','No!','Tallulah!'],
+        pinyin:[
+          'hū zī（呼兹）· fù sī tè（复斯特）· nào（闹）？',
+          'méi xī（梅西）？',
+          'nòu（呶）！',
+          'tǎ lù lā（塔露拉）！'
+        ],
+        ipa:[
+          '/huːz fɜːrst naʊ/',
+          '/ˈmeɪzi/',
+          '/noʊ/',
+          '/təˈluːlə/'
+        ],
+        qa:[
+          { ask:'Who\'s first now? Maisy?', expect:'No! Tallulah!', response:'Yes! Tallulah is first now!' }
+        ],
+        anchors:['who|谁','first|第一','now|现在','change|变化'],
+        tpr:'家长故意指错人 → 引导孩子说 "No!" 并指对的人 → 说 "Oh! Now it\'s different!"',
+        why:'2 岁开始理解"变化"——先波波领先，现在换了。家长故意"猜错让孩子纠正"是参与感训练的黄金机会——他会觉得自己在教你。'
+      },
+      {
+        num:'P7', title:'Charley 逆袭获胜',
+        focus:{ not:'强调 Maisy 输了', but:'比赛结束了 · 大家都开心' },
+        phrases:['So fast!','But not enough.','Charley wins!','Yay!','Everybody happy!'],
+        pinyin:[
+          'sōu（搜）· fā sī tè（法斯特）！',
+          'bā tè（巴特）· nào tè（闹特）· yī nà fū（伊那夫）。',
+          'chá lì（茶利）· wēn sī（温斯）！',
+          'yeī（耶）！',
+          'āi wéi bó dī（爱维波底）· hā pī（哈皮）！'
+        ],
+        ipa:[
+          '/soʊ fæst/',
+          '/bʌt nɒt ɪˈnʌf/',
+          '/ˈtʃɑːrli wɪnz/',
+          '/jeɪ/',
+          '/ˈevribɒdi ˈhæpi/'
+        ],
+        qa:[
+          { ask:'Who wins?', expect:'Charley!', response:'Yay! Charley wins! Everybody happy!' }
+        ],
+        anchors:['fast|快','win|赢','happy|开心','yay|耶·拟声'],
+        tpr:'用玩具车演一次超车——说 "past" 时把一辆车滑过另一辆 → Yay 时拍手',
+        why:'不强调"Maisy 输了 = 不好"，而是"比赛结束了 · 大家都开心"。2 岁太早接触输赢价值观，先让"结束 + 庆祝"作为叙事闭环。'
+      },
+      {
+        num:'P8', title:'吃冰淇淋庆祝',
+        focus:{ not:'冰淇淋是奖品', but:'大家一起庆祝 · 这是仪式感' },
+        phrases:['Yummy!','Ice cream!','What flavor?','Chocolate?','Strawberry?'],
+        pinyin:[
+          'yà mī（呀咪）！',
+          'āi sī（爱斯）· kè rīm（克瑞姆）！',
+          'wō tè（沃特）· fú lěi wō（弗雷沃）？',
+          'qiào kè lì tè（巧克力特）？',
+          'sī chuō bèi lì（斯戳贝利）？'
+        ],
+        ipa:[
+          '/ˈjʌmi/',
+          '/aɪs kriːm/',
+          '/wɒt ˈfleɪvər/',
+          '/ˈtʃɒklət/',
+          '/ˈstrɔːberi/'
+        ],
+        qa:[
+          { ask:'What flavor?', expect:'Chocolate! / Strawberry!', response:'Yummy~ so good!' }
+        ],
+        anchors:['yummy|好吃','ice cream|冰淇淋','flavor|味道','celebrate|庆祝'],
+        tpr:'假装舔冰淇淋 "lick lick" → 数动物 → 每个动物冰淇淋颜色说英语（red / green / yellow）',
+        why:'收尾 "The end! See you tomorrow, Maisy!" 让共读有固定仪式感——2 岁孩子对重复的收尾套路有强烈满足感，能预期"结束"这件事本身就是成长。'
+      }
+    ]
+  },
+
+  {
+    id:'train', title:"Maisy's Train", emoji:'🚂', color:'#5db7de', klass:'train',
+    subtitle:'波波开小火车环游',
+    redefine:'讲的是：<b>空间介词全套</b>（up / down / through / out / back）· <b>拟声词大集合</b>（Toot-toot / Wheee / Baaaa）· <b>环形叙事</b>（车站出发→回车站，绕一圈回来）· <b>Hello / Bye-bye 社交套语循环</b>。',
+    storyLines:[
+      { en:'Today Maisy drives a train! All aboard! Toot-toot!', zh:'今天小鼠波波开火车！大家上车！嘟——嘟——！' },
+      { en:'Off we go! To the country. Hello, geese! Honk honk!', zh:'出发咯！去乡下。你好，大鹅！叫叫叫！' },
+      { en:'Up up up the hill! Hello, goat! Baaaa!', zh:'上——上——上山！你好，小羊！咩——啊！' },
+      { en:'Down down down into the valley! Wheeeeee!', zh:'下——下——下山谷！哇——！' },
+      { en:'Through the tunnel! It\'s dark. Bye-bye, bird!', zh:'穿过隧道！好黑。再见，小鸟！' },
+      { en:'And out! Into the sunshine! Hello, butterfly!', zh:'出来啦！阳光下。你好，蝴蝶！' },
+      { en:'Here we are! Back at the station! Toot-toot!', zh:'到啦！回到车站了！嘟——嘟——！' },
+      { en:'What a fun train ride! Bye-bye, everyone!', zh:'好好玩的火车之旅！大家再见！' }
+    ],
+    story:'车站上车 → 去乡下 → 上山 → 下谷 → 穿隧道 → 出太阳 → 回车站',
+    goldMine:'<b>空间介词全套</b>：up / down / through / out / back · <b>Hello ___! Bye-bye ___!</b>（社交套语循环）· <b>Toot-toot!</b> · <b>Wheeeee!</b>',
+    play:'椅子排一列当火车 · 毯子搭隧道反复钻 · 举高高 "up up up"/放下来 "down down down"',
+    pages:[
+      {
+        num:'封面', title:'Maisy\'s Train',
+        focus:{ but:'触觉记忆入口 · 摸凸起轮子 + 说 wheels，多通道编码' },
+        phrases:['Look!','A train!','Choo-choo!','Maisy\'s train!'],
+        pinyin:[
+          'lù kè（露克）！',
+          'ā（啊）· chuàn（串）！',
+          'qiū—qiū（秋——秋）！',
+          'méi xī sī（梅西斯）· chuàn（串）！'
+        ],
+        ipa:[
+          '/lʊk/',
+          '/ə treɪn/',
+          '/tʃuː tʃuː/',
+          '/ˈmeɪziz treɪn/'
+        ],
+        qa:[
+          { ask:'Whose train?', expect:'Maisy!', response:'Yes! Maisy\'s train!' }
+        ],
+        anchors:['train|火车','choo-choo|呜·拟声','round|圆的','wheels|轮子'],
+        tpr:'摸摸封面凸起的轮子说 "Wheels! Round round!" → 手指做转圈动作',
+        why:'异形书的封面凸起是触觉记忆的入口。摸着凸起说 wheels，把词和触感绑在一起——多通道编码让词更持久。'
+      },
+      {
+        num:'P1', title:'车站出发 · Toot-toot',
+        focus:{ but:'All aboard + Toot-toot 是火车出发的经典套语组合' },
+        phrases:['All aboard!','Toot-toot!','Off we go!','Choo-choo!'],
+        pinyin:[
+          'ào（奥）· ā bào de（阿包德）！',
+          'dū—dū（嘟——嘟）！',
+          'ào fú（奥夫）· wēi（威）· gòu（够）！',
+          'qiū—qiū（秋——秋）！'
+        ],
+        ipa:[
+          '/ɔːl əˈbɔːrd/',
+          '/tuːt tuːt/',
+          '/ɔːf wiː ɡoʊ/',
+          '/tʃuː tʃuː/'
+        ],
+        qa:[
+          { ask:'All aboard! What sound?', expect:'Toot-toot!', response:'Toot-toot! Off we go!' }
+        ],
+        anchors:['aboard|上车','toot|嘟·拟声','station|车站','go|走'],
+        tpr:'手拉汽笛动作让孩子模仿 → 把家里椅子排一列当火车 → 每人坐一个座位',
+        why:'Toot-toot 是英语火车标准拟声，和中文"呜——"平行学习。All aboard 是英美童谣/绘本里火车出发的经典套语——记住这一组就能玩很多假装火车游戏。'
+      },
+      {
+        num:'P2', title:'去乡下 · Geese',
+        focus:{ but:'Hello + 动物名 · 每见一种动物重复一次 = 社交套语强化' },
+        phrases:['Off we go!','The country!','Geese!','Hello, geese!','Honk!'],
+        pinyin:[
+          'ào fú（奥夫）· wēi（威）· gòu（够）！',
+          'dé（得）· kāng cè lì（康策利）！',
+          'guī sī（归斯）！',
+          'hā lóu（哈喽）· guī sī（归斯）！',
+          'hōng kè（轰克）！'
+        ],
+        ipa:[
+          '/ɔːf wiː ɡoʊ/',
+          '/ðə ˈkʌntri/',
+          '/ɡiːs/',
+          '/həˈloʊ ɡiːs/',
+          '/hɒŋk/'
+        ],
+        qa:[
+          { ask:'What animal?', expect:'Geese! / 大鹅', response:'Yes! Hello, geese! Honk honk!' }
+        ],
+        anchors:['country|乡下','geese|大鹅','hello|你好','honk|叫声'],
+        tpr:'模仿鹅叫（geese 是 honk 不是 quack）→ 找乡下场景元素：花、栅栏、湖',
+        why:'顺便教鸭和鹅的区别——2 岁开始能做类别归纳。goose/geese 单复数变化不用讲，用 "one goose, two geese" 反复听就够了。'
+      },
+      {
+        num:'P3', title:'上山 · Up up up · Goat',
+        focus:{ but:'up 举三次高高 · 空间词靠身体记忆（前庭系统参与）' },
+        phrases:['Up!','Up up up!','The hill!','Hello, goat!','Baaaa!'],
+        pinyin:[
+          'ā pǔ（阿普）！',
+          'ā pǔ（阿普）！',
+          'dé（得）· hēi ěr（黑尔）！',
+          'hā lóu（哈喽）· gòu tè（够特）！',
+          'bā——ā（吧——啊）！'
+        ],
+        ipa:[
+          '/ʌp/',
+          '/ʌp ʌp ʌp/',
+          '/ðə hɪl/',
+          '/həˈloʊ ɡoʊt/',
+          '/bɑː/'
+        ],
+        qa:[
+          { ask:'Which way? Up or down?', expect:'Up!', response:'Yes! Up up up the hill!' }
+        ],
+        anchors:['up|上','hill|山','goat|山羊','baa|羊叫'],
+        tpr:'说 up 就把孩子举高一次，重复三次；模仿羊叫 baaaa',
+        why:'空间介词是 2 岁最难的词类之一。三次 up 配合三次举高，让孩子的前庭系统（内耳平衡感）参与编码——身体记住的 up 比听到的 up 深 10 倍。'
+      },
+      {
+        num:'P4', title:'下谷 · Down down down · Wheeee',
+        focus:{ but:'up ↔ down 一对空间反义词 · 一起给学得快得多' },
+        phrases:['Down!','Down down down!','The valley!','Wheeee!'],
+        pinyin:[
+          'dāng（当）！',
+          'dāng（当）！',
+          'dé（得）· wǎ lì（瓦利）！',
+          'wēi——（威——）！'
+        ],
+        ipa:[
+          '/daʊn/',
+          '/daʊn daʊn daʊn/',
+          '/ðə ˈvæli/',
+          '/wiː/'
+        ],
+        qa:[
+          { ask:'Down down down — how does it feel?', expect:'Wheeee!', response:'Wheeee! Fast down!' }
+        ],
+        anchors:['down|下','valley|山谷','wheee|哇·拟声','fast|快'],
+        tpr:'说 down 就把孩子放低 / 做滑滑梯感觉；Wheeee 拉长音',
+        why:'up ↔ down 一对反义词。2 岁孩子学空间词最需要"对比对"——正反两个词一起给，比单独给一个学得快得多（Vygotsky 最近发展区）。'
+      },
+      {
+        num:'P5', title:'穿隧道 · Through',
+        focus:{ but:'through 是抽象空间介词 · TPR 钻过隧道一次内化胜讲 100 遍' },
+        phrases:['Through!','The tunnel!','Dark!','Bye-bye, bird!'],
+        pinyin:[
+          'sī rú（斯如）！',
+          'dé（得）· tán nào（谈闹）！',
+          'dá kè（达克）！',
+          'bài—bài（拜——拜）· bó de（波德）！'
+        ],
+        ipa:[
+          '/θruː/',
+          '/ðə ˈtʌnl/',
+          '/dɑːrk/',
+          '/baɪ baɪ bɜːrd/'
+        ],
+        qa:[
+          { ask:'Through the tunnel — dark or bright?', expect:'Dark!', response:'Yes! Dark dark dark! Bye-bye!' }
+        ],
+        anchors:['through|穿过','tunnel|隧道','dark|黑','bird|鸟'],
+        tpr:'用毯子/书搭一个小隧道让孩子钻过去，边钻边说 "through the tunnel"',
+        why:'through 是抽象空间介词，比 up/down 难。靠 TPR 让身体穿过一个物理隧道，一次内化，胜过讲 100 遍。'
+      },
+      {
+        num:'P6', title:'出隧道 · Out · Butterfly',
+        focus:{ but:'through ↔ out（进去 ↔ 出来）· 过程性空间对' },
+        phrases:['Out!','Sunshine!','Hello, butterfly!','Fly fly!'],
+        pinyin:[
+          'ào tè（奥特）！',
+          'sāng（桑）· xiān（仙）！',
+          'hā lóu（哈喽）· bā tè（巴特）· fú lài（弗赖）！',
+          'fú lài（弗赖）！'
+        ],
+        ipa:[
+          '/aʊt/',
+          '/ˈsʌnʃaɪn/',
+          '/həˈloʊ ˈbʌtərflaɪ/',
+          '/flaɪ flaɪ/'
+        ],
+        qa:[
+          { ask:'What do you see?', expect:'Butterfly! / 蝴蝶', response:'Yes! Hello, butterfly! Fly fly!' }
+        ],
+        anchors:['out|出','sunshine|阳光','butterfly|蝴蝶','fly|飞'],
+        tpr:'钻出隧道后张开手臂 → butterfly 用手指做蝴蝶飞',
+        why:'through ↔ out（进去 ↔ 出来），配合上一页的对比对。这是 2 岁孩子空间概念的高级版——不只是位置，还有"过程"（穿过 → 出来）。'
+      },
+      {
+        num:'P7', title:'回到车站 · Back',
+        focus:{ but:'back 呼应开头 station · 2 岁孩子对"绕一圈回来"有强烈满足感' },
+        phrases:['Here we are!','Back!','The station!','Toot-toot!'],
+        pinyin:[
+          'hēi ěr（嘿尔）· wēi（威）· ā（啊）！',
+          'bài kè（拜克）！',
+          'dé（得）· sī dài shén（斯戴什）！',
+          'dū—dū（嘟——嘟）！'
+        ],
+        ipa:[
+          '/hɪr wiː ɑːr/',
+          '/bæk/',
+          '/ðə ˈsteɪʃn/',
+          '/tuːt tuːt/'
+        ],
+        qa:[
+          { ask:'Where are we now?', expect:'Station! / 车站', response:'Yes! Back at the station!' }
+        ],
+        anchors:['back|回','here|这里','station|车站','arrive|到达'],
+        tpr:'回顾一路遇到了谁——geese, goat, bird, butterfly → 让孩子从记忆里翻找',
+        why:'back 呼应了开头的 station。2 岁孩子对"绕一圈回来"的叙事结构有强烈满足感——这是最早的"环形叙事"体验，也是未来听所有故事的基础。'
+      },
+      {
+        num:'P8', title:'收尾道别 · Bye-bye',
+        focus:{ but:'一个一个 bye-bye · 名字记忆巩固 · 收尾仪式感' },
+        phrases:['Fun ride!','Bye-bye!','Bye, Cyril!','Bye, Tallulah!','The end!'],
+        pinyin:[
+          'fěn（芬）· ruì dé（瑞德）！',
+          'bài—bài（拜——拜）！',
+          'bài（拜）· sài ruò（塞若）！',
+          'bài（拜）· tǎ lù lā（塔露拉）！',
+          'dé（得）· ēn de（恩德）！'
+        ],
+        ipa:[
+          '/fʌn raɪd/',
+          '/baɪ baɪ/',
+          '/baɪ ˈsɪrəl/',
+          '/baɪ təˈluːlə/',
+          '/ði end/'
+        ],
+        qa:[
+          { ask:'Say bye to everyone!', expect:'Bye-bye!', response:'Bye-bye, everyone! See you tomorrow!' }
+        ],
+        anchors:['fun|好玩','ride|坐','bye-bye|再见','everyone|大家'],
+        tpr:'挥手 → 一个一个点名说 bye-bye → 合上书 "The end."',
+        why:'一个一个道别是最好的"名字记忆"训练。2 岁孩子人脸+名字的匹配还在早期，每个角色单独 bye-bye 能巩固每个名字。'
+      }
+    ]
+  },
+
+  {
+    id:'fire', title:"Maisy's Fire Engine", emoji:'🚒', color:'#c0392b', klass:'fire',
+    subtitle:'消防员波波救小猫',
+    redefine:'讲的是：<b>救援与帮助</b>（小猫爬上屋顶下不来）· <b>消防拟声词</b>（Nee-nah 警报 / Swoosh 水声）· <b>问题解决</b>（意外→取梯子→救援）· <b>责任感</b>（Firefighter Maisy）。',
+    storyLines:[
+      { en:'Maisy and Cyril are driving the fire engine today. Nee-nah, nee-nah!', zh:'今天 Maisy 和 Cyril 开消防车。呜咿——呜咿！' },
+      { en:'It\'s time to check the water. Swoosh!', zh:'该检查水管了。哗——！' },
+      { en:'Watch out, Little Black Cat!', zh:'小心，小黑猫！' },
+      { en:'Little Black Cat is scared. She climbs onto the roof and won\'t come down.', zh:'小黑猫吓坏了。爬到屋顶上不肯下来。' },
+      { en:'Maisy and Cyril get the ladder.', zh:'Maisy 和 Cyril 取来梯子。' },
+      { en:'Then Maisy climbs up the ladder...', zh:'然后 Maisy 爬上梯子……' },
+      { en:'...and rescues Little Black Cat. Well done, Firefighter Maisy!', zh:'……救下了小黑猫。做得好，消防员 Maisy！' },
+      { en:'Then Maisy and Cyril take Little Black Cat for a ride. Bye-bye!', zh:'然后 Maisy 和 Cyril 带小黑猫兜风。再见！' }
+    ],
+    story:'开消防车 → 检查水管 → 溅到小黑猫 → 小猫爬屋顶下不来 → 取梯子 → 爬上去 → 救下小猫 → 带小猫兜风',
+    goldMine:'<b>Nee-nah!</b> / <b>Swoosh!</b>（消防拟声）· <b>Watch out!</b>（警告套语）· <b>Up / Climb / Rescue</b>（动作动词）· <b>Well done! Good job!</b>（表扬套语）',
+    play:'家里椅子当消防车 · 拉汽笛"Nee-nah!" · 假装用水管"Swoosh!" · 把玩偶放高处让孩子当消防员救下来',
+    pages:[
+      {
+        num:'P1', title:'开场：Maisy 和 Cyril 开消防车',
+        focus:{ but:'Nee-nah 是英语世界消防车的经典警报拟声' },
+        phrases:['Look!','A fire engine!','Maisy!','Cyril!','Nee-nah!'],
+        pinyin:[
+          'lù kè（露克）！',
+          'ā（啊）· fài ěr（法尔）· ān jīn（安金）！',
+          'méi xī（梅西）！',
+          'sài ruò（塞若）！',
+          'nì—nà（呢——呐）！'
+        ],
+        ipa:[
+          '/lʊk/',
+          '/ə ˈfaɪər ˈendʒɪn/',
+          '/ˈmeɪzi/',
+          '/ˈsɪrəl/',
+          '/niː nɑː/'
+        ],
+        qa:[
+          { ask:'Who\'s driving?', expect:'Maisy! Cyril!', response:'Yes! Two firefighters!' }
+        ],
+        anchors:['fire engine|消防车','drive|开','nee-nah|警报声','today|今天'],
+        tpr:'手做方向盘 → 拉警报"Nee-nah nee-nah!" → 让孩子跟着一起喊',
+        why:'Nee-nah 是英美儿童绘本里消防车的标准拟声，和中文"呜咿呜咿"平行学习。拟声词是最容易跨语言习得的词类——不用翻译，直接演。'
+      },
+      {
+        num:'P2', title:'检查水管 · Swoosh',
+        focus:{ but:'拟声词 Swoosh 演出来 · 让水的动作变成身体记忆' },
+        phrases:['Water!','Check!','Swoosh!','Big water!'],
+        pinyin:[
+          'wō tè（沃特）！',
+          'qiè kè（切克）！',
+          'sī wū shí（斯呜什）！',
+          'bǐ gé（比格）· wō tè（沃特）！'
+        ],
+        ipa:[
+          '/ˈwɔːtər/',
+          '/tʃek/',
+          '/swuːʃ/',
+          '/bɪɡ ˈwɔːtər/'
+        ],
+        qa:[
+          { ask:'What sound?', expect:'Swoosh!', response:'Yes! Water sound!' }
+        ],
+        anchors:['water|水','check|检查','swoosh|哗·拟声','hose|水管'],
+        tpr:'双手做喷水动作 → 说 "Swoosh!" → 假装水柱从孩子头上冲过',
+        why:'Swoosh 是流水/挥动的英文拟声。做动作时手臂快速划过配合"Swoosh"音，让声音+动作一起进入记忆。'
+      },
+      {
+        num:'P3', title:'小心 · Watch out',
+        focus:{ but:'Watch out! 是英语最重要的警告套语 · 全书情绪转折点' },
+        phrases:['Watch out!','Little Black Cat!','Oh no!','Splash!'],
+        pinyin:[
+          'wō qí（沃奇）· ào tè（奥特）！',
+          'lì tuō（利托）· bù lài kè（不赖克）· kè tè（客特）！',
+          'ōu（欧）· nòu（呶）！',
+          'sī pǔ lā shí（斯普拉什）！'
+        ],
+        ipa:[
+          '/wɒtʃ aʊt/',
+          '/ˈlɪtl blæk kæt/',
+          '/oʊ noʊ/',
+          '/splæʃ/'
+        ],
+        qa:[
+          { ask:'Who got splashed?', expect:'Cat! / 小猫', response:'Oh no! The cat got wet!' }
+        ],
+        anchors:['watch out|小心','black|黑','cat|猫','splash|溅水'],
+        tpr:'说 Watch out 时做"停"手势 + 惊讶表情 → 演水花溅到自己身上（做出躲避动作）',
+        why:'Watch out 是日常最高频的警告套语——从"小心开水"到"小心车"都用它。此页做出惊讶+躲避动作，让孩子把这个短语与"意外发生"的情境绑定。'
+      },
+      {
+        num:'P4', title:'小猫吓坏了 · 爬到屋顶',
+        focus:{ but:'情绪词 scared + 空间介词 up · 一起演出来' },
+        phrases:['Scared!','Climb up!','On the roof!','Won\'t come down!'],
+        pinyin:[
+          'sī kè ěr de（斯克尔德）！',
+          'kè lài mǔ（克莱姆）· ā pǔ（阿普）！',
+          'āng（昂）· dé（得）· rǔ fū（如夫）！',
+          'wàng tè（望特）· kǎn（砍）· dàng（当）！'
+        ],
+        ipa:[
+          '/skerd/',
+          '/klaɪm ʌp/',
+          '/ɒn ðə ruːf/',
+          '/woʊnt kʌm daʊn/'
+        ],
+        qa:[
+          { ask:'Where is the cat?', expect:'On the roof! / 屋顶上', response:'Yes! Up up up! Won\'t come down!' }
+        ],
+        anchors:['scared|害怕','climb|爬','up|上','roof|屋顶','down|下'],
+        tpr:'手指从低往高做"爬"的动作 → 说 climb up up up → 做害怕表情让孩子模仿',
+        why:'scared 是情绪词，通过夸张表情+身体缩起来演出。up ↔ down 是最早的空间对比词对——一起给比单独给学得快得多。'
+      },
+      {
+        num:'P5', title:'取梯子 · Get the ladder',
+        focus:{ but:'Get the ___ 是最实用的英文动词框架 · 家庭日常最常见指令' },
+        phrases:['Ladder!','Get the ladder!','Big ladder!','Ready!'],
+        pinyin:[
+          'lài dé（赖德）！',
+          'gài tè（盖特）· dé（得）· lài dé（赖德）！',
+          'bǐ gé（比格）· lài dé（赖德）！',
+          'ruì dí（瑞迪）！'
+        ],
+        ipa:[
+          '/ˈlædər/',
+          '/ɡet ðə ˈlædər/',
+          '/bɪɡ ˈlædər/',
+          '/ˈredi/'
+        ],
+        qa:[
+          { ask:'What do we need?', expect:'Ladder!', response:'Yes! A big ladder!' }
+        ],
+        anchors:['ladder|梯子','get|拿','big|大','ready|准备好'],
+        tpr:'双手举高做"拿梯子"动作 → 让孩子帮忙"抬"想象中的梯子',
+        why:'Get the ___ 是最实用的英文动词框架——"去拿 XX"是家庭生活里最常见的指令。这一页学会 get 相当于开启了一整类日常表达。'
+      },
+      {
+        num:'P6', title:'爬上梯子 · Up up up',
+        focus:{ but:'up up up 重复三次 + 身体动作 = 空间介词最好的教法' },
+        phrases:['Up!','Up up up!','Climb!','Higher!'],
+        pinyin:[
+          'ā pǔ（阿普）！',
+          'ā pǔ（阿普）！',
+          'kè lài mǔ（克莱姆）！',
+          'hài ěr（嗨尔）！'
+        ],
+        ipa:[
+          '/ʌp/',
+          '/ʌp ʌp ʌp/',
+          '/klaɪm/',
+          '/ˈhaɪər/'
+        ],
+        qa:[
+          { ask:'Where is Maisy going?', expect:'Up!', response:'Yes! Up up up! To the roof!' }
+        ],
+        anchors:['up|上','climb|爬','high|高','higher|更高'],
+        tpr:'说 Up 就把孩子举高一次，重复三次；手指做"一格一格爬梯子"的动作',
+        why:'空间介词 up 通过身体举高激活前庭系统（内耳平衡感），比听 100 遍 "up" 的效果都好——身体记住的比耳朵深 10 倍。'
+      },
+      {
+        num:'P7', title:'救下小猫 · Well done',
+        focus:{ but:'Rescue + Firefighter Maisy · 让孩子体会"帮助他人"的成就感' },
+        phrases:['Rescue!','Well done!','Firefighter Maisy!','Good job!'],
+        pinyin:[
+          'ruì sī kù（瑞斯酷）！',
+          'wèi ěr（威尔）· dāng（当）！',
+          'fài ěr（法尔）· fài tè（法特）· méi xī（梅西）！',
+          'gǔ dé（古德）· jiá bù（贾布）！'
+        ],
+        ipa:[
+          '/ˈreskjuː/',
+          '/wel dʌn/',
+          '/ˈfaɪərˌfaɪtər ˈmeɪzi/',
+          '/ɡʊd dʒɒb/'
+        ],
+        qa:[
+          { ask:'Who saved the cat?', expect:'Maisy!', response:'Yes! Firefighter Maisy! Well done!' }
+        ],
+        anchors:['rescue|救','well done|做得好','firefighter|消防员','good job|棒'],
+        tpr:'双手做"抱下来"动作 → 抱抱小猫玩偶 → 拍拍手说 Well done!',
+        why:'2 岁孩子已经能感受"帮助别人"带来的正向情绪。Well done / Good job 是英语世界最常用的表扬套语——家长听了要经常用回给孩子。'
+      },
+      {
+        num:'P8', title:'带小猫兜风 · Bye-bye',
+        focus:{ but:'首尾呼应（开头 Nee-nah 出发 · 结尾 Nee-nah 兜风）· 环形闭环' },
+        phrases:['A ride!','Bye-bye!','Nee-nah!','The end!'],
+        pinyin:[
+          'ā（啊）· ruì dé（瑞德）！',
+          'bài—bài（拜——拜）！',
+          'nì—nà（呢——呐）！',
+          'dé（得）· ēn de（恩德）！'
+        ],
+        ipa:[
+          '/ə raɪd/',
+          '/baɪ baɪ/',
+          '/niː nɑː/',
+          '/ði end/'
+        ],
+        qa:[
+          { ask:'What now?', expect:'A ride!', response:'Yes! Bye-bye! Nee-nah nee-nah!' }
+        ],
+        anchors:['ride|兜风','bye-bye|再见','end|结束','together|一起'],
+        tpr:'挥手说 Bye-bye → 拉警报"Nee-nah!" → 收尾 "The end. See you next time, Maisy!"',
+        why:'首尾呼应——开头是 Nee-nah 出发，结尾又是 Nee-nah 兜风。绕一圈回来的叙事闭环让孩子有强烈满足感。Bye-bye 是最容易学会主动使用的英文套语之一。'
+      }
+    ]
+  }
+];
+
+/* Books list including future ones */
+const allBooks = [
+  {emoji:'🚌', name:"Maisy's Bus", status:'done'},
+  {emoji:'🏎️', name:"Maisy's Race Car", status:'done'},
+  {emoji:'🚂', name:"Maisy's Train", status:'done'},
+  {emoji:'✈️', name:"Maisy's Plane", status:'pending'},
+  {emoji:'🚒', name:"Maisy's Fire Engine", status:'done'},
+  {emoji:'🚜', name:"Maisy's Digger", status:'pending'},
+  {emoji:'🚑', name:"Maisy's Ambulance", status:'pending'}
+];
+
+/* ================= Render ================= */
+function renderTabs(){
+  const tabs = document.getElementById('tabs');
+  const introTab = `<button class="tab intro active" data-target="intro">📖 首页</button>`;
+  const bookTabs = books.map(b =>
+    `<button class="tab ${b.klass}" data-target="${b.id}">${b.emoji} ${b.title.replace("Maisy's ",'')}</button>`
+  ).join('');
+  tabs.innerHTML = introTab + bookTabs;
+  tabs.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => switchTo(t.dataset.target));
+  });
+}
+
+function renderBooks(){
+  const mount = document.getElementById('books-mount');
+  mount.innerHTML = books.map(b => `
+    <section class="section" data-id="${b.id}">
+      <h2 class="book-title">
+        <span class="dot" style="background:${b.color}"></span>
+        ${b.emoji} ${b.title}
+      </h2>
+      <p class="book-sub">${b.subtitle}</p>
+      ${b.redefine ? `<div class="book-redefine">${b.redefine}</div>` : ''}
+      ${(Array.isArray(b.storyLines) && b.storyLines.length) ? `
+        <div class="story-lines">
+          ${b.storyLines.map(sl => `
+            <div class="sl">
+              <div class="sl-en">${sl.en}</div>
+              <div class="sl-zh">${sl.zh}</div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+      <div class="book-meta">
+        <b>故事骨架</b>：${b.story}<br>
+        <b>亮点词汇</b>：${b.goldMine}<br>
+        <b>玩法循环</b>：${b.play}
+      </div>
+      ${b.pages.map(p => renderPage(p, b.klass)).join('')}
+    </section>
+  `).join('');
+
+  // Bind why toggles
+  mount.querySelectorAll('.why-toggle').forEach(t => {
+    t.addEventListener('click', () => {
+      t.classList.toggle('open');
+      t.nextElementSibling.classList.toggle('open');
+    });
+  });
+}
+
+function renderPage(p, klass){
+  // 新版：有 phrases 字段就走 v3 结构；旧版：保留原 script 单行渲染
+  if (Array.isArray(p.phrases)) return renderPageV3(p, klass);
+  return renderPageLegacy(p, klass);
+}
+
+function renderPageV3(p, klass){
+  const focusHtml = p.focus ? `
+    <div class="page-focus">重点：${p.focus.but}</div>
+  ` : '';
+  const phrasesHtml = `
+    <div class="phrase-list">
+      ${p.phrases.map((ph, i) => `
+        <div class="phrase-item">
+          <div class="phrase-en">${ph}</div>
+          ${(p.ipa && p.ipa[i]) ? `<div class="phrase-ipa">${p.ipa[i]}</div>` : ''}
+          ${(p.pinyin && p.pinyin[i]) ? `<div class="phrase-zh">${p.pinyin[i]}</div>` : ''}
+        </div>
+      `).join('')}
+    </div>
+  `;
+  const qaHtml = (Array.isArray(p.qa) && p.qa.length) ? `
+    <div class="qa-block">
+      <div class="qa-round">
+        ${p.qa.map(q => `
+          <div class="qa-turn parent"><div class="qa-avatar"><span class="emoji">👨‍👩</span><span class="who">家长</span></div><div class="qa-bubble">${q.ask}</div></div>
+          <div class="qa-turn child"><div class="qa-avatar"><span class="emoji">🧒</span><span class="who">宝宝</span></div><div class="qa-bubble">${q.expect}</div></div>
+          ${q.response ? `<div class="qa-turn parent"><div class="qa-avatar"><span class="emoji">👨‍👩</span><span class="who">家长</span></div><div class="qa-bubble">${q.response}</div></div>` : ''}
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
+  const anchorsHtml = (p.anchors && p.anchors.length) ? `
+    <div class="anchors-label">🔑 这一页的英文重点</div>
+    <div class="anchors">${p.anchors.map(a => {
+      const parts = (typeof a === 'string' ? a.split('|') : [a.en, a.zh]);
+      const en = parts[0], zh = parts[1] || '';
+      return `<span class="chip"><b>${en}</b>${zh ? `<span class="chip-zh">${zh}</span>` : ''}</span>`;
+    }).join('')}</div>
+  ` : '';
+  return `
+    <div class="page ${klass}">
+      <div class="page-head">
+        <span class="page-num">${p.num}</span>
+        <span class="page-title">${p.title}</span>
+      </div>
+      ${focusHtml}
+      ${phrasesHtml}
+      ${qaHtml}
+      ${anchorsHtml}
+      <div class="tpr">${p.tpr}</div>
+      <div class="why-toggle">为什么这样做</div>
+      <div class="why">${p.why}</div>
+    </div>
+  `;
+}
+
+function renderPageLegacy(p, klass){
+  return `
+    <div class="page ${klass}">
+      <div class="page-head">
+        <span class="page-num">${p.num}</span>
+        <span class="page-title">${p.title}</span>
+      </div>
+      <div class="script">${p.script}</div>
+      <div class="pinyin">${p.pinyin}</div>
+      <div class="anchors">${(p.anchors||[]).map(a => `<span class="chip">${a}</span>`).join('')}</div>
+      <div class="tpr">${p.tpr}</div>
+      <div class="why-toggle">为什么这样做</div>
+      <div class="why">${p.why}</div>
+    </div>
+  `;
+}
+
+function renderBookList(){
+  document.getElementById('booklist').innerHTML = allBooks.map(b => `
+    <li>
+      <span class="em">${b.emoji}</span>
+      <span class="name">${b.name}</span>
+      <span class="st ${b.status}">${b.status === 'done' ? '✓ 已加入' : '待扫描'}</span>
+    </li>
+  `).join('');
+}
+
+function switchTo(id){
+  document.querySelectorAll('.tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.target === id)
+  );
+  document.querySelectorAll('.section').forEach(s =>
+    s.classList.toggle('active', s.dataset.id === id)
+  );
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* Controls */
+document.getElementById('btn-elder').addEventListener('click', function(){
+  document.body.classList.toggle('elder');
+  this.classList.toggle('on');
+  // In elder mode, auto-enable pinyin
+  if (document.body.classList.contains('elder')){
+    document.body.classList.add('show-pinyin');
+    document.getElementById('btn-pinyin').classList.add('on');
+  }
+});
+document.getElementById('btn-pinyin').addEventListener('click', function(){
+  document.body.classList.toggle('show-pinyin');
+  this.classList.toggle('on');
+});
+document.getElementById('btn-why').addEventListener('click', function(){
+  const isOpen = this.classList.toggle('on');
+  document.querySelectorAll('.why-toggle').forEach(t => t.classList.toggle('open', isOpen));
+  document.querySelectorAll('.why').forEach(w => w.classList.toggle('open', isOpen));
+});
+document.getElementById('btn-layers').addEventListener('click', function(){
+  switchTo('intro');
+  setTimeout(() => {
+    const el = document.getElementById('five-layers-block');
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 120);
+});
+
+renderTabs();
+renderBooks();
+renderBookList();
+</script>
+
+</body>
+</html>
