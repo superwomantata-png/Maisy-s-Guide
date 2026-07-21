@@ -606,6 +606,144 @@ body.elder .sl-zh{font-size:15px;color:var(--ink)}
   font-size:14px;
   line-height:1.7;
 }
+
+/* =========================================================
+   v4 · DIAL Framework 样式
+   ========================================================= */
+
+/* Teaching Priority Engine · 页顶"只做这几件事"汇总 */
+.dial-priority { margin:12px 0 16px; padding:14px 16px; background:linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%); border-radius:14px; border:2px solid #f59e0b; }
+.dial-priority .priority-header { font-weight:700; font-size:1em; color:#92400e; margin-bottom:10px; letter-spacing:0.02em; }
+.dial-priority .priority-band { margin:8px 0; padding:8px 10px; background:rgba(255,255,255,0.7); border-radius:10px; }
+.dial-priority .band-title { font-weight:600; font-size:0.88em; margin-bottom:4px; }
+.dial-priority .band-must .band-title { color:#b45309; }
+.dial-priority .band-can .band-title  { color:#0369a1; }
+.dial-priority .band-skip .band-title { color:#6b7280; }
+.dial-priority .stars { margin-right:6px; letter-spacing:-2px; }
+.dial-priority .band-list { margin:2px 0 4px 0; padding-left:22px; font-size:0.92em; line-height:1.55; }
+.dial-priority .band-list li { margin:3px 0; }
+.dial-priority .band-must .band-list li { font-weight:500; }
+
+/* Layer 容器自身的 tier 折叠（例如全 skip 的 Layer 4 在初读时整层隐藏） */
+.section[data-tier="first"]    .page.v4 .dial-layer.tier-canDo,
+.section[data-tier="first"]    .page.v4 .dial-layer.tier-skip,
+.section[data-tier="familiar"] .page.v4 .dial-layer.tier-skip { display:none; }
+
+/* Stage switch */
+.stage-switch { display:flex; gap:2px; background:#fef3c7; border-radius:14px; padding:3px; margin-left:6px; }
+.stage-switch[hidden] { display:none; }
+.stage-switch button { padding:5px 9px; border:none; background:transparent; border-radius:11px; cursor:pointer; font-size:0.85em; color:#92400e; font-family:inherit; }
+.stage-switch button.active { background:var(--accent, #e08a3c); color:#fff; font-weight:600; }
+
+/* Tier folding · v4 页面按 data-tier 显示/隐藏 field */
+.section[data-tier="first"]    .page.v4 .tier-canDo,
+.section[data-tier="first"]    .page.v4 .tier-skip,
+.section[data-tier="familiar"] .page.v4 .tier-skip { display:none; }
+.section[data-tier="first"]    .book-transfer.tier-skip,
+.section[data-tier="familiar"] .book-transfer.tier-skip { display:none; }
+
+/* dial-tips 按当前档次显示对应提示 */
+.page.v4 .dial-tips { display:none; padding:8px 12px; background:#fef3c7; border-radius:10px; margin:8px 0; font-size:0.85em; color:#92400e; }
+.section[data-tier="first"]    .page.v4 .tip-first,
+.section[data-tier="familiar"] .page.v4 .tip-familiar,
+.section[data-tier="deep"]     .page.v4 .tip-deep { display:block; }
+
+/* Layer 容器 */
+.page.v4 .dial-layer { margin:14px 0; padding:12px 14px; background:rgba(255,255,255,0.55); border-radius:12px; border-left:4px solid var(--book-color, #e08a3c); }
+.page.v4 .dial-layer-title { font-weight:600; font-size:0.95em; margin-bottom:8px; color:var(--ink); }
+.page.v4 .dial-field { margin:10px 0; padding-left:6px; }
+.page.v4 .dial-label { display:inline-block; font-weight:600; font-size:0.82em; opacity:0.75; margin-right:6px; }
+.page.v4 .dial-value { font-size:1em; margin:3px 0; line-height:1.5; }
+.page.v4 .dial-sub { font-size:0.85em; color:#7a6a55; margin-top:3px; font-style:italic; }
+
+/* Vocab cards (核心词汇 5 张卡) */
+.page.v4 .vocab-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(85px, 1fr)); gap:6px; margin-top:6px; }
+.page.v4 .vocab-card { padding:8px 6px; background:#fff; border-radius:10px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+.page.v4 .vocab-card .v-en { font-weight:700; font-size:1.05em; color:var(--book-color, #e08a3c); }
+.page.v4 .vocab-card .v-ipa { font-size:0.72em; color:#888; margin:2px 0; font-family:'Courier New', monospace; }
+.page.v4 .vocab-card .v-zh { font-size:0.85em; color:#555; }
+
+/* Core chunks */
+.page.v4 .chunks-list { display:flex; flex-direction:column; gap:6px; margin-top:6px; }
+.page.v4 .chunk-item { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:8px 10px; background:#fff; border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,0.08); }
+.page.v4 .chunk-en { font-weight:600; font-size:1.02em; color:var(--book-color, #e08a3c); }
+.page.v4 .chunk-ipa { font-size:0.75em; color:#888; font-family:'Courier New', monospace; }
+.page.v4 .chunk-zh { font-size:0.9em; color:#555; }
+.page.v4 .chunk-repeat { display:inline-block; padding:2px 7px; background:#fef3c7; color:#92400e; border-radius:8px; font-size:0.72em; font-weight:700; margin-left:auto; }
+
+/* Repetition */
+.page.v4 .repeat-hi, .page.v4 .repeat-lo { font-size:0.88em; margin:3px 0; }
+.page.v4 .repeat-hi::before { content:'🔥 '; }
+.page.v4 .repeat-lo::before { content:'💨 '; }
+
+/* Parent action list */
+.page.v4 .action-list { margin:4px 0; padding-left:20px; }
+.page.v4 .action-list li { margin:3px 0; line-height:1.5; }
+
+/* Child participation types */
+.page.v4 .participation-types { display:flex; gap:6px; margin-top:4px; flex-wrap:wrap; }
+.page.v4 .p-type { padding:3px 10px; background:#e0f2fe; color:#0369a1; border-radius:10px; font-size:0.8em; font-weight:600; }
+
+/* Open questions */
+.page.v4 .qa-mini { margin:8px 0; padding:8px 12px; background:#fafafa; border-radius:10px; border-left:3px solid #ddd; }
+.page.v4 .qa-ask { font-weight:600; font-size:0.95em; }
+.page.v4 .qa-expect { color:#0369a1; font-size:0.88em; margin:3px 0; }
+.page.v4 .qa-response { color:#666; font-size:0.85em; font-style:italic; }
+
+/* Development Map */
+.dev-map-wrap { margin:14px 0; }
+.dev-map-btn { padding:8px 14px; background:#e0f2fe; color:#0369a1; border:none; border-radius:10px; font-weight:600; font-size:0.9em; cursor:pointer; font-family:inherit; }
+.dev-map-btn::before { content:'📖 '; }
+.dev-map-btn.open::before { content:'📕 '; }
+.dev-map { display:none; margin-top:10px; padding:14px; background:#f0f9ff; border-radius:12px; }
+.dev-map.open { display:block; }
+.dev-map-theme { font-size:0.9em; color:#0369a1; margin-bottom:10px; text-align:center; font-weight:600; }
+.dev-map-track { display:grid; grid-template-columns:repeat(8, minmax(70px, 1fr)); gap:6px; overflow-x:auto; padding-bottom:8px; }
+.dev-map-node { padding:8px 5px; background:#fff; border-radius:8px; text-align:center; font-size:0.75em; box-shadow:0 1px 2px rgba(0,0,0,0.08); }
+.dev-map-node .n-page { font-weight:700; color:#0369a1; font-size:0.95em; }
+.dev-map-node .n-beat { font-size:0.9em; margin:3px 0; font-weight:600; color:var(--ink); }
+.dev-map-node .n-label { color:#666; font-size:0.85em; line-height:1.3; }
+.dev-map-node[data-dim="Emotion"]     { border-top:3px solid #f472b6; }
+.dev-map-node[data-dim="ExecutiveFn"] { border-top:3px solid #fbbf24; }
+.dev-map-node[data-dim="Cognition"]   { border-top:3px solid #34d399; }
+.dev-map-node[data-dim="Attention"]   { border-top:3px solid #60a5fa; }
+.dev-map-legend { display:flex; gap:12px; justify-content:center; margin-top:10px; font-size:0.78em; flex-wrap:wrap; }
+.dev-map-legend .l-dim { display:inline-flex; align-items:center; }
+.dev-map-legend .l-dim::before { content:''; display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; }
+.dev-map-legend .l-dim[data-dim="Emotion"]::before     { background:#f472b6; }
+.dev-map-legend .l-dim[data-dim="ExecutiveFn"]::before { background:#fbbf24; }
+.dev-map-legend .l-dim[data-dim="Cognition"]::before   { background:#34d399; }
+.dev-map-legend .l-dim[data-dim="Attention"]::before   { background:#60a5fa; }
+
+/* Book-level transfer */
+.book-transfer { margin:14px 0; padding:12px 14px; background:#f0fdf4; border-radius:10px; }
+.book-transfer .t-block { margin:8px 0; }
+.book-transfer .t-title { font-weight:600; font-size:0.9em; color:#166534; margin-bottom:4px; }
+.book-transfer ul { margin:4px 0; padding-left:22px; font-size:0.9em; }
+.book-transfer li { margin:3px 0; }
+
+/* Promote modal */
+.promote-modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; }
+.promote-modal { background:#fff; border-radius:18px; padding:24px; max-width:400px; width:100%; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,0.25); }
+.promote-modal .p-emoji { font-size:2.8em; margin-bottom:6px; }
+.promote-modal .p-title { font-size:1.1em; font-weight:600; margin-bottom:10px; color:var(--ink); }
+.promote-modal .p-desc { color:#666; margin-bottom:18px; font-size:0.95em; line-height:1.5; }
+.promote-modal .p-btns { display:flex; flex-direction:column; gap:8px; }
+.promote-modal button { padding:11px 14px; border:none; border-radius:12px; cursor:pointer; font-size:0.95em; font-family:inherit; }
+.promote-modal .p-btn-primary { background:var(--accent, #e08a3c); color:#fff; font-weight:600; }
+.promote-modal .p-btn-secondary { background:#f5f5f5; color:#555; }
+.promote-modal .p-btn-off { background:transparent; color:#999; font-size:0.85em; }
+
+/* 老人模式下增大字号 */
+body.elder .page.v4 .dial-value { font-size:1.1em; }
+body.elder .page.v4 .vocab-card .v-en { font-size:1.15em; }
+body.elder .page.v4 .chunk-en { font-size:1.1em; }
+
+@media (max-width:520px){
+  .dev-map-track { grid-template-columns:repeat(4, 1fr); }
+  .stage-switch { margin-left:0; margin-top:6px; width:100%; }
+  .stage-switch button { flex:1; }
+}
 </style>
 </head>
 <body class="show-pinyin">
@@ -618,6 +756,11 @@ body.elder .sl-zh{font-size:15px;color:var(--ink)}
       <button id="btn-pinyin" class="btn-toggle on">🔤 注音</button>
       <button id="btn-layers" class="btn-toggle">📚 五层法</button>
       <button id="btn-why" class="btn-toggle">💡 展开原理</button>
+      <div class="stage-switch" id="stage-switch" hidden>
+        <button data-stage="first">📖 初读</button>
+        <button data-stage="familiar">🌿 熟读</button>
+        <button data-stage="deep">🌳 精读</button>
+      </div>
     </div>
   </div>
   <div class="tabs" id="tabs"></div>
@@ -793,6 +936,34 @@ body.elder .sl-zh{font-size:15px;color:var(--ink)}
 </footer>
 
 <script>
+/* ================= DIAL Storage (v4) ================= */
+/* localStorage keys:
+   dial.count.<id>          — number, 累计手动确认的读的次数
+   dial.stage.<id>          — 'first'|'familiar'|'deep', 用户手动切换的阶段
+   dial.stageOverride.<id>  — '1' 表示用户覆盖了自动档
+   dial.promoted.<id>.<n>   — '1' 表示第 n 次临界弹窗已展示过
+*/
+const DS = {
+  getCount(id){ return +localStorage.getItem('dial.count.'+id) || 0; },
+  setCount(id, n){ localStorage.setItem('dial.count.'+id, String(n)); },
+  bumpCount(id){ const n = DS.getCount(id)+1; DS.setCount(id, n); return n; },
+  autoStage(n){ return n<=2 ? 'first' : n<=5 ? 'familiar' : 'deep'; },
+  getStage(id){
+    if (localStorage.getItem('dial.stageOverride.'+id))
+      return localStorage.getItem('dial.stage.'+id) || DS.autoStage(DS.getCount(id));
+    return DS.autoStage(DS.getCount(id));
+  },
+  setStage(id, s, byUser){
+    localStorage.setItem('dial.stage.'+id, s);
+    if (byUser) localStorage.setItem('dial.stageOverride.'+id, '1');
+    else localStorage.removeItem('dial.stageOverride.'+id);
+  },
+  atThreshold(id){ const n = DS.getCount(id); return n === 3 || n === 6; },
+  isPromoted(id, n){ return localStorage.getItem('dial.promoted.'+id+'.'+n) === '1'; },
+  markPromoted(id, n){ localStorage.setItem('dial.promoted.'+id+'.'+n, '1'); },
+  stageLabel(s){ return s==='first'?'📖 初读':s==='familiar'?'🌿 熟读':'🌳 精读'; }
+};
+
 /* ================= Book Data ================= */
 const books = [
   {
@@ -836,7 +1007,56 @@ const books = [
         ],
         anchors:['bus|公交','drive|开车','beach|海边','where|去哪'],
         tpr:'用玩具车做"开车"动作 → 手指沿桌面划过示意"路" → 说 "Bye-bye, house!"',
-        why:'目的地是 2 岁最敏感的问题类型——"要去哪里"是他每天都在问的问题。beach 一词配上海浪手势，就把新词挂在了已有的身体感觉上。'
+        why:'目的地是 2 岁最敏感的问题类型——"要去哪里"是他每天都在问的问题。beach 一词配上海浪手势，就把新词挂在了已有的身体感觉上。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '挥手做 "Bye-bye, house!"',
+            '双手握方向盘学开车 + "Vroom vroom!"',
+            '每次读念 3 遍 "To the beach!"'
+          ],
+          canDo:[
+            '问 "Where is Maisy going?" 期待 Beach',
+            '找绿色公交车 vs 橙色房子的颜色对比'
+          ],
+          skip:[
+            '解释 "driving" 的语法',
+            '介绍 "her bus" 的所有格'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'绿色公交车 + 波波的头（在车窗里）', antiTarget:'背景的橙色房子（第一遍不用讲）' },
+          emotion:{ tier:'mustDo', label:'happy departure · eager', cueForParent:'挥手 "Bye-bye!" + 音调上扬', childExpected:'挥手 / 学 vroom' },
+          cognition:{ tier:'canDo', skills:['目的地(destination)', '事件开始'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'bus',    zh:'公交车', ipa:'/bʌs/' },
+            { en:'drive',  zh:'开车',   ipa:'/draɪv/' },
+            { en:'beach',  zh:'海边',   ipa:'/biːtʃ/' },
+            { en:'house',  zh:'房子',   ipa:'/haʊs/' },
+            { en:'bye-bye',zh:'再见',   ipa:'/ˌbaɪˈbaɪ/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Look, a bus!',     zh:'看，公交车！',    ipa:'/lʊk ə bʌs/',         repeat:3 },
+            { en:'Bye-bye, house!',  zh:'再见小房子！',    ipa:'/ˌbaɪˈbaɪ haʊs/',      repeat:3 },
+            { en:'To the beach!',    zh:'去海边！',        ipa:'/tuː ðə biːtʃ/',      repeat:3 },
+            { en:'Vroom vroom!',     zh:'呜呜！',          ipa:'/vruːm vruːm/',       repeat:5 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Vroom!','Bye-bye!'], oneShot:['driving'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['指公交车 + 指波波','挥手做 bye-bye','双手握方向盘做开车姿势','用玩具车沿桌面划出"路"'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Wave','Pretend'], script:'挥手 "Bye-bye!" + 学 vroom' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Where is Maisy going?', expect:'Beach!',   response:'Yes! To the beach!' },
+            { ask:'What color is the bus?', expect:'Green!',   response:"Yes! A green bus!" }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'出门时挥手 "Bye-bye, house!" 建立离家仪式' },
+          extensionPlay:{ tier:'skip', hint:'用玩具车/箱子当公交去"目的地"（沙发/餐桌）' }
+        }
       },
       {
         num:'P2', title:'第一位乘客上车（Dotty）',
@@ -859,7 +1079,57 @@ const books = [
         ],
         anchors:['hello|你好','hop on|上车','first|第一位','friend|朋友'],
         tpr:'伸出一根手指数 "One!" → 挥手做 hello 动作 → 拍拍旁边座位说 "Sit here!"',
-        why:'"Hello + 名字" 是本书主框架句 · 从这里开始每次接人重复一次，孩子第 4-5 次会自己接上 "Hello"——句法框架先行、词汇后填。'
+        why:'"Hello + 名字" 是本书主框架句 · 从这里开始每次接人重复一次，孩子第 4-5 次会自己接上 "Hello"——句法框架先行、词汇后填。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '挥手大声说 "Hello, Dotty!"',
+            '伸出一根手指数 "One friend!"',
+            '拍拍旁边座位做 "Hop on!" 手势'
+          ],
+          canDo:[
+            '问 "Who\'s here?" 期待孩子说 Dotty',
+            '观察 Dotty 的伞/衣服细节'
+          ],
+          skip:[
+            '解释 "passenger" 的含义',
+            '记忆 "the first" 语法'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'停下的公交车 + Dotty（长嘴巴的第一位乘客）', antiTarget:'底下等候的其他角色（第一遍不讲）' },
+          emotion:{ tier:'mustDo', label:'friendly greeting', cueForParent:'挥手 + 眼睛看 Dotty + "Hello!" 上扬语调', childExpected:'挥手 / 说 hello' },
+          cognition:{ tier:'canDo', skills:['计数(first = 1)', '社交套语(Hello + name)'] },
+          executiveFn:{ tier:'canDo', demand:'stop' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'hello', zh:'你好',   ipa:'/həˈloʊ/' },
+            { en:'first', zh:'第一位', ipa:'/fɜːrst/' },
+            { en:'hop',   zh:'跳',     ipa:'/hɒp/' },
+            { en:'stop',  zh:'停',     ipa:'/stɒp/' },
+            { en:'Dotty', zh:'多蒂',   ipa:'/ˈdɒti/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Stop!',           zh:'停！',       ipa:'/stɒp/',              repeat:3 },
+            { en:'Hello, Dotty!',   zh:'你好多蒂！',  ipa:'/həˈloʊ ˈdɒti/',      repeat:5 },
+            { en:'Hop on!',         zh:'上车！',     ipa:'/hɒp ɒn/',            repeat:5 },
+            { en:'One friend!',     zh:'一位朋友！',  ipa:'/wʌn frend/',         repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Hello, [name]!','Hop on!'], oneShot:['first passenger'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['挥手做 hello 动作','伸一根手指数 "One!"','拍旁边座位说 "Hop on!"','做刹车"Stop!"手势'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Wave'], script:'挥手 hello + 数一根手指' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:"Who's here?",  expect:'Dotty!',   response:'Yes! Hello, Dotty!' },
+            { ask:'Hello, ___?',  expect:'Dotty!',   response:'Hop on!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'见到熟人挥手 "Hello, [name]!" 建立打招呼习惯' },
+          extensionPlay:{ tier:'skip', hint:'玩具排队 "上车" 一个个 hello' }
+        }
       },
       {
         num:'P3', title:'带野餐食物的 Cyril',
@@ -882,7 +1152,54 @@ const books = [
         ],
         anchors:['next|下一个','food|食物','picnic|野餐','yum|好吃'],
         tpr:'假装从图里抓食物往嘴里塞 "Yum yum!" → 假装喂孩子 → 问 "You want some?"',
-        why:'Next it\'s ___ 的重复节奏让孩子在句法节奏里预测下一位 · 这种节奏预测是幼儿最早的语法感来源。'
+        why:'Next it\'s ___ 的重复节奏让孩子在句法节奏里预测下一位 · 这种节奏预测是幼儿最早的语法感来源。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '摸肚子 + "Yum yum!" 语气夸张',
+            '假装从袋里拿食物塞嘴 + 假装喂孩子 "Want some?"',
+            '读到 "Next it\'s..." 时停顿等孩子接名字'
+          ],
+          canDo:[
+            '问 "What\'s in the bag?" 期待 food',
+            '找 Cyril 手里的野餐袋'
+          ],
+          skip:[
+            '解释 "picnic" 的含义（可以真正去野餐时讲）'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'Cyril（条纹衣服的松鼠）+ 手里大袋子里的野餐食物', antiTarget:'车上已上车的乘客（次要）' },
+          emotion:{ tier:'mustDo', label:'hungry curiosity · yummy anticipation', cueForParent:'摸肚子 + "Yum yum" + 吸鼻子做闻食物动作', childExpected:'摸肚子 / 说 yum' },
+          cognition:{ tier:'canDo', skills:['序列(next)', '食物类别'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'next',    zh:'下一个', ipa:'/nekst/' },
+            { en:'food',    zh:'食物',   ipa:'/fuːd/' },
+            { en:'yum',     zh:'好吃',   ipa:'/jʌm/' },
+            { en:'picnic',  zh:'野餐',   ipa:'/ˈpɪknɪk/' },
+            { en:'Cyril',   zh:'松鼠',   ipa:'/ˈsɪrəl/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:"Next it's Cyril!",  zh:'下一个是松鼠！', ipa:"/nekst ɪts ˈsɪrəl/",   repeat:5 },
+            { en:'Yum yum!',          zh:'好吃好吃！',    ipa:'/jʌm jʌm/',            repeat:5 },
+            { en:'For a picnic!',     zh:'去野餐！',      ipa:'/fɔːr ə ˈpɪknɪk/',     repeat:2 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:["Next it's ___",'Yum yum!'], oneShot:['picnic'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['摸肚子做"饿"动作','假装从袋里拿食物塞嘴','假装喂孩子 "Want some?"','读 "Next it\'s..." 后停顿'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Pretend'], script:'假装吃 + 摸肚子 + 学 yum' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:"What's in the bag?", expect:'Food!',    response:'Yes! Food for a picnic!' },
+            { ask:"Next it's...?",       expect:'Cyril!',   response:'Yes! Hello, Cyril!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'吃饭时说 "Yum yum!" · 排队/轮流时说 "Next it\'s [name]"' },
+          extensionPlay:{ tier:'skip', hint:'假装野餐 · 玩具食物 · 让宝宝当"喂食官"' }
+        }
       },
       {
         num:'P4', title:'红绿灯 · Honk Beep',
@@ -910,7 +1227,57 @@ const books = [
         ],
         anchors:['red|红','green|绿','stop|停','go|走','honk|喇叭'],
         tpr:'玩红绿灯游戏——喊 "red light" 抱住孩子不动 · 喊 "green light" 举高高 · 反复几次',
-        why:'stop/go 是最容易内化的一对反义词。中英双通道 + 身体动作强化让规则更牢固。'
+        why:'stop/go 是最容易内化的一对反义词。中英双通道 + 身体动作强化让规则更牢固。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '玩红绿灯游戏：喊 "Red light!" 抱住不动 · "Green light!" 举高',
+            '双手按喇叭 "Honk honk!" / "Beep beep!"',
+            '每次读念 3 遍 "Red light — Stop! / Green light — Go!"'
+          ],
+          canDo:[
+            '问 "Red light?" → Stop · "Green light?" → Go',
+            '数一数街上多少辆车'
+          ],
+          skip:[
+            '解释 "busy" 的抽象含义',
+            '介绍 "traffic light" 的完整词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'交通信号灯 + 排队的各种车辆', antiTarget:'背景建筑物细节' },
+          emotion:{ tier:'mustDo', label:'busy · energetic', cueForParent:'假装按喇叭 + 加大音量 "Honk!"', childExpected:'学 honk / beep' },
+          cognition:{ tier:'canDo', skills:['规则(red/green light)', '因果(信号→动作)'] },
+          executiveFn:{ tier:'mustDo', demand:'wait-then-go' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'red',   zh:'红',   ipa:'/red/' },
+            { en:'green', zh:'绿',   ipa:'/ɡriːn/' },
+            { en:'stop',  zh:'停',   ipa:'/stɒp/' },
+            { en:'go',    zh:'走',   ipa:'/ɡoʊ/' },
+            { en:'honk',  zh:'喇叭', ipa:'/hɒŋk/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Red light — Stop!',   zh:'红灯——停！', ipa:'/red laɪt stɒp/',    repeat:10 },
+            { en:'Green light — Go!',   zh:'绿灯——走！', ipa:'/ɡriːn laɪt ɡoʊ/',    repeat:10 },
+            { en:'Honk honk!',          zh:'叭叭！',      ipa:'/hɒŋk hɒŋk/',        repeat:5 },
+            { en:'Beep beep!',          zh:'滴滴！',      ipa:'/biːp biːp/',        repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Red light Stop / Green light Go','Honk honk!'], oneShot:['very busy'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['举手做红灯 "Stop!"（掌心朝前）','手放下做绿灯 "Go!" 开车动作','双手按喇叭 "Honk honk!"','反复来回切换 red / green'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'红灯→静止 · 绿灯→冲 · 学 honk' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Red light means...?',   expect:'Stop!',   response:'Yes! We stop!' },
+            { ask:'Green light means...?', expect:'Go!',     response:'Vroom vroom!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'canDo', hint:'⭐ 过马路指红绿灯直接教 "Red light stop! Green light go!" —— 最强生活迁移' },
+          extensionPlay:{ tier:'skip', hint:'红绿灯 Stop-Go 游戏 · 音乐停停游戏' }
+        }
       },
       {
         num:'P5', title:'Tallulah 上车要玩水',
@@ -933,7 +1300,55 @@ const books = [
         ],
         anchors:['hop|跳','splash|溅水','water|水','wait|等'],
         tpr:'抱孩子做"上车"跳跃动作 → 用手拍桌面/水面演 "splash splash!"',
-        why:'hop 和 splash 是能立刻演出来的动作动词，比 board/enter 适合 2 岁。能演的动词最容易记。'
+        why:'hop 和 splash 是能立刻演出来的动作动词，比 board/enter 适合 2 岁。能演的动词最容易记。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '抱孩子做"上车"跳跃 "Hop on!"',
+            '拍桌面/水面演 "Splash splash!"',
+            '抖脚 + 大眼睛演 "Can\'t wait!"'
+          ],
+          canDo:[
+            '问 "What will Tallulah do?" 期待 Splash',
+            '找 Tallulah 手里的水上玩具'
+          ],
+          skip:[
+            '解释 "can\'t wait" 的语法结构'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'Tallulah（黄色鸭子戴粉头巾）+ 她手里粉色的水上玩具', antiTarget:'底下的红房子背景' },
+          emotion:{ tier:'mustDo', label:'eager · can\'t wait', cueForParent:'抖脚做"等不及"动作 + 大眼睛 + 声音急切', childExpected:'学 hop 跳 / 拍水' },
+          cognition:{ tier:'canDo', skills:['预测(要 splash)', '序列(下一位乘客)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'hop',      zh:'跳',   ipa:'/hɒp/' },
+            { en:'splash',   zh:'溅水', ipa:'/splæʃ/' },
+            { en:'water',    zh:'水',   ipa:'/ˈwɔːtər/' },
+            { en:'wait',     zh:'等',   ipa:'/weɪt/' },
+            { en:'Tallulah', zh:'鸭子', ipa:'/təˈluːlə/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Hop on, Tallulah!', zh:'上车吧鸭子！',   ipa:'/hɒp ɒn təˈluːlə/',  repeat:5 },
+            { en:'Hop hop hop!',      zh:'跳跳跳！',       ipa:'/hɒp hɒp hɒp/',      repeat:5 },
+            { en:'Splash splash!',    zh:'哗啦哗啦！',      ipa:'/splæʃ splæʃ/',      repeat:5 },
+            { en:"Can't wait!",       zh:'等不及了！',      ipa:'/kænt weɪt/',        repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Hop on!','Splash splash!'], oneShot:['in the water'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['抱孩子做"上车"跳跃','拍桌面/水面演 splash','抖脚做迫不及待','用嘴发泡泡音效'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'跳 hop + 拍手当 splash' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What will Tallulah do?',  expect:'Splash!',    response:'Yes! Splash in the water!' },
+            { ask:'Can you hop like Tallulah?', expect:'（学跳）', response:'Hop hop hop!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'洗澡/游泳时说 "Splash splash!" · 跳床时 "Hop hop hop!"' },
+          extensionPlay:{ tier:'skip', hint:'玩水浴盆 · 沙发跳跳游戏' }
+        }
       },
       {
         num:'P6', title:'Charley AND Eddie 挤进来',
@@ -956,7 +1371,56 @@ const books = [
         ],
         anchors:['and|和','two|两个','squeeze|挤','both|两个都'],
         tpr:'抱紧孩子挤一挤 · 痒痒他一下 —— 让 squeeze 变成身体记忆',
-        why:'AND 不是从语法书学的，是从"我 AND 你"这种指认场景学的。配合"两个朋友一起挤"的情境，AND 直接落到孩子身上。'
+        why:'AND 不是从语法书学的，是从"我 AND 你"这种指认场景学的。配合"两个朋友一起挤"的情境，AND 直接落到孩子身上。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '抱紧孩子挤挤 + 拖长音 "Squeeeeze!"',
+            '强调 AND："Charley AND Eddie!"',
+            '数手指 "One… two!" 双人上车'
+          ],
+          canDo:[
+            '问 "How many friends now?" 数手指',
+            '看 Eddie 有多大（大象特别巨）'
+          ],
+          skip:[
+            '解释 "both" 的语法',
+            '介绍连词 AND 的抽象含义'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'大灰象 Eddie（红点披风超大只）+ 鳄鱼 Charley 一起挤上车', antiTarget:'背景的房子花草' },
+          emotion:{ tier:'mustDo', label:'squishy · playful', cueForParent:'抱紧孩子挤挤 + "Squeeeeze!" 语调拖长 + 痒痒', childExpected:'学挤 + 咯咯笑' },
+          cognition:{ tier:'canDo', skills:['连词 AND', '数量(two)', '空间(挤/squish)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'two',     zh:'两个', ipa:'/tuː/' },
+            { en:'and',     zh:'和',   ipa:'/ænd/' },
+            { en:'squeeze', zh:'挤',   ipa:'/skwiːz/' },
+            { en:'both',    zh:'两个都',ipa:'/boʊθ/' },
+            { en:'Eddie',   zh:'大象', ipa:'/ˈedi/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Charley AND Eddie!', zh:'鳄鱼和大象！',  ipa:'/ˈtʃɑːrli ænd ˈedi/', repeat:5 },
+            { en:'Squeeeeze!',         zh:'挤——！',        ipa:'/skwiːːz/',            repeat:5 },
+            { en:'Two friends!',       zh:'两位朋友！',    ipa:'/tuː frendz/',         repeat:3 },
+            { en:'Squeeze in!',        zh:'挤进来！',      ipa:'/skwiːz ɪn/',          repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Squeeeeze!','AND'], oneShot:['both'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['抱紧孩子挤挤 + 拖长音 Squeeeeze','痒痒他让 squeeze 变身体记忆','数手指 One, two','强调 AND 时用双手比一下'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'跟着挤 + 数手指 + 学 squeeze' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'How many friends now?', expect:'Two!',           response:'Yes! Charley AND Eddie!' },
+            { ask:"Who's here?",           expect:'Charley! Eddie!', response:'Both! Two friends!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'拥抱时拖长 "Squeeeeze!" · 电梯挤时 "Squeeze in!"' },
+          extensionPlay:{ tier:'skip', hint:'玩具塞小盒子 "Squeeze!" · 一起钻被窝挤挤' }
+        }
       },
       {
         num:'P7', title:'一起唱 Wheels on the Bus',
@@ -979,7 +1443,56 @@ const books = [
         ],
         anchors:['wheels|轮子','round|转圈','sing|唱','song|歌'],
         tpr:'唱整首《The Wheels on the Bus》（Super Simple Songs 版）· 双手做转圈动作 · 让孩子一起转',
-        why:'身体动作是记忆的骨架 · 唱 10 遍后孩子会先做转圈动作再说 round。这是英语儿歌最经典的入门曲。'
+        why:'身体动作是记忆的骨架 · 唱 10 遍后孩子会先做转圈动作再说 round。这是英语儿歌最经典的入门曲。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '完整唱一遍《The Wheels on the Bus》',
+            '双手做轮子转圈动作，让孩子一起转',
+            '唱到 "Round and…" 停顿等孩子接 "round!"'
+          ],
+          canDo:[
+            '转到 wipers（swish swish）/ horn（beep beep）等 verse',
+            '假装公交上不同乘客的动作'
+          ],
+          skip:[
+            '解释 "all day long" 的时间概念',
+            '讲每一段 verse 的完整含义'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'公交车里唱歌的乘客 + 车外飘出的音符', antiTarget:'背景的羊和小红车（干扰）' },
+          emotion:{ tier:'mustDo', label:'joyful sing-along · collective', cueForParent:'大声唱 + 双手做轮子转圈 + 摇晃身体', childExpected:'跟唱 / 转手 / 摇摆' },
+          cognition:{ tier:'canDo', skills:['即将到达', '集体活动', '音乐节奏'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'sing',   zh:'唱',   ipa:'/sɪŋ/' },
+            { en:'wheels', zh:'轮子', ipa:'/wiːlz/' },
+            { en:'round',  zh:'转圈', ipa:'/raʊnd/' },
+            { en:'song',   zh:'歌',   ipa:'/sɒŋ/' },
+            { en:'bus',    zh:'公交', ipa:'/bʌs/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Sing a song!',              zh:'唱首歌！',       ipa:'/sɪŋ ə sɒŋ/',                repeat:5 },
+            { en:'The wheels on the bus',     zh:'公交车的轮子',    ipa:'/ðə wiːlz ɒn ðə bʌs/',       repeat:5 },
+            { en:'Round and round!',          zh:'转啊转！',        ipa:'/raʊnd ənd raʊnd/',          repeat:10 },
+            { en:'All day long!',             zh:'一整天！',        ipa:'/ɔːl deɪ lɒŋ/',              repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Round and round!'], oneShot:['Not long now'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['开唱《The Wheels on the Bus》完整版','双手做轮子转圈动作','唱到 "Round and…" 停顿','摇晃身体 + 让孩子一起摇'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Sing','Point'], script:'转手 + 跟唱 + 身体摇摆' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'The wheels on the bus go...?', expect:'Round and round!', response:'Round and round, all day long!' },
+            { ask:'What sound does the horn make?', expect:'Beep beep!',      response:'Beep beep, all day long!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'坐车/走路时唱这首儿歌 · 洗澡时也可以' },
+          extensionPlay:{ tier:'skip', hint:'Super Simple Songs 版本反复播放 + 全套动作' }
+        }
       },
       {
         num:'P8', title:'到海边啦！',
@@ -1004,8 +1517,86 @@ const books = [
         ],
         anchors:['hooray|万岁','sunny|阳光','sand|沙子','ice cream|冰淇淋'],
         tpr:'数一数海滩上所有动物 → 找波波在哪 → 指认太阳/海鸥/贝壳/冲浪板 → 收尾 "The end. Bye-bye, Maisy!"',
-        why:'从家到海边的闭环叙事 · 2 岁孩子对"绕一圈到达"有强烈满足感 · 固定收尾套路培养仪式感。'
+        why:'从家到海边的闭环叙事 · 2 岁孩子对"绕一圈到达"有强烈满足感 · 固定收尾套路培养仪式感。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '张开双臂 "Hooray! We\'re at the beach!"',
+            '指太阳 + 拍手庆祝到达',
+            '数一数海滩上每个动物，找波波在哪'
+          ],
+          canDo:[
+            '问 "Where are we?" 期待 Beach',
+            '问 "Can you find Maisy?" 指认'
+          ],
+          skip:[
+            '讲 "arrived" 的语法',
+            '记忆每个角色带了什么东西'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'太阳 + 海边聚在一起的所有朋友', antiTarget:'画面右下角的公交车（已完成使命）' },
+          emotion:{ tier:'mustDo', label:'joyful arrival · sunny', cueForParent:'张开双臂 + "Yay! We\'re here!"', childExpected:'开心跳 / 拍手' },
+          cognition:{ tier:'canDo', skills:['事件结束', '闭环叙事', '天气(sunny)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'hooray', zh:'万岁',   ipa:'/hʊˈreɪ/' },
+            { en:'beach',  zh:'海边',   ipa:'/biːtʃ/' },
+            { en:'sunny',  zh:'阳光的', ipa:'/ˈsʌni/' },
+            { en:'sun',    zh:'太阳',   ipa:'/sʌn/' },
+            { en:'here',   zh:'这里',   ipa:'/hɪər/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Hooray!',              zh:'万岁！',       ipa:'/hʊˈreɪ/',              repeat:5 },
+            { en:"We're at the beach!",  zh:'我们到海边啦！', ipa:'/wɪər æt ðə biːtʃ/',    repeat:3 },
+            { en:'What a sunny day!',    zh:'好晴朗的一天！', ipa:'/wɒt ə ˈsʌni deɪ/',      repeat:3 },
+            { en:'Splash splash!',       zh:'哗啦哗啦！',    ipa:'/splæʃ splæʃ/',         repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Hooray!','Splash splash!'], oneShot:['arrived'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['张开双臂庆祝到达','指太阳说 "Sunny day!"','数每个动物，找波波','拍手 "Hooray!"'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Clap','Pretend'], script:'指太阳 + 拍手 + 找波波' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Where are we?',      expect:'Beach!',     response:"Yes! We're at the beach!" },
+            { ask:'Can you find Maisy?', expect:'指波波',      response:'There she is! In the bus!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'到达任何目的地时说 "Yay, we\'re here!"' },
+          extensionPlay:{ tier:'skip', hint:'假装海边玩沙 / 玩具野餐 / 家里的收尾"Bye-bye Maisy"仪式' }
+        }
       }
+    ],
+    // ===== v4 · DIAL Framework book-level =====
+    ageBand:'2-3',
+    totalPages:8,
+    developmentMap:{
+      theme:'出发 → 社交框架 → 规则 → 集体 → 闭环到达',
+      nodes:[
+        { page:'P1', beat:'出发',      dimension:'Emotion',     label:'目的地建立 · 期待到海边' },
+        { page:'P2', beat:'社交套语',   dimension:'Attention',   label:'Hello + [name] 框架首现' },
+        { page:'P3', beat:'序列展开',   dimension:'Cognition',   label:'Next it\'s ___ 可预测节奏' },
+        { page:'P4', beat:'规则内化',   dimension:'ExecutiveFn', label:'红绿灯 Stop / Go' },
+        { page:'P5', beat:'动作动词',   dimension:'Emotion',     label:'Splash 迫不及待' },
+        { page:'P6', beat:'连词+集体',  dimension:'Cognition',   label:'AND / Squeeze 数量 2' },
+        { page:'P7', beat:'音乐仪式',   dimension:'Emotion',     label:'Wheels on the Bus 全体唱' },
+        { page:'P8', beat:'闭环到达',   dimension:'Emotion',     label:'Hooray! We\'re here!' }
+      ]
+    },
+    dailyLifeConnection:[
+      '出门时挥手 "Bye-bye, house!"',
+      '见人挥手 "Hello, [name]!"',
+      '过马路指红绿灯 "Red light — stop! Green light — go!"',
+      '拥抱时拖长音说 "Squeeeeze!"',
+      '坐车/走路一起唱 The Wheels on the Bus'
+    ],
+    extensionPlay:[
+      '用箱子/椅子当公交，玩具依次说 "Hop on!"',
+      '排队挤挤游戏 "Squeeze in!"',
+      '红绿灯 Stop / Go 音乐游戏',
+      'Wheels on the Bus 全套动作版（可用 Super Simple Songs）'
     ]
   },
 
@@ -1055,7 +1646,55 @@ const books = [
         ],
         anchors:['race|比赛','friends|朋友','exciting|兴奋','red|红色','car|车'],
         tpr:'指认小车 → 做期待表情让孩子模仿 → 让孩子挑一辆玩具车 "Which one?"',
-        why:'exciting 这种情绪词，孩子先学表情再学词。家长的脸就是最早的情感词典——你张大眼睛、抖抖手，他就理解了什么是 exciting。'
+        why:'exciting 这种情绪词，孩子先学表情再学词。家长的脸就是最早的情感词典——你张大眼睛、抖抖手，他就理解了什么是 exciting。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '指红色赛车，让孩子也伸手指',
+            '做兴奋表情（眼睛睁大 · O 型嘴）让孩子模仿',
+            '每次读念 3 遍 "How exciting!"'
+          ],
+          canDo:[
+            '问 "What color?" 引导孩子说 Red',
+            '一起找小猫和小鸟'
+          ],
+          skip:[
+            '讲解 race 这个抽象词',
+            '介绍 friend 的含义'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'大红色赛车 + 波波的脸', antiTarget:'背景花朵和文字' },
+          emotion:{ tier:'mustDo', label:'excited / anticipating', cueForParent:'眼睛睁大 + 音调上扬 + 手掌互搓', childExpected:'模仿"哇"或眼睛发光' },
+          cognition:{ tier:'canDo', skills:['事件开始','预测(what next)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'race',   zh:'比赛', ipa:'/reɪs/' },
+            { en:'car',    zh:'车',   ipa:'/kɑːr/' },
+            { en:'red',    zh:'红色', ipa:'/red/' },
+            { en:'Maisy',  zh:'波波', ipa:'/ˈmeɪzi/' },
+            { en:'friend', zh:'朋友', ipa:'/frend/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Look!',         zh:'看！',        ipa:'/lʊk/',            repeat:3 },
+            { en:'A red car!',    zh:'红色的车！',   ipa:'/ə red kɑːr/',     repeat:3 },
+            { en:'How exciting!', zh:'真让人期待！', ipa:'/haʊ ɪkˈsaɪtɪŋ/',  repeat:2 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Look!','How exciting!'], oneShot:['friend','race'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['指红色赛车','做兴奋表情（眼睛睁大、张嘴 O）','模仿波波擦车动作','指认小猫和小鸟'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Pretend'], script:'指红车、找小猫、假装擦车' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What color is the car?', expect:'Red! / 红色', response:'Yes! A red car!' },
+            { ask:'Where is the cat?',      expect:'指小猫',       response:'Yes! There\'s a cat!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'路上看到红色的车说 "Look! A red car!"' },
+          extensionPlay:{ tier:'skip', hint:'让孩子挑一辆玩具车，假装擦洗它' }
+        }
       },
       {
         num:'P2', title:'起跑 · Ready Set GO',
@@ -1078,7 +1717,56 @@ const books = [
         ],
         anchors:['ready|准备','set|预备','go|开始','vroom|呜·拟声'],
         tpr:'玩起跑游戏——家长喊 "Ready... Set... GO!" 抱着孩子从沙发冲到餐桌。冲一次孩子笑一次。让孩子当发令员反过来喊。',
-        why:'Ready-Set-Go 是英语世界所有游戏/比赛/起跑的通用短语。学会这一组比死记 start 有用 100 倍——它是可以嵌入任何日常场景的高频套语。'
+        why:'Ready-Set-Go 是英语世界所有游戏/比赛/起跑的通用短语。学会这一组比死记 start 有用 100 倍——它是可以嵌入任何日常场景的高频套语。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '举手当旗：起→挥下 · Ready…低慢、Set…更高、GO! 爆发',
+            '抱着孩子从沙发冲到餐桌，真身体动一次',
+            '让孩子当发令员反过来喊 Ready-Set-GO'
+          ],
+          canDo:[
+            '问 "Where is the flag?" 指鸵鸟',
+            '喊 Ready-Set… 停顿等孩子接 GO!'
+          ],
+          skip:[
+            '讲解 "line up" 的字面意思',
+            '介绍 "everyone" 这个抽象量词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'黑白格子起跑旗 + 三辆车排队', antiTarget:'背景动物观众' },
+          emotion:{ tier:'mustDo', label:'about to burst · anticipating', cueForParent:'深吸气 + 手停半空 + 表情紧绷盯旗', childExpected:'屏住呼吸 + 身体前倾' },
+          cognition:{ tier:'canDo', skills:['顺序(lining up)','因果预告(旗挥下→出发)'] },
+          executiveFn:{ tier:'mustDo', demand:'wait-then-go' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'ready',    zh:'准备',     ipa:'/ˈredi/' },
+            { en:'set',      zh:'预备',     ipa:'/set/' },
+            { en:'go',       zh:'开始',     ipa:'/ɡoʊ/' },
+            { en:'vroom',    zh:'呜(拟声)', ipa:'/vruːm/' },
+            { en:'everyone', zh:'大家',     ipa:'/ˈevriwʌn/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Ready, Set, GO!',   zh:'预备、备、冲！', ipa:'/ˈredi set ɡoʊ/',       repeat:10 },
+            { en:'Vroom vroom!',      zh:'呜呜！',        ipa:'/vruːm vruːm/',         repeat:5 },
+            { en:'Everyone lines up', zh:'大家排好队',    ipa:'/ˈevriwʌn laɪnz ʌp/',   repeat:1 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Ready Set GO!','Vroom!'], oneShot:['everyone','line up'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['举手当旗（起→挥下）','语调蓄势：Ready…低慢，Set…更高，GO! 爆发','假装踩油门','身体前倾抖动'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Pretend','Wave'], script:'跟着喊 GO! 时挥手 / 踩地板 / 冲出去' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Where is the flag?', expect:'指鸵鸟手里的旗', response:'Yes! The flag!' },
+            { ask:'Ready, Set...?',     expect:'GO!',            response:'GO! Vroom vroom!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'出门/洗手/跑步前用 Ready-Set-GO 起头' },
+          extensionPlay:{ tier:'skip', hint:'玩具车排队 + 毛巾当起跑旗' }
+        }
       },
       {
         num:'P3', title:'波波领跑 · Zoom',
@@ -1101,7 +1789,55 @@ const books = [
         ],
         anchors:['fast|快','zoom|嗖·拟声','first|第一','front|前面'],
         tpr:'用玩具小车在地上画一个弯道跑一次 → 手指从起点滑到终点说 "Zoom~~"',
-        why:'"in front" 是空间关系词，2 岁孩子先理解身体的"前后"（我前面/我后面），再迁移到抽象的"车前面"——所以做动作时让自己站在孩子前面，指着自己说 "I\'m in front!"'
+        why:'"in front" 是空间关系词，2 岁孩子先理解身体的"前后"（我前面/我后面），再迁移到抽象的"车前面"——所以做动作时让自己站在孩子前面，指着自己说 "I\'m in front!"',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '手快速划过书面模拟车飞驰',
+            '大声喊 "She\'s FAST!" 和 "Zoom!"',
+            '指波波 vs 后面的车形成"前/后"对比'
+          ],
+          canDo:[
+            '问 "Who is first?"',
+            '家长站到孩子前面说 "I\'m in front!" 让身体理解前后'
+          ],
+          skip:[
+            '讲 bend / 弯道',
+            '解释 "heads for the first bend"'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'波波的红赛车 + 飘起来的围巾（速度感）', antiTarget:'落后的粉车蓝车（次要）' },
+          emotion:{ tier:'mustDo', label:'zooming · thrilled', cueForParent:'音调加快 + 手臂前冲 + Wow! 惊叹', childExpected:'学 vroom / 跟着比手势' },
+          cognition:{ tier:'canDo', skills:['比较(前/后)','速度(fast/zooms)','序数(first)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'fast',  zh:'快',       ipa:'/fæst/' },
+            { en:'first', zh:'第一',     ipa:'/fɜːrst/' },
+            { en:'front', zh:'前面',     ipa:'/frʌnt/' },
+            { en:'zoom',  zh:'嗖(拟声)', ipa:'/zuːm/' },
+            { en:'bend',  zh:'弯道',     ipa:'/bend/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Zoom!',         zh:'嗖！',      ipa:'/zuːm/',           repeat:5 },
+            { en:'She\'s fast!',  zh:'她好快！',   ipa:'/ʃiːz fæst/',      repeat:3 },
+            { en:'Maisy is first!', zh:'波波第一！', ipa:'/ˈmeɪzi ɪz fɜːrst/', repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Vroom!','Zoom!','She\'s fast!'], oneShot:['heads for the bend'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['手快速划过书面模拟飞驰','头前伸做冲刺姿态','抖围巾（如家里有）','指波波+指落后的车形成对比'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Pretend'], script:'指出谁在前面 / 假装开快车 vroom' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Who is first?',        expect:'Maisy!',           response:'Yes! Maisy is FAST!' },
+            { ask:'Where is Maisy going?', expect:'前面 / the bend', response:'She\'s going to the bend!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'走路/上楼时说 "I\'m first!" 或 "Daddy is first!"' },
+          extensionPlay:{ tier:'skip', hint:'家里跑步谁先到沙发 = first / 玩具车比赛' }
+        }
       },
       {
         num:'P4', title:'加油 · Cheer',
@@ -1124,7 +1860,54 @@ const books = [
         ],
         anchors:['cheer|欢呼','yay|耶·拟声','who|谁','ahead|前方'],
         tpr:'手举高做加油动作 → 拍拍手，孩子也会拍 → 问 "Who\'s that?" 引导找乌龟，为下一页做预测',
-        why:'"But wait...!" 后停 5 秒——2 岁孩子已经理解悬念，他会主动催你翻页。"下一页会发生什么？"是最早的预测练习，比逼他记单词有用得多。'
+        why:'"But wait...!" 后停 5 秒——2 岁孩子已经理解悬念，他会主动催你翻页。"下一页会发生什么？"是最早的预测练习，比逼他记单词有用得多。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '拍手 + 喊 "Go Maisy, go!"（示范动作让孩子跟拍）',
+            '做惊讶表情 + 指前方的乌龟',
+            '读 "But wait…!" 后停 5 秒，让孩子催翻页'
+          ],
+          canDo:[
+            '问 "Who is cheering?" 或 "Can you find the tortoise?"',
+            '预测下一页会发生什么'
+          ],
+          skip:[
+            '记忆 Eddie 和 Cyril 的角色名'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'举旗欢呼的观众（大象+松鼠）+ 前方的乌龟', antiTarget:'波波本身（本页不是重点）' },
+          emotion:{ tier:'mustDo', label:'cheering + surprise（双情绪）', cueForParent:'拍手 + 眉毛上扬 + "咦？"惊讶表情 + 指前方', childExpected:'跟着拍手 / 指乌龟' },
+          cognition:{ tier:'canDo', skills:['社会情绪(为他人加油)','结果变化预告','预测'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'cheer',    zh:'欢呼',    ipa:'/tʃɪr/' },
+            { en:'ahead',    zh:'前方',    ipa:'/əˈhed/' },
+            { en:'wait',     zh:'等一下',   ipa:'/weɪt/' },
+            { en:'look',     zh:'看',      ipa:'/lʊk/' },
+            { en:'tortoise', zh:'乌龟',    ipa:'/ˈtɔːrtəs/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Go Maisy, go!',    zh:'加油波波！',     ipa:'/ɡoʊ ˈmeɪzi ɡoʊ/',   repeat:5 },
+            { en:'Hooray!',          zh:'万岁！',         ipa:'/hʊˈreɪ/',            repeat:5 },
+            { en:'Wait, who\'s that?', zh:'等等，那是谁？', ipa:'/weɪt huːz ðæt/',    repeat:2 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Go Maisy go!','Hooray!'], oneShot:['Eddie and Cyril'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['拍手（模仿观众加油）','挥手 (waving)','做惊讶表情（大眼睛+O 型嘴）','指前方点出乌龟'] },
+          childParticipation:{ tier:'mustDo', types:['Clap','Wave','Point'], script:'跟着拍手加油 / 指前方的乌龟' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Who is cheering?',         expect:'大象和松鼠 / Eddie and Cyril', response:'Yes! They are cheering!' },
+            { ask:'Can you find the tortoise?', expect:'指乌龟',                     response:'Yes! There\'s a tortoise!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'家人做完事拍手说 "Hooray!"' },
+          extensionPlay:{ tier:'skip', hint:'给玩具加油 "Go car go!" / 藏猫猫找到人拍手' }
+        }
       },
       {
         num:'P5', title:'SLOW DOWN！乌龟过马路',
@@ -1149,7 +1932,57 @@ const books = [
         ],
         anchors:['stop|停','wait|等','tortoise|乌龟','first|优先','cross|过马路'],
         tpr:'一起做停车动作 → 举手 → 说 "Stop." → 等乌龟走完 → 拍拍手 "Good job!"',
-        why:'2 岁开始理解"规则"——红绿灯是最早的规则之一。中英双通道 + 身体动作定型 stop/wait。这一页也是共情训练：为别人停下来。'
+        why:'2 岁开始理解"规则"——红绿灯是最早的规则之一。中英双通道 + 身体动作定型 stop/wait。这一页也是共情训练：为别人停下来。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '举手做 STOP 手势（掌心朝前）让孩子跟做',
+            '语速放慢+压低说 "sloooow doooown"',
+            '一起等乌龟走完，说 "Wait…" 再 "Good job!"'
+          ],
+          canDo:[
+            '问 "Why does Maisy stop?" 引导指乌龟',
+            '⭐ 联系现实红绿灯 "Red light! Stop!"'
+          ],
+          skip:[
+            '讲 tortoise 的动物学知识',
+            '解释"crossing"这个动词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'红色停车旗 + 横穿的乌龟', antiTarget:'橙色背景（避免只看颜色不看主体）' },
+          emotion:{ tier:'mustDo', label:'careful / alarmed', cueForParent:'张手做 STOP 手势 + 屏住呼吸 + 慢慢说 "slow… down…"', childExpected:'学 STOP 手势 / 慢慢说' },
+          cognition:{ tier:'canDo', skills:['社会规则(让行)','因果(乌龟在路→停车)','慢/快对比'] },
+          executiveFn:{ tier:'mustDo', demand:'stop' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'slow',     zh:'慢',   ipa:'/sloʊ/' },
+            { en:'stop',     zh:'停',   ipa:'/stɒp/' },
+            { en:'wait',     zh:'等',   ipa:'/weɪt/' },
+            { en:'cross',    zh:'穿过', ipa:'/krɒs/' },
+            { en:'tortoise', zh:'乌龟', ipa:'/ˈtɔːrtəs/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'SLOW DOWN!',           zh:'慢下来！',       ipa:'/sloʊ daʊn/',              repeat:10 },
+            { en:'Stop!',                zh:'停！',          ipa:'/stɒp/',                    repeat:10 },
+            { en:'Wait!',                zh:'等一下！',       ipa:'/weɪt/',                    repeat:5 },
+            { en:'Tortoise is crossing', zh:'乌龟在过马路',    ipa:'/ˈtɔːrtəs ɪz ˈkrɒsɪŋ/',    repeat:2 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['SLOW DOWN!','Stop!','Wait!'], oneShot:['crossing the track'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['举手做 STOP 手势（掌心朝前）','音调放慢+压低 slooooow doooown','假装踩刹车','指乌龟解释为什么停'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend'], script:'跟着做 STOP 手势 / 假装踩刹车 / 屏住不动' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Why does Maisy stop?',      expect:'因为乌龟 / tortoise', response:'Yes! Tortoise is crossing.' },
+            { ask:'Where is the tortoise going?', expect:'指过马路方向',    response:'Crossing the track!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'canDo', hint:'⭐ 过马路看到红灯说 "Stop! Cars stop!" —— 全书最强生活迁移点' },
+          extensionPlay:{ tier:'skip', hint:'Stop and Go 玩具车游戏 / 红绿灯游戏 / 音乐停停游戏' }
+        }
       },
       {
         num:'P6', title:'Tallulah 反超',
@@ -1172,7 +2005,55 @@ const books = [
         ],
         anchors:['who|谁','first|第一','now|现在','change|变化'],
         tpr:'家长故意指错人 → 引导孩子说 "No!" 并指对的人 → 说 "Oh! Now it\'s different!"',
-        why:'2 岁开始理解"变化"——先波波领先，现在换了。家长故意"猜错让孩子纠正"是参与感训练的黄金机会——他会觉得自己在教你。'
+        why:'2 岁开始理解"变化"——先波波领先，现在换了。家长故意"猜错让孩子纠正"是参与感训练的黄金机会——他会觉得自己在教你。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '家长故意指错人："Maisy is first!" 等孩子说 "No!" 纠正',
+            '手划过书面模拟追赶动作',
+            '摇头叹气"哎呀波波被超啦"配合失望表情'
+          ],
+          canDo:[
+            '问 "Who\'s first now?"',
+            '联系"第一名会变化"——第一名不是永远的'
+          ],
+          skip:[
+            '学 "lead" / "catch" 这些抽象动词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'冲到前面的粉色车（Tallulah）+ 波波不再第一', antiTarget:'背景围观小鸟' },
+          emotion:{ tier:'mustDo', label:'surprise + competitive', cueForParent:'"咦？"惊讶脸 + 指前方 Tallulah + 给波波"追！"的语气', childExpected:'惊讶/瞪眼/指' },
+          cognition:{ tier:'canDo', skills:['结果变化(第一名会变)','预测重估'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'now',      zh:'现在', ipa:'/naʊ/' },
+            { en:'lead',     zh:'领先', ipa:'/liːd/' },
+            { en:'back',     zh:'回来', ipa:'/bæk/' },
+            { en:'catch',    zh:'追上', ipa:'/kætʃ/' },
+            { en:'Tallulah', zh:'鸭子', ipa:'/təˈluːlə/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Now Tallulah is first!', zh:'现在鸭子第一了！',  ipa:'/naʊ təˈluːlə ɪz fɜːrst/', repeat:5 },
+            { en:'The race is back on!',   zh:'比赛继续！',        ipa:'/ðə reɪs ɪz bæk ɒn/',      repeat:3 },
+            { en:'Vroom vroom!',           zh:'呜呜！',            ipa:'/vruːm vruːm/',            repeat:5 },
+            { en:'Catch her!',             zh:'追上她！',          ipa:'/kætʃ hɜːr/',              repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Vroom Vroom!','Go Maisy!'], oneShot:['safely','takes the lead'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['手划过书面模拟追赶','摇头叹气"哎呀波波被超了"','指 Tallulah 说 "She\'s first now!"','故意指错人让孩子纠正'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Pretend'], script:'指现在第一的粉车 / 假装追赶动作' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Who is first now?', expect:'Tallulah!',       response:'Yes! Now Tallulah is first!' },
+            { ask:'Where is Maisy?',   expect:'后面 / behind',    response:'Maisy is behind now!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'排队/吃饭换位时说 "Now you are first"' },
+          extensionPlay:{ tier:'skip', hint:'玩具车比赛让孩子体验"第一名会变" / 沙发跑步换位游戏' }
+        }
       },
       {
         num:'P7', title:'Charley 逆袭获胜',
@@ -1197,7 +2078,57 @@ const books = [
         ],
         anchors:['fast|快','win|赢','happy|开心','yay|耶·拟声'],
         tpr:'用玩具车演一次超车——说 "past" 时把一辆车滑过另一辆 → Yay 时拍手',
-        why:'不强调"Maisy 输了 = 不好"，而是"比赛结束了 · 大家都开心"。2 岁太早接触输赢价值观，先让"结束 + 庆祝"作为叙事闭环。'
+        why:'不强调"Maisy 输了 = 不好"，而是"比赛结束了 · 大家都开心"。2 岁太早接触输赢价值观，先让"结束 + 庆祝"作为叙事闭环。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '突然停顿 + 惊讶表情 + 指鳄鱼 "Oh! Who\'s that?"',
+            '一起大喊 "Charley wins!"',
+            '拍手庆祝 Charley（示范"为别人赢开心"）'
+          ],
+          canDo:[
+            '问 "Are you happy for Charley?"',
+            '⭐ 联系游戏输 "It\'s OK — yay for Daddy!"'
+          ],
+          skip:[
+            '讲输赢价值观',
+            '解释 "not fast enough"'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'冲过终点旗的蓝色车（鳄鱼 Charley）', antiTarget:'落后的波波和 Tallulah' },
+          emotion:{ tier:'mustDo', label:'surprised + accepting', cueForParent:'"哦？"惊讶 → 转"哇 Charley 赢了！"庆祝语气 → 拍手示范"为他人赢而高兴"', childExpected:'惊讶/接受/拍手' },
+          cognition:{ tier:'canDo', skills:['结果接受','预期修正(不是最爱的角色赢也 OK)'] },
+          executiveFn:{ tier:'canDo', demand:'emotional-regulation' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'win',     zh:'赢',    ipa:'/wɪn/' },
+            { en:'past',    zh:'越过',  ipa:'/pæst/' },
+            { en:'fast',    zh:'快',    ipa:'/fæst/' },
+            { en:'enough',  zh:'足够',  ipa:'/ɪˈnʌf/' },
+            { en:'Charley', zh:'鳄鱼',  ipa:'/ˈtʃɑːrli/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Charley wins!',       zh:'鳄鱼赢啦！',     ipa:'/ˈtʃɑːrli wɪnz/',     repeat:10 },
+            { en:'So fast!',            zh:'好快！',        ipa:'/soʊ fæst/',           repeat:5 },
+            { en:'But not fast enough', zh:'但还不够快',    ipa:'/bʌt nɒt fæst ɪˈnʌf/', repeat:2 },
+            { en:'He zooms past!',      zh:'他嗖地过去了！', ipa:'/hi zuːmz pæst/',      repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Charley wins!','Vroom!','Yay!'], oneShot:['not fast enough'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['冲刺手势（手向前）','突然停顿指鳄鱼"哦？谁？"','拍手庆祝 Charley（示范为他人高兴）','假装自己是终点旗挥动'] },
+          childParticipation:{ tier:'mustDo', types:['Point','Clap'], script:'指出谁赢 / 拍手庆祝赢家 / 学"Yay!"' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Who wins?',                expect:'Charley!',   response:'Yay! Charley wins!' },
+            { ask:'Are you happy for Charley?', expect:'点头 / Yes', response:'Me too! Yay for Charley!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'canDo', hint:'⭐ 玩游戏孩子输时说 "It\'s OK, Daddy wins today, yay for Daddy!" —— 情绪接受迁移' },
+          extensionPlay:{ tier:'skip', hint:'玩具车比赛让赢家轮换 + 输方 clap for winner 仪式' }
+        }
       },
       {
         num:'P8', title:'吃冰淇淋庆祝',
@@ -1222,8 +2153,84 @@ const books = [
         ],
         anchors:['yummy|好吃','ice cream|冰淇淋','flavor|味道','celebrate|庆祝'],
         tpr:'假装舔冰淇淋 "lick lick" → 数动物 → 每个动物冰淇淋颜色说英语（red / green / yellow）',
-        why:'收尾 "The end! See you tomorrow, Maisy!" 让共读有固定仪式感——2 岁孩子对重复的收尾套路有强烈满足感，能预期"结束"这件事本身就是成长。'
+        why:'收尾 "The end! See you tomorrow, Maisy!" 让共读有固定仪式感——2 岁孩子对重复的收尾套路有强烈满足感，能预期"结束"这件事本身就是成长。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '假装舔冰淇淋（伸舌头 "lick lick"）让孩子跟做',
+            '数每人一支 "one, two, three…"',
+            '拥抱孩子说 "What a lot of fun!"'
+          ],
+          canDo:[
+            '找每个角色（大象、松鼠、鸭子、鳄鱼、乌龟…）',
+            '问 "What flavor?" 选颜色'
+          ],
+          skip:[
+            '讲 "celebrate" 的含义'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'大家聚在一起 + 手里的冰淇淋（颜色鲜艳）', antiTarget:'无特别（焦点分散是刻意的——集体庆祝）' },
+          emotion:{ tier:'mustDo', label:'joyful / celebratory', cueForParent:'大笑 + 张开双臂 + 亲吻/拥抱孩子 + 一起吃东西的动作', childExpected:'大笑 + 假装吃冰淇淋' },
+          cognition:{ tier:'canDo', skills:['仪式收尾(事件有始有终)','数量(每人一支)','集体概念'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'ice cream', zh:'冰淇淋', ipa:'/aɪs kriːm/' },
+            { en:'fun',       zh:'好玩',   ipa:'/fʌn/' },
+            { en:'everyone',  zh:'大家',   ipa:'/ˈevriwʌn/' },
+            { en:'yummy',     zh:'好吃',   ipa:'/ˈjʌmi/' },
+            { en:'together',  zh:'一起',   ipa:'/təˈɡeðər/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Yummy!',           zh:'好吃！',         ipa:'/ˈjʌmi/',              repeat:10 },
+            { en:'What a lot of fun!', zh:'真好玩！',      ipa:'/wɒt ə lɒt əv fʌn/',   repeat:5 },
+            { en:'Ice cream time!',  zh:'吃冰淇淋啦！',    ipa:'/aɪs kriːm taɪm/',     repeat:5 },
+            { en:'Everyone is happy!', zh:'大家都开心！',  ipa:'/ˈevriwʌn ɪz ˈhæpi/',  repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Yummy!','What fun!'], oneShot:['celebrate'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['假装舔冰淇淋（伸舌头 lick lick）','数每人一支冰淇淋 one, two, three...','大笑 + 张开双臂','拥抱孩子（模仿画面团聚感）'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'假装舔冰淇淋 / 找每个角色 / 数冰淇淋' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Who is here?',    expect:'数每个角色',         response:'Yes! Everyone is here!' },
+            { ask:'What flavor do you want?', expect:'chocolate / strawberry / 指颜色', response:'Yummy!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'家人聚在一起吃零食时说 "It\'s fun time!"' },
+          extensionPlay:{ tier:'skip', hint:'玩具聚会 + 假装冰淇淋派对 / 用积木做冰淇淋' }
+        }
       }
+    ],
+    // ===== v4 · DIAL Framework book-level =====
+    ageBand:'2-3',
+    totalPages:8,
+    developmentMap:{
+      theme:'期待 → 执行(等待/停止) → 社会情绪 → 结果接受',
+      nodes:[
+        { page:'P1', beat:'期待建立',      dimension:'Emotion',     label:'兴奋预告 · How exciting!' },
+        { page:'P2', beat:'游戏化指令',    dimension:'ExecutiveFn', label:'Ready-Set-GO 等待→释放' },
+        { page:'P3', beat:'速度释放',      dimension:'Cognition',   label:'fast / first 空间比较' },
+        { page:'P4', beat:'社会情绪+伏笔', dimension:'Emotion',     label:'为他人加油 + 乌龟出现' },
+        { page:'P5', beat:'规则内化',      dimension:'ExecutiveFn', label:'STOP + 让行' },
+        { page:'P6', beat:'认知变化',      dimension:'Cognition',   label:'第一名会变' },
+        { page:'P7', beat:'情绪高潮',      dimension:'Emotion',     label:'意外结果接受' },
+        { page:'P8', beat:'仪式收尾',      dimension:'Emotion',     label:'集体庆祝' }
+      ]
+    },
+    dailyLifeConnection:[
+      '过马路看红灯说 "Stop!" / "Wait!"',
+      '出门/洗手前用 "Ready, Set, GO!" 起头',
+      '排队时说 "Now you\'re first!" / "You go first!"',
+      '玩游戏输了 clap for winner + "Yay for Daddy!"'
+    ],
+    extensionPlay:[
+      '沙发→餐桌划跑道跑三轮，Ready-Set-GO 起头 + 中途喊 STOP',
+      '玩具车队排队 + 用毛巾当起跑旗',
+      'Stop-and-Go 音乐游戏（音乐停就静止）',
+      '收尾玩冰淇淋派对（积木做冰淇淋）'
     ]
   },
 
@@ -1289,7 +2296,56 @@ const books = [
         ],
         anchors:['aboard|上车','toot|嘟·拟声','station|车站','go|走'],
         tpr:'手拉汽笛动作让孩子模仿 → 把家里椅子排一列当火车 → 每人坐一个座位',
-        why:'Toot-toot 是英语火车标准拟声，和中文"呜——"平行学习。All aboard 是英美童谣/绘本里火车出发的经典套语——记住这一组就能玩很多假装火车游戏。'
+        why:'Toot-toot 是英语火车标准拟声，和中文"呜——"平行学习。All aboard 是英美童谣/绘本里火车出发的经典套语——记住这一组就能玩很多假装火车游戏。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '拉汽笛 "Toot-toot!" 大声拖长',
+            '双手做火车摇臂动作 + "Choo-choo!"',
+            '张手做 "All aboard!"（招呼上车）'
+          ],
+          canDo:[
+            '问 "What color is the train?" → green',
+            '找 Maisy 在哪节车厢'
+          ],
+          skip:[
+            '解释 "aboard" 的语法',
+            '介绍 "her train" 所有格'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'绿色小火车 + 波波（司机）', antiTarget:'售票亭细节和时钟' },
+          emotion:{ tier:'mustDo', label:'excited departure', cueForParent:'拉汽笛 + 双手摇臂 + 上扬语调', childExpected:'学 toot / 学开车' },
+          cognition:{ tier:'canDo', skills:['事件开始', '拟声(toot / choo-choo)', '集体(all aboard)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'train',   zh:'火车',   ipa:'/treɪn/' },
+            { en:'aboard',  zh:'上车',   ipa:'/əˈbɔːrd/' },
+            { en:'toot',    zh:'嘟',     ipa:'/tuːt/' },
+            { en:'today',   zh:'今天',   ipa:'/təˈdeɪ/' },
+            { en:'drive',   zh:'开车',   ipa:'/draɪv/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Toot-toot!',      zh:'嘟嘟！',      ipa:'/tuːt tuːt/',            repeat:10 },
+            { en:'All aboard!',     zh:'大家上车！',   ipa:'/ɔːl əˈbɔːrd/',           repeat:5 },
+            { en:'Choo-choo!',      zh:'呜呜！',      ipa:'/tʃuː tʃuː/',            repeat:5 },
+            { en:"Look, a train!",  zh:'看，火车！',   ipa:'/lʊk ə treɪn/',           repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Toot-toot!','Choo-choo!'], oneShot:['today'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['拉汽笛"Toot-toot!" 大声拖长','双手做火车摇臂 + Choo-choo','张手做 All aboard 招呼手势','把椅子排一列当火车'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'学汽笛 + 学开车 + 上"火车"' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What color is the train?', expect:'Green!',   response:'Yes! A green train!' },
+            { ask:'What sound?',              expect:'Toot-toot!', response:'Toot-toot! Off we go!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'见到火车/坐公交时说 "Toot-toot!" / "All aboard!"' },
+          extensionPlay:{ tier:'skip', hint:'椅子排队当火车 / 玩具火车轨道' }
+        }
       },
       {
         num:'P2', title:'去乡下 · Geese',
@@ -1314,7 +2370,56 @@ const books = [
         ],
         anchors:['country|乡下','geese|大鹅','hello|你好','honk|叫声'],
         tpr:'模仿鹅叫（geese 是 honk 不是 quack）→ 找乡下场景元素：花、栅栏、湖',
-        why:'顺便教鸭和鹅的区别——2 岁开始能做类别归纳。goose/geese 单复数变化不用讲，用 "one goose, two geese" 反复听就够了。'
+        why:'顺便教鸭和鹅的区别——2 岁开始能做类别归纳。goose/geese 单复数变化不用讲，用 "one goose, two geese" 反复听就够了。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '挥手大声 "Hello, Geese!"',
+            '学鹅叫 "Honk honk!"（不是 quack）',
+            '数手指 "One, two, three geese!"'
+          ],
+          canDo:[
+            '问 "How many geese?" 期待 three',
+            '看火车的车厢和乘客'
+          ],
+          skip:[
+            '解释 country 与 city 的对比',
+            '介绍 goose / geese 单复数'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'火车 + 底下的 3 只鹅', antiTarget:'车厢里的乘客细节' },
+          emotion:{ tier:'mustDo', label:'cheerful greeting', cueForParent:'挥手 + Hello 语气上扬 + 学鹅叫', childExpected:'挥手 / 学 honk' },
+          cognition:{ tier:'canDo', skills:['目的地(country)', '数量(3 只)', '动物类别(geese)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'hello',   zh:'你好',   ipa:'/həˈloʊ/' },
+            { en:'geese',   zh:'大鹅',   ipa:'/ɡiːs/' },
+            { en:'country', zh:'乡下',   ipa:'/ˈkʌntri/' },
+            { en:'off',     zh:'出发',   ipa:'/ɔːf/' },
+            { en:'honk',    zh:'鹅叫',   ipa:'/hɒŋk/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Hello, Geese!',           zh:'你好大鹅！',       ipa:'/həˈloʊ ɡiːs/',           repeat:5 },
+            { en:"We're off to the country!", zh:'我们去乡下！',   ipa:"/wɪər ɔːf tuː ðə ˈkʌntri/", repeat:3 },
+            { en:'Honk honk!',              zh:'嘎嘎嘎！',        ipa:'/hɒŋk hɒŋk/',            repeat:5 },
+            { en:'Look, geese!',            zh:'看，鹅！',        ipa:'/lʊk ɡiːs/',              repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Hello, [animal]!','Honk honk!'], oneShot:['country'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['挥手做 hello 大声打招呼','学鹅叫 honk honk','数手指 One, two, three','找乡下场景（栅栏、花）'] },
+          childParticipation:{ tier:'mustDo', types:['Wave','Point'], script:'挥手 hello + 学 honk + 数手指' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'How many geese?',   expect:'Three!',      response:'Yes! Three geese!' },
+            { ask:'What sound do geese make?', expect:'Honk!', response:'Honk honk! Big geese!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'见到动物就说 "Hello, [animal]!" 建立主动打招呼习惯' },
+          extensionPlay:{ tier:'skip', hint:'玩具动物排队"上火车"依次 Hello' }
+        }
       },
       {
         num:'P3', title:'上山 · Up up up · Goat',
@@ -1339,7 +2444,57 @@ const books = [
         ],
         anchors:['up|上','hill|山','goat|山羊','baa|羊叫'],
         tpr:'说 up 就把孩子举高一次，重复三次；模仿羊叫 baaaa',
-        why:'空间介词是 2 岁最难的词类之一。三次 up 配合三次举高，让孩子的前庭系统（内耳平衡感）参与编码——身体记住的 up 比听到的 up 深 10 倍。'
+        why:'空间介词是 2 岁最难的词类之一。三次 up 配合三次举高，让孩子的前庭系统（内耳平衡感）参与编码——身体记住的 up 比听到的 up 深 10 倍。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '每说 "Up" 把孩子举高一次（重复三次激活前庭）',
+            '学火车爬坡喘气 "Chugga chugga chugga!"',
+            '挥手 + 学羊叫 "Hello, Goat! Baaaa!"'
+          ],
+          canDo:[
+            '问 "Which way? Up or down?" 期待 Up',
+            '让孩子帮火车"推一把"上山'
+          ],
+          skip:[
+            '介绍 hill 与 mountain 的区别',
+            '解释 "the hill" 的定冠词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'向上倾斜的火车 + 底下的山羊', antiTarget:'背景蓝天' },
+          emotion:{ tier:'mustDo', label:'effort · going up · determined', cueForParent:'学 Chugga chugga 喘气 + 手臂前后摆 + 认真表情', childExpected:'学 chugga / 被举高' },
+          cognition:{ tier:'canDo', skills:['空间(up hill)', '努力/坚持', 'Hello + 动物'] },
+          executiveFn:{ tier:'canDo', demand:'persist' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'up',    zh:'上',   ipa:'/ʌp/' },
+            { en:'hill',  zh:'山',   ipa:'/hɪl/' },
+            { en:'goat',  zh:'山羊', ipa:'/ɡoʊt/' },
+            { en:'baa',   zh:'羊叫', ipa:'/bɑː/' },
+            { en:'chug',  zh:'轰',   ipa:'/tʃʌɡ/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Up, up, up!',        zh:'上上上！',       ipa:'/ʌp ʌp ʌp/',              repeat:5 },
+            { en:'Up the hill!',       zh:'上山！',         ipa:'/ʌp ðə hɪl/',             repeat:3 },
+            { en:'Chugga chugga!',     zh:'轰轰！',        ipa:'/ˈtʃʌɡə ˈtʃʌɡə/',          repeat:10 },
+            { en:'Hello, Goat! Baaaa!', zh:'你好山羊！咩！', ipa:'/həˈloʊ ɡoʊt bɑː/',       repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Up up up!','Chugga chugga!'], oneShot:['the country'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['每说 Up 把孩子举高一次 × 3','学火车爬坡 Chugga chugga chugga','挥手 + 学羊叫 Baa','手臂前后摆做火车轮'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point','Wave'], script:'被举高 + 学 chugga + 挥手 Hello Goat' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Which way? Up or down?', expect:'Up!',   response:'Yes! Up up up the hill!' },
+            { ask:'What animal is that?',   expect:'Goat!',  response:'Yes! Hello, Goat! Baaaa!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'爬楼梯说 "Up up up!" · 抱起来说 "Up you go!"' },
+          extensionPlay:{ tier:'skip', hint:'举高高游戏 · 沙发爬坡 · 学各种动物叫' }
+        }
       },
       {
         num:'P4', title:'下谷 · Down down down · Wheeee',
@@ -1362,7 +2517,56 @@ const books = [
         ],
         anchors:['down|下','valley|山谷','wheee|哇·拟声','fast|快'],
         tpr:'说 down 就把孩子放低 / 做滑滑梯感觉；Wheeee 拉长音',
-        why:'up ↔ down 一对反义词。2 岁孩子学空间词最需要"对比对"——正反两个词一起给，比单独给一个学得快得多（Vygotsky 最近发展区）。'
+        why:'up ↔ down 一对反义词。2 岁孩子学空间词最需要"对比对"——正反两个词一起给，比单独给一个学得快得多（Vygotsky 最近发展区）。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '手指做下坡 + "Down, down, down!" 声调下降',
+            '拖长 "Wheeeeeee!"（最好举孩子做滑梯感觉）',
+            '挥手 "Hello, Rabbit!"'
+          ],
+          canDo:[
+            '问 "Which way now?" → Down',
+            '让孩子体验从沙发"滑"下来的 wheee 感'
+          ],
+          skip:[
+            '解释 valley 的地理含义',
+            '介绍 down into 的介词组合'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'俯冲的火车（向下倾斜）+ 底下的兔子', antiTarget:'黄色/红色的分块背景' },
+          emotion:{ tier:'mustDo', label:'thrilling · Wheee release', cueForParent:'拖长 Wheeeeee 音调下降 + 大笑', childExpected:'学 Wheee / 大笑' },
+          cognition:{ tier:'canDo', skills:['空间(down)', 'up/down 对比', '速度/释放'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'down',   zh:'下',   ipa:'/daʊn/' },
+            { en:'valley', zh:'山谷', ipa:'/ˈvæli/' },
+            { en:'wheee',  zh:'哇',   ipa:'/wiː/' },
+            { en:'rabbit', zh:'兔子', ipa:'/ˈræbɪt/' },
+            { en:'fast',   zh:'快',   ipa:'/fæst/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Down, down, down!',  zh:'下下下！',      ipa:'/daʊn daʊn daʊn/',       repeat:5 },
+            { en:'Wheeeeeee!',         zh:'哇——！',        ipa:'/wiːːː/',                repeat:5 },
+            { en:'Into the valley!',   zh:'进山谷！',       ipa:'/ˈɪntuː ðə ˈvæli/',      repeat:3 },
+            { en:'Hello, Rabbit!',     zh:'你好兔子！',     ipa:'/həˈloʊ ˈræbɪt/',        repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Down down down!','Wheeeee!'], oneShot:['valley'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['手指做下坡 + 声调下降 Down','拖长 Wheeeeeee（可举孩子做滑梯）','挥手 Hello Rabbit','对比 P3 的 up 做反义演示'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Wave'], script:'学 Wheee + 挥手 Hello Rabbit + 体验下降' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Up or down now?',          expect:'Down!',    response:'Yes! Down down down!' },
+            { ask:'How does it feel?',        expect:'Wheeee!',  response:'Wheeee! Fast!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'下楼梯说 "Down down down!" · 滑滑梯说 "Wheeeeee!"' },
+          extensionPlay:{ tier:'skip', hint:'沙发滑梯 · 抱着孩子降低喊 down · 玩具从高处滑' }
+        }
       },
       {
         num:'P5', title:'穿隧道 · Through',
@@ -1385,7 +2589,56 @@ const books = [
         ],
         anchors:['through|穿过','tunnel|隧道','dark|黑','bird|鸟'],
         tpr:'用毯子/书搭一个小隧道让孩子钻过去，边钻边说 "through the tunnel"',
-        why:'through 是抽象空间介词，比 up/down 难。靠 TPR 让身体穿过一个物理隧道，一次内化，胜过讲 100 遍。'
+        why:'through 是抽象空间介词，比 up/down 难。靠 TPR 让身体穿过一个物理隧道，一次内化，胜过讲 100 遍。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '双手做隧道让孩子钻 + "Through!"',
+            '挥手 "Bye-bye, Bird!"',
+            '学火车 "Choo-choo!"'
+          ],
+          canDo:[
+            '用毯子搭一个真隧道让孩子钻',
+            '问 "Dark or bright?" 期待 Dark'
+          ],
+          skip:[
+            '解释 through 与 into 的区别',
+            '介绍隧道的物理知识'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'火车头钻进砖头隧道 + 天上的鸟', antiTarget:'背景蓝色天空' },
+          emotion:{ tier:'mustDo', label:'entering · brief farewell', cueForParent:'双手做隧道 + 声音低下来演"变黑" + Bye-bye Bird', childExpected:'钻隧道 / 挥手' },
+          cognition:{ tier:'canDo', skills:['空间(through)', '明/暗对比', 'Bye-bye 套语'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'through',  zh:'穿过', ipa:'/θruː/' },
+            { en:'tunnel',   zh:'隧道', ipa:'/ˈtʌnl/' },
+            { en:'dark',     zh:'黑',   ipa:'/dɑːrk/' },
+            { en:'bird',     zh:'鸟',   ipa:'/bɜːrd/' },
+            { en:'bye-bye',  zh:'再见', ipa:'/ˌbaɪˈbaɪ/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Through the tunnel!',  zh:'穿过隧道！',    ipa:'/θruː ðə ˈtʌnl/',         repeat:5 },
+            { en:'Bye-bye, Bird!',       zh:'再见小鸟！',     ipa:'/ˌbaɪˈbaɪ bɜːrd/',        repeat:5 },
+            { en:'Choo-choo!',           zh:'呜呜！',         ipa:'/tʃuː tʃuː/',             repeat:5 },
+            { en:"It's dark!",           zh:'好黑！',         ipa:"/ɪts dɑːrk/",             repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Through!','Bye-bye, [animal]!'], oneShot:['dark'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['双手在孩子头上做隧道让他钻过','说 Through 时孩子从下钻过','挥手 Bye-bye Bird','用毯子/椅子搭真隧道'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Wave','Point'], script:'钻隧道 + 挥手 bye-bye + 学 choo-choo' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Where does the train go?', expect:'Through the tunnel!', response:'Yes! Through the tunnel!' },
+            { ask:'Dark or bright?',           expect:'Dark!',              response:'Yes! Dark dark dark!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'钻桥洞/门帘/穿衣时说 "Through!"' },
+          extensionPlay:{ tier:'skip', hint:'毯子搭隧道游戏 · 床下钻来钻去' }
+        }
       },
       {
         num:'P6', title:'出隧道 · Out · Butterfly',
@@ -1408,7 +2661,56 @@ const books = [
         ],
         anchors:['out|出','sunshine|阳光','butterfly|蝴蝶','fly|飞'],
         tpr:'钻出隧道后张开手臂 → butterfly 用手指做蝴蝶飞',
-        why:'through ↔ out（进去 ↔ 出来），配合上一页的对比对。这是 2 岁孩子空间概念的高级版——不只是位置，还有"过程"（穿过 → 出来）。'
+        why:'through ↔ out（进去 ↔ 出来），配合上一页的对比对。这是 2 岁孩子空间概念的高级版——不只是位置，还有"过程"（穿过 → 出来）。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '张开手做"哇！Sunshine!" + 眯眼像看阳光',
+            '用双手做蝴蝶飞',
+            '挥手 "Hello, Butterfly!"'
+          ],
+          canDo:[
+            '问 "What flies?" 期待 butterfly',
+            '对比上一页：dark → sunny 的转变'
+          ],
+          skip:[
+            '解释 into 与 out of 的成对介词',
+            '介绍蝴蝶的种类'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'火车从砖隧道出来 + 蝴蝶在飞', antiTarget:'黄色阳光背景（是氛围）' },
+          emotion:{ tier:'mustDo', label:'sunny reveal · bright joy', cueForParent:'张手做"哇！Sunshine!" + 眯眼 + 明亮语气', childExpected:'张手 / 用手做飞' },
+          cognition:{ tier:'canDo', skills:['空间(out of)', '明暗对比', '天气(sunny)', 'Hello + 动物'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'out',        zh:'出',   ipa:'/aʊt/' },
+            { en:'sunshine',   zh:'阳光', ipa:'/ˈsʌnʃaɪn/' },
+            { en:'butterfly',  zh:'蝴蝶', ipa:'/ˈbʌtərflaɪ/' },
+            { en:'fly',        zh:'飞',   ipa:'/flaɪ/' },
+            { en:'sunny',      zh:'晴',   ipa:'/ˈsʌni/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Out into the sunshine!',  zh:'出来到阳光下！',    ipa:'/aʊt ˈɪntuː ðə ˈsʌnʃaɪn/', repeat:3 },
+            { en:'Sunshine!',               zh:'阳光！',           ipa:'/ˈsʌnʃaɪn/',                repeat:5 },
+            { en:'Hello, Butterfly!',       zh:'你好蝴蝶！',        ipa:'/həˈloʊ ˈbʌtərflaɪ/',      repeat:5 },
+            { en:'Fly fly!',                zh:'飞飞！',           ipa:'/flaɪ flaɪ/',                repeat:5 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Sunshine!','Fly fly!'], oneShot:['out into'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['张手做"哇！Sunshine!" 眯眼','用双手当蝴蝶飞（手指连起飞舞）','挥手 Hello Butterfly','对比 P5 dark → 这里 bright'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Wave','Point'], script:'张手做阳光 + 手做蝴蝶飞 + 挥手' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What do you see?',         expect:'Butterfly!',   response:'Yes! Hello, butterfly! Fly fly!' },
+            { ask:'Is it dark or sunny now?', expect:'Sunny!',        response:'Yes! Sunshine!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'走出门/隧道时说 "Out! Sunshine!" · 见到蝴蝶飞时"Fly fly!"' },
+          extensionPlay:{ tier:'skip', hint:'用手做蝴蝶飞游戏 · "钻出隧道见阳光"重演' }
+        }
       },
       {
         num:'P7', title:'回到车站 · Back',
@@ -1431,7 +2733,56 @@ const books = [
         ],
         anchors:['back|回','here|这里','station|车站','arrive|到达'],
         tpr:'回顾一路遇到了谁——geese, goat, bird, butterfly → 让孩子从记忆里翻找',
-        why:'back 呼应了开头的 station。2 岁孩子对"绕一圈回来"的叙事结构有强烈满足感——这是最早的"环形叙事"体验，也是未来听所有故事的基础。'
+        why:'back 呼应了开头的 station。2 岁孩子对"绕一圈回来"的叙事结构有强烈满足感——这是最早的"环形叙事"体验，也是未来听所有故事的基础。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '拍手 "Here we are!"',
+            '拉汽笛 "Toot-toot!"（呼应开头）',
+            '音调放缓 "We\'re back at the station!"'
+          ],
+          canDo:[
+            '问 "Where are we?" 期待 Station',
+            '回忆一路遇到的动物 geese / goat / bird / butterfly'
+          ],
+          skip:[
+            '解释 "back at" 的语法',
+            '介绍 arrive 的动词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'火车 + 车站的站长（戴礼帽）', antiTarget:'背景蓝天' },
+          emotion:{ tier:'mustDo', label:'safe return · content', cueForParent:'拍手 + 音调放缓 + "We\'re back!"', childExpected:'跟着拍手 / 学 toot' },
+          cognition:{ tier:'canDo', skills:['闭环(回到起点)', '熟悉/回归', '环形叙事'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'back',    zh:'回',   ipa:'/bæk/' },
+            { en:'station', zh:'车站', ipa:'/ˈsteɪʃn/' },
+            { en:'here',    zh:'这里', ipa:'/hɪər/' },
+            { en:'toot',    zh:'嘟',   ipa:'/tuːt/' },
+            { en:'home',    zh:'家',   ipa:'/hoʊm/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Here we are!',           zh:'到啦！',           ipa:'/hɪər wi ɑːr/',            repeat:5 },
+            { en:'Back at the station!',   zh:'回到车站了！',     ipa:'/bæk æt ðə ˈsteɪʃn/',      repeat:3 },
+            { en:'Toot-toot!',             zh:'嘟嘟！',           ipa:'/tuːt tuːt/',              repeat:5 },
+            { en:"We're back!",            zh:'我们回来啦！',     ipa:"/wɪər bæk/",               repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Here we are!','Toot-toot!'], oneShot:['back at'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['拍手 Here we are','拉汽笛 Toot-toot（呼应开头）','音调放缓演"到家的安心"','回忆一路遇到的动物'] },
+          childParticipation:{ tier:'mustDo', types:['Clap','Point'], script:'拍手 + 学汽笛 + 找一路的朋友' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Where are we now?',         expect:'Station!',   response:'Yes! Back at the station!' },
+            { ask:'Who did we meet on the way?', expect:'geese/goat/…', response:'All the animals!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'回到家时说 "Here we are! We\'re back home!"' },
+          extensionPlay:{ tier:'skip', hint:'"绕一圈回来"游戏 · 回顾一天做了什么' }
+        }
       },
       {
         num:'P8', title:'收尾道别 · Bye-bye',
@@ -1456,8 +2807,87 @@ const books = [
         ],
         anchors:['fun|好玩','ride|坐','bye-bye|再见','everyone|大家'],
         tpr:'挥手 → 一个一个点名说 bye-bye → 合上书 "The end."',
-        why:'一个一个道别是最好的"名字记忆"训练。2 岁孩子人脸+名字的匹配还在早期，每个角色单独 bye-bye 能巩固每个名字。'
+        why:'一个一个道别是最好的"名字记忆"训练。2 岁孩子人脸+名字的匹配还在早期，每个角色单独 bye-bye 能巩固每个名字。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '大幅挥手 "Bye-bye, everyone!"',
+            '大笑 "What a fun train ride!"',
+            '拥抱孩子做收尾仪式 "The end!"'
+          ],
+          canDo:[
+            '一个一个点名 "Bye-bye, [name]"（Cyril / Tallulah / Charley…）',
+            '回忆一路遇到的动物 geese / goat / bird / butterfly'
+          ],
+          skip:[
+            '解释 "What a fun ___!" 感叹句结构',
+            '介绍 "everyone" 集合名词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'波波 + 挥手告别的所有乘客', antiTarget:'橙色背景' },
+          emotion:{ tier:'mustDo', label:'happy farewell · togetherness · warm', cueForParent:'挥手 + 大笑 + "Bye-bye!" + 抱抱孩子', childExpected:'挥手 / 学 bye-bye' },
+          cognition:{ tier:'canDo', skills:['集体', '闭环收尾', 'Bye-bye 套语循环', '名字记忆'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'fun',      zh:'好玩', ipa:'/fʌn/' },
+            { en:'ride',     zh:'旅程', ipa:'/raɪd/' },
+            { en:'bye-bye',  zh:'再见', ipa:'/ˌbaɪˈbaɪ/' },
+            { en:'everyone', zh:'大家', ipa:'/ˈevriwʌn/' },
+            { en:'thanks',   zh:'谢谢', ipa:'/θæŋks/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Bye-bye, everyone!',    zh:'大家再见！',       ipa:'/ˌbaɪˈbaɪ ˈevriwʌn/',     repeat:5 },
+            { en:'What a fun train ride!', zh:'好好玩的一趟！',  ipa:'/wɒt ə fʌn treɪn raɪd/',  repeat:3 },
+            { en:'Bye-bye, Maisy!',       zh:'再见波波！',        ipa:'/ˌbaɪˈbaɪ ˈmeɪzi/',       repeat:5 },
+            { en:'The end!',              zh:'结束啦！',          ipa:'/ði end/',                repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Bye-bye, [name]!','What a fun ___!'], oneShot:['ride'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['大幅挥手 "Bye-bye, everyone!"','一个一个点名 bye-bye','大笑 "What a fun train ride!"','拥抱孩子 "The end!"'] },
+          childParticipation:{ tier:'mustDo', types:['Wave','Point','Pretend'], script:'挥手 bye-bye 每个动物 + 学 The end' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Say bye to everyone!',           expect:'Bye-bye!',   response:"Bye-bye, everyone! See you tomorrow!" },
+            { ask:'Who did we meet on the way?',    expect:'数一数动物',   response:'Geese, goat, bird, butterfly!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'每次道别一个一个说 "Bye-bye, [name]" 建立名字记忆' },
+          extensionPlay:{ tier:'skip', hint:'睡前"The end"仪式 · 玩具下车依次告别' }
+        }
       }
+    ],
+    // ===== v4 · DIAL Framework book-level =====
+    ageBand:'2-3',
+    totalPages:8,
+    developmentMap:{
+      theme:'出发 → 空间介词累积 (up/down/through/out/back) → 环形闭环 → 名字循环告别',
+      nodes:[
+        { page:'P1', beat:'出发',         dimension:'Attention',   label:'Toot-toot + All aboard' },
+        { page:'P2', beat:'目的地+打招呼', dimension:'Cognition',   label:'Hello + 动物名 循环首现' },
+        { page:'P3', beat:'空间(up)',     dimension:'ExecutiveFn', label:'Up up up + Chugga chugga' },
+        { page:'P4', beat:'空间(down)',   dimension:'Emotion',     label:'Down down down + Wheeee' },
+        { page:'P5', beat:'空间(through)', dimension:'Cognition',   label:'钻隧道 · Bye-bye Bird' },
+        { page:'P6', beat:'空间(out)',    dimension:'Emotion',     label:'出隧道见 Sunshine + Butterfly' },
+        { page:'P7', beat:'空间(back)',   dimension:'Attention',   label:'回到 Station 闭环' },
+        { page:'P8', beat:'集体告别',     dimension:'Emotion',     label:'Bye-bye everyone 名字循环' }
+      ]
+    },
+    dailyLifeConnection:[
+      '爬楼梯说 "Up, up, up!" / 下楼梯说 "Down, down, down!"',
+      '滑滑梯拉长音 "Wheeeeeee!"',
+      '钻桥洞/毯子隧道说 "Through!"',
+      '出门 / 进门时 "Bye-bye!" / "Hello!" 循环练习',
+      '街上看到动物就说 "Hello, [animal]!"'
+    ],
+    extensionPlay:[
+      '椅子排一列当火车，把玩偶排进去当乘客',
+      '毯子搭隧道让孩子钻过去 "Through!"',
+      '举高高 "up up up" / 放下来 "down down down"',
+      '"火车站"游戏：出发→上山→下谷→回站的重演',
+      'Super Simple Songs 的《Down by the Station》配合听'
     ]
   },
 
@@ -1502,7 +2932,55 @@ const books = [
         ],
         anchors:['fire engine|消防车','drive|开','nee-nah|警报声','today|今天'],
         tpr:'手做方向盘 → 拉警报"Nee-nah nee-nah!" → 让孩子跟着一起喊',
-        why:'Nee-nah 是英美儿童绘本里消防车的标准拟声，和中文"呜咿呜咿"平行学习。拟声词是最容易跨语言习得的词类——不用翻译，直接演。'
+        why:'Nee-nah 是英美儿童绘本里消防车的标准拟声，和中文"呜咿呜咿"平行学习。拟声词是最容易跨语言习得的词类——不用翻译，直接演。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '双手做警笛上下摆动 + 拉长音 "Nee-nah, nee-nah!"',
+            '指红色消防车',
+            '学开车姿势（双手方向盘 + 认真的消防员表情）'
+          ],
+          canDo:[
+            '问 "What color is the fire engine?" 期待 Red',
+            '找左边的黑猫'
+          ],
+          skip:[
+            '解释 "fire engine" 的字面组合',
+            '记忆 "today" 的时间概念'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'红色消防车 + 波波和 Cyril 一起开车', antiTarget:'左边小黑猫（P3 才登场）' },
+          emotion:{ tier:'mustDo', label:'on-duty · alert', cueForParent:'双手做警笛上下摆 + 认真表情 + "Nee-nah!"', childExpected:'学 nee-nah / 认真样子' },
+          cognition:{ tier:'canDo', skills:['事件开始', '拟声(siren)', '合作(两人开车)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'fire engine', zh:'消防车', ipa:'/ˈfaɪər ˈendʒɪn/' },
+            { en:'drive',       zh:'开车',   ipa:'/draɪv/' },
+            { en:'red',         zh:'红',     ipa:'/red/' },
+            { en:'today',       zh:'今天',   ipa:'/təˈdeɪ/' },
+            { en:'Cyril',       zh:'松鼠',   ipa:'/ˈsɪrəl/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Nee-nah, nee-nah!', zh:'呜咿呜咿！',    ipa:'/niː nɑː niː nɑː/',     repeat:10 },
+            { en:'A fire engine!',    zh:'消防车！',      ipa:'/ə ˈfaɪər ˈendʒɪn/',     repeat:3 },
+            { en:"Look, it's red!",   zh:'看，红的！',    ipa:"/lʊk ɪts red/",           repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Nee-nah!'], oneShot:['today','driving'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['双手做警笛上下摆 + 拉长 Nee-nah','双手握方向盘学开车','指红色消防车','让孩子跟着一起喊 Nee-nah'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'学警笛 + 学开车姿势' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What color is the fire engine?', expect:'Red!',            response:"Yes! A red fire engine!" },
+            { ask:"Who's driving?",                 expect:'Maisy! Cyril!',   response:'Yes! Two firefighters together!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'街上看到消防车/救护车说 "Nee-nah! A fire engine!"' },
+          extensionPlay:{ tier:'skip', hint:'玩具消防车 + 学警笛游戏' }
+        }
       },
       {
         num:'P2', title:'检查水管 · Swoosh',
@@ -1525,7 +3003,56 @@ const books = [
         ],
         anchors:['water|水','check|检查','swoosh|哗·拟声','hose|水管'],
         tpr:'双手做喷水动作 → 说 "Swoosh!" → 假装水柱从孩子头上冲过',
-        why:'Swoosh 是流水/挥动的英文拟声。做动作时手臂快速划过配合"Swoosh"音，让声音+动作一起进入记忆。'
+        why:'Swoosh 是流水/挥动的英文拟声。做动作时手臂快速划过配合"Swoosh"音，让声音+动作一起进入记忆。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '手臂大幅划动 + 拖长音 "Swooooosh!"',
+            '假装拿水管喷水（水柱从孩子头上冲过）',
+            '每次读念 3 遍 "Check the water!"'
+          ],
+          canDo:[
+            '问 "What color is the water?" 期待 Blue',
+            '找波波和 Cyril 谁拿水管'
+          ],
+          skip:[
+            '解释 "check" 的多义',
+            '介绍 "hose" 这个词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'喷出的蓝色水柱 + 两只拿水管的角色', antiTarget:'橙色背景（是氛围不是重点）' },
+          emotion:{ tier:'mustDo', label:'excited testing · playful', cueForParent:'学水喷 "Swooooosh!" 手臂划动 + 假装被溅', childExpected:'学 swoosh / 学喷水动作' },
+          cognition:{ tier:'canDo', skills:['准备/检查', '因果(水管→喷水)', '拟声(swoosh)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'water',   zh:'水',   ipa:'/ˈwɔːtər/' },
+            { en:'check',   zh:'检查', ipa:'/tʃek/' },
+            { en:'swoosh',  zh:'哗',   ipa:'/swuːʃ/' },
+            { en:'blue',    zh:'蓝',   ipa:'/bluː/' },
+            { en:'big',     zh:'大',   ipa:'/bɪɡ/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Swoooooosh!',        zh:'哗——！',       ipa:'/swuːːʃ/',                repeat:10 },
+            { en:'Check the water!',   zh:'检查水管！',     ipa:'/tʃek ðə ˈwɔːtər/',      repeat:3 },
+            { en:"It's time to...",    zh:'该……了',       ipa:'/ɪts taɪm tuː/',          repeat:2 },
+            { en:'Big water!',         zh:'好多水！',       ipa:'/bɪɡ ˈwɔːtər/',           repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Swoosh!'], oneShot:['check'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['手臂大幅划动模拟水柱','拖长音 "Swooooosh!"','假装拿水管喷水','水柱从孩子头上"冲过"逗笑'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'学 swoosh + 假装喷水' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What sound does the water make?', expect:'Swoosh!',   response:'Yes! Big water sound!' },
+            { ask:'What color is the water?',        expect:'Blue!',      response:"Yes! Blue water!" }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'洗手/洗澡时说 "Swoosh! Water!" · 浇花时"Swoosh"' },
+          extensionPlay:{ tier:'skip', hint:'玩水枪 · 假装浇花 · 用喷雾瓶模拟消防' }
+        }
       },
       {
         num:'P3', title:'小心 · Watch out',
@@ -1548,7 +3075,56 @@ const books = [
         ],
         anchors:['watch out|小心','black|黑','cat|猫','splash|溅水'],
         tpr:'说 Watch out 时做"停"手势 + 惊讶表情 → 演水花溅到自己身上（做出躲避动作）',
-        why:'Watch out 是日常最高频的警告套语——从"小心开水"到"小心车"都用它。此页做出惊讶+躲避动作，让孩子把这个短语与"意外发生"的情境绑定。'
+        why:'Watch out 是日常最高频的警告套语——从"小心开水"到"小心车"都用它。此页做出惊讶+躲避动作，让孩子把这个短语与"意外发生"的情境绑定。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '张开手做 "Watch out!" 警示手势',
+            '惊呼 "Oh no! Cat\'s all wet!"',
+            '指黑猫湿了的样子（可以模仿甩水）'
+          ],
+          canDo:[
+            '问 "What happened to the cat?" → 被淋湿了',
+            '⭐ 联系生活："Watch out! Hot water!"'
+          ],
+          skip:[
+            '解释形容词顺序 (Little Black Cat)',
+            '介绍 splash 和 water 的语法差别'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'蓝色水柱 + 被淋湿的黑猫', antiTarget:'两位消防员（不是重点）' },
+          emotion:{ tier:'mustDo', label:'warning · uh-oh', cueForParent:'张开手做 "Watch out!" 手势 + 大眼睛 + 语调急', childExpected:'惊讶 / 学甩水' },
+          cognition:{ tier:'canDo', skills:['因果(方向错→意外)', '警示套语'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'watch out', zh:'小心', ipa:'/wɒtʃ aʊt/' },
+            { en:'cat',       zh:'猫',   ipa:'/kæt/' },
+            { en:'black',     zh:'黑',   ipa:'/blæk/' },
+            { en:'wet',       zh:'湿',   ipa:'/wet/' },
+            { en:'splash',    zh:'溅',   ipa:'/splæʃ/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Watch out!',           zh:'小心！',       ipa:'/wɒtʃ aʊt/',              repeat:5 },
+            { en:'Oh no!',               zh:'哎呀！',       ipa:'/oʊ noʊ/',                repeat:3 },
+            { en:'Little Black Cat!',    zh:'小黑猫！',     ipa:'/ˈlɪtl blæk kæt/',        repeat:3 },
+            { en:"Cat's all wet!",       zh:'猫全湿了！',   ipa:"/kæts ɔːl wet/",           repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Watch out!','Oh no!'], oneShot:['splash'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['张手做警示 stop 手势','惊呼 "Oh no!"（大眼睛+O嘴）','假装被水柱扫过（躲一躲）','指黑猫湿的样子'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'学惊讶 + 躲一躲 + 指湿猫' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What happened to the cat?', expect:'Wet! / 湿了',   response:"Oh no! Cat's all wet!" },
+            { ask:"Where's the cat?",           expect:'指黑猫',        response:'There she is!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'canDo', hint:'⭐ 危险时立刻用 "Watch out!"（开水/车/尖角）—— 高频生活套语' },
+          extensionPlay:{ tier:'skip', hint:'玩具躲水枪游戏 · 假装意外让孩子提醒你' }
+        }
       },
       {
         num:'P4', title:'小猫吓坏了 · 爬到屋顶',
@@ -1571,7 +3147,57 @@ const books = [
         ],
         anchors:['scared|害怕','climb|爬','up|上','roof|屋顶','down|下'],
         tpr:'手指从低往高做"爬"的动作 → 说 climb up up up → 做害怕表情让孩子模仿',
-        why:'scared 是情绪词，通过夸张表情+身体缩起来演出。up ↔ down 是最早的空间对比词对——一起给比单独给学得快得多。'
+        why:'scared 是情绪词，通过夸张表情+身体缩起来演出。up ↔ down 是最早的空间对比词对——一起给比单独给学得快得多。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '缩身 + 抖动演 "Scared!"（让孩子看到表情）',
+            '手指从低往高做爬 + 每一格念 "up up up"',
+            '指屋顶上的猫说 "On the roof!"'
+          ],
+          canDo:[
+            '问 "Where is the cat?" 期待 On the roof',
+            '问 "How does the cat feel?" 演一次 scared'
+          ],
+          skip:[
+            '解释 "won\'t" 缩写',
+            '介绍 "onto" 空间介词'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'屋顶上的黑猫（高高的）+ 波波松鼠仰望', antiTarget:'房子的其他细节' },
+          emotion:{ tier:'mustDo', label:'scared · worried', cueForParent:'缩起身体演 scared + 抬头看 + 担心表情', childExpected:'学 scared / 抬头看' },
+          cognition:{ tier:'canDo', skills:['空间(up / on the roof)', '因果(害怕→逃高)'] },
+          executiveFn:{ tier:'canDo', demand:'stay put(不下来)' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'scared', zh:'害怕', ipa:'/skerd/' },
+            { en:'climb',  zh:'爬',   ipa:'/klaɪm/' },
+            { en:'up',     zh:'上',   ipa:'/ʌp/' },
+            { en:'roof',   zh:'屋顶', ipa:'/ruːf/' },
+            { en:'down',   zh:'下',   ipa:'/daʊn/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Scared!',              zh:'害怕！',      ipa:'/skerd/',                repeat:3 },
+            { en:'Climb up up up!',      zh:'爬上上上！',   ipa:'/klaɪm ʌp ʌp ʌp/',       repeat:5 },
+            { en:'On the roof!',         zh:'在屋顶上！',   ipa:'/ɒn ðə ruːf/',           repeat:3 },
+            { en:"Won't come down!",     zh:'不下来！',     ipa:"/woʊnt kʌm daʊn/",       repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Up up up!','Scared!'], oneShot:['onto'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['缩身演 scared 让孩子看','手指做 up up up 爬','仰头看屋顶 + 担心表情','用两只手比划"上"和"下"'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'学 scared 表情 + 学爬手势 + 指高处' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Where is the cat?',       expect:'On the roof!', response:"Yes! Up up up on the roof!" },
+            { ask:'How does the cat feel?',  expect:'Scared!',      response:"Yes! Little Black Cat is scared." }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'孩子紧张时用表情演"scared"共情 · 爬楼梯说 "up up up"' },
+          extensionPlay:{ tier:'skip', hint:'玩具从低到高攀爬游戏 · 家里"救援"玩偶练习' }
+        }
       },
       {
         num:'P5', title:'取梯子 · Get the ladder',
@@ -1594,7 +3220,56 @@ const books = [
         ],
         anchors:['ladder|梯子','get|拿','big|大','ready|准备好'],
         tpr:'双手举高做"拿梯子"动作 → 让孩子帮忙"抬"想象中的梯子',
-        why:'Get the ___ 是最实用的英文动词框架——"去拿 XX"是家庭生活里最常见的指令。这一页学会 get 相当于开启了一整类日常表达。'
+        why:'Get the ___ 是最实用的英文动词框架——"去拿 XX"是家庭生活里最常见的指令。这一页学会 get 相当于开启了一整类日常表达。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '双手学抬大梯子（认真表情、微微弯腰）',
+            '大声有力说 "Get the ladder!"',
+            '用双手比一比"how big"（梯子有多长）'
+          ],
+          canDo:[
+            '问 "What do they need?" 期待 ladder',
+            '让孩子当帮手一起"抬"梯子'
+          ],
+          skip:[
+            '解释 ladder 的字面构成',
+            '介绍 "get + 名词" 的语法结构'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'大梯子 + 波波松鼠合作抬', antiTarget:'背景消防车（第二次出现）' },
+          emotion:{ tier:'mustDo', label:'focused · teamwork', cueForParent:'学抬东西动作 + 认真表情 + "Ready?"', childExpected:'学抬 / 说 ready' },
+          cognition:{ tier:'canDo', skills:['工具/需求', '合作', '解决问题'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'ladder', zh:'梯子',   ipa:'/ˈlædər/' },
+            { en:'get',    zh:'拿',     ipa:'/ɡet/' },
+            { en:'big',    zh:'大',     ipa:'/bɪɡ/' },
+            { en:'ready',  zh:'准备好', ipa:'/ˈredi/' },
+            { en:'need',   zh:'需要',   ipa:'/niːd/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Get the ladder!',   zh:'去拿梯子！',    ipa:'/ɡet ðə ˈlædər/',       repeat:5 },
+            { en:'A big ladder!',     zh:'一个大梯子！',   ipa:'/ə bɪɡ ˈlædər/',        repeat:3 },
+            { en:'Ready?',            zh:'准备好了？',     ipa:'/ˈredi/',                repeat:3 },
+            { en:'Here we go!',       zh:'走起！',         ipa:'/hɪər wi ɡoʊ/',         repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Get the ___!','Ready?'], oneShot:['ladder'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['学抬大梯子（认真+微弯腰）','双手做"举梯"动作','用手指从下往上比长度','让孩子帮忙一起"抬"'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Help','Point'], script:'一起抬 + 说 Ready + 比长度' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What do they need?',           expect:'Ladder!',   response:'Yes! A big ladder!' },
+            { ask:'Why do they need a ladder?',   expect:'救猫',       response:'To rescue Little Black Cat!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'"Get the [item]!"（Get the book / Get your shoes）是最实用的日常框架' },
+          extensionPlay:{ tier:'skip', hint:'用椅子/积木搭"梯子" · 假装救玩偶' }
+        }
       },
       {
         num:'P6', title:'爬上梯子 · Up up up',
@@ -1617,7 +3292,57 @@ const books = [
         ],
         anchors:['up|上','climb|爬','high|高','higher|更高'],
         tpr:'说 Up 就把孩子举高一次，重复三次；手指做"一格一格爬梯子"的动作',
-        why:'空间介词 up 通过身体举高激活前庭系统（内耳平衡感），比听 100 遍 "up" 的效果都好——身体记住的比耳朵深 10 倍。'
+        why:'空间介词 up 通过身体举高激活前庭系统（内耳平衡感），比听 100 遍 "up" 的效果都好——身体记住的比耳朵深 10 倍。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '每说 "Up" 把孩子举高一次（激活前庭）',
+            '手指做梯子一格一格爬 + 屏气',
+            '慢速拖长演 "Careful!"'
+          ],
+          canDo:[
+            '问 "Where is Maisy going?" 期待 Up',
+            '让孩子做"爬"手势'
+          ],
+          skip:[
+            '解释 "then" 的时序副词',
+            '介绍 higher 的比较级'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'波波在梯子中间往上爬 + 屋顶上的猫（目标）', antiTarget:'背景橙色天空' },
+          emotion:{ tier:'mustDo', label:'brave · careful · focused', cueForParent:'手指模拟爬梯子 + 屏息 + "Careful!"', childExpected:'学爬手势 / 屏息' },
+          cognition:{ tier:'canDo', skills:['空间(up 逐级)', '顺序', '悬念(...)'] },
+          executiveFn:{ tier:'canDo', demand:'persist' }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'up',       zh:'上',     ipa:'/ʌp/' },
+            { en:'climb',    zh:'爬',     ipa:'/klaɪm/' },
+            { en:'high',     zh:'高',     ipa:'/haɪ/' },
+            { en:'careful',  zh:'小心',   ipa:'/ˈkerfəl/' },
+            { en:'then',     zh:'然后',   ipa:'/ðen/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Climb up!',            zh:'爬上去！',     ipa:'/klaɪm ʌp/',              repeat:10 },
+            { en:'Up up up!',            zh:'上上上！',     ipa:'/ʌp ʌp ʌp/',              repeat:5 },
+            { en:'Careful!',             zh:'小心！',       ipa:'/ˈkerfəl/',               repeat:3 },
+            { en:'Then Maisy climbs...', zh:'然后波波爬…',  ipa:'/ðen ˈmeɪzi klaɪmz/',     repeat:2 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Up up up!','Careful!'], oneShot:['then'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['每说 Up 把孩子举高一次（前庭刺激）','手指做一格一格爬梯','屏气 + 慢速演 Careful','假装扶梯子'] },
+          childParticipation:{ tier:'mustDo', types:['Pretend','Point'], script:'学爬 + 被举高 + 屏气' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'What is Maisy doing?',    expect:'Climbing!',      response:'Yes! Climbing up up up!' },
+            { ask:'Where is Maisy going?',   expect:'Up! / 屋顶',      response:'Up to the roof! To save the cat.' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'爬楼梯/沙发时说 "Up up up!" · 抱起来时说 "Careful, up!"' },
+          extensionPlay:{ tier:'skip', hint:'爬爬垫/攀爬架 · 用积木搭梯子给玩具爬' }
+        }
       },
       {
         num:'P7', title:'救下小猫 · Well done',
@@ -1640,7 +3365,56 @@ const books = [
         ],
         anchors:['rescue|救','well done|做得好','firefighter|消防员','good job|棒'],
         tpr:'双手做"抱下来"动作 → 抱抱小猫玩偶 → 拍拍手说 Well done!',
-        why:'2 岁孩子已经能感受"帮助别人"带来的正向情绪。Well done / Good job 是英语世界最常用的表扬套语——家长听了要经常用回给孩子。'
+        why:'2 岁孩子已经能感受"帮助别人"带来的正向情绪。Well done / Good job 是英语世界最常用的表扬套语——家长听了要经常用回给孩子。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '大声表扬 "Well done, Maisy!"',
+            '拍手 + 竖大拇指',
+            '抱抱孩子说 "You\'re a hero too!"'
+          ],
+          canDo:[
+            '问 "Who saved the cat?" 期待 Maisy',
+            '⭐ 家长常用回孩子身上 "Good job!"'
+          ],
+          skip:[
+            '介绍 "firefighter" 的职业词',
+            '解释 rescue 与 save 的区别'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'波波抱着小黑猫下梯子 + 温暖的姿态', antiTarget:'黄色梯子背景' },
+          emotion:{ tier:'mustDo', label:'proud · warm relief', cueForParent:'拍手 + "Well done!" + 抱抱孩子', childExpected:'学拍手 / 竖大拇指' },
+          cognition:{ tier:'canDo', skills:['任务完成', '表扬套语(well done)'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'rescue',       zh:'救',      ipa:'/ˈreskjuː/' },
+            { en:'well done',    zh:'做得好',   ipa:'/wel dʌn/' },
+            { en:'firefighter',  zh:'消防员',   ipa:'/ˈfaɪərˌfaɪtər/' },
+            { en:'hero',         zh:'英雄',     ipa:'/ˈhɪəroʊ/' },
+            { en:'save',         zh:'救',       ipa:'/seɪv/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Well done, Maisy!',   zh:'做得好，波波！', ipa:'/wel dʌn ˈmeɪzi/',        repeat:5 },
+            { en:'Rescue!',             zh:'救援！',        ipa:'/ˈreskjuː/',              repeat:3 },
+            { en:'Firefighter Maisy!',  zh:'消防员波波！',   ipa:'/ˈfaɪərˌfaɪtər ˈmeɪzi/',  repeat:3 },
+            { en:'Good job!',           zh:'棒！',           ipa:'/ɡʊd dʒɒb/',              repeat:5 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Well done!','Good job!'], oneShot:['rescues'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['大声拍手庆祝','竖大拇指 + Well done!','抱抱孩子说 "You\'re a hero too!"','假装抱小猫下来'] },
+          childParticipation:{ tier:'mustDo', types:['Clap','Pretend'], script:'拍手 + 竖大拇指 + 学 well done' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:'Who saved the cat?',  expect:'Maisy!',   response:'Yes! Well done, Firefighter Maisy!' },
+            { ask:'Is Maisy a hero?',    expect:'Yes!',      response:'Yes! Maisy is our hero!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'canDo', hint:'⭐ 孩子每完成一件小事说 "Well done!" / "Good job!" 建立积极反馈' },
+          extensionPlay:{ tier:'skip', hint:'假装救玩偶 · 每次帮忙做家务后拍手 well done' }
+        }
       },
       {
         num:'P8', title:'带小猫兜风 · Bye-bye',
@@ -1663,8 +3437,86 @@ const books = [
         ],
         anchors:['ride|兜风','bye-bye|再见','end|结束','together|一起'],
         tpr:'挥手说 Bye-bye → 拉警报"Nee-nah!" → 收尾 "The end. See you next time, Maisy!"',
-        why:'首尾呼应——开头是 Nee-nah 出发，结尾又是 Nee-nah 兜风。绕一圈回来的叙事闭环让孩子有强烈满足感。Bye-bye 是最容易学会主动使用的英文套语之一。'
+        why:'首尾呼应——开头是 Nee-nah 出发，结尾又是 Nee-nah 兜风。绕一圈回来的叙事闭环让孩子有强烈满足感。Bye-bye 是最容易学会主动使用的英文套语之一。',
+        // --- v4 DIAL ---
+        priority:{
+          mustDo:[
+            '挥手大声 "Bye-bye!" 三只都要打招呼',
+            '一起学警笛 "Nee-nah, nee-nah!" 出发',
+            '拥抱孩子说 "You\'re safe too!"'
+          ],
+          canDo:[
+            '问 "Who\'s in the fire engine?" 数三个',
+            '呼应开头：这本书是不是又回到 Nee-nah 了？'
+          ],
+          skip:[
+            '解释 "take for a ride" 的搭配'
+          ]
+        },
+        development:{
+          attention:{ tier:'mustDo', target:'消防车 + 车里的波波、Cyril、黑猫（三个一起）', antiTarget:'橙色背景' },
+          emotion:{ tier:'mustDo', label:'happy ending · together · warm', cueForParent:'挥手 bye-bye + 学 vroom + 拥抱孩子', childExpected:'挥手 / 学 Nee-nah' },
+          cognition:{ tier:'canDo', skills:['邀请(take for a ride)', '闭环收尾', '首尾呼应'] }
+        },
+        language:{
+          coreVocab:{ tier:'mustDo', items:[
+            { en:'ride',      zh:'兜风', ipa:'/raɪd/' },
+            { en:'bye-bye',   zh:'再见', ipa:'/ˌbaɪˈbaɪ/' },
+            { en:'together',  zh:'一起', ipa:'/təˈɡeðər/' },
+            { en:'take',      zh:'带',   ipa:'/teɪk/' },
+            { en:'end',       zh:'结束', ipa:'/end/' }
+          ]},
+          coreChunks:{ tier:'mustDo', items:[
+            { en:'Bye-bye!',            zh:'再见！',       ipa:'/ˌbaɪˈbaɪ/',            repeat:5 },
+            { en:'Take a ride!',        zh:'去兜风！',      ipa:'/teɪk ə raɪd/',        repeat:3 },
+            { en:'Nee-nah, nee-nah!',   zh:'呜咿呜咿！',   ipa:'/niː nɑː niː nɑː/',    repeat:5 },
+            { en:'The end!',            zh:'结束啦！',      ipa:'/ði end/',              repeat:3 }
+          ]},
+          repetition:{ tier:'mustDo', highFreq:['Bye-bye!','Nee-nah!'], oneShot:['for a ride'] }
+        },
+        interaction:{
+          parentAction:{ tier:'mustDo', items:['挥手做 bye-bye 三次（每个角色一次）','学警笛拉长音 "Nee-nah!"','双手方向盘 + 假装出发','抱抱孩子仪式化收尾 "The end. See you next time!"'] },
+          childParticipation:{ tier:'mustDo', types:['Wave','Pretend'], script:'挥手 Bye-bye + 学 Nee-nah' },
+          openQuestions:{ tier:'canDo', items:[
+            { ask:"Who's in the fire engine?", expect:'Maisy, Cyril, Cat!',   response:'Yes! Three friends together!' },
+            { ask:'Where are they going?',      expect:'For a ride!',          response:'Bye-bye! Nee-nah nee-nah!' }
+          ]}
+        },
+        transfer:{
+          dailyLife:{ tier:'skip', hint:'家人出门时挥手 "Bye-bye!" 建立固定收尾' },
+          extensionPlay:{ tier:'skip', hint:'玩具消防车带朋友兜风 · 睡前重演救援闭环' }
+        }
       }
+    ],
+    // ===== v4 · DIAL Framework book-level =====
+    ageBand:'2-3',
+    totalPages:8,
+    developmentMap:{
+      theme:'任务出发 → 意外发生 → 情绪高潮 → 工具使用 → 救援闭环',
+      nodes:[
+        { page:'P1', beat:'出发',       dimension:'Attention',   label:'Nee-nah 警报 + 消防车' },
+        { page:'P2', beat:'装备检查',   dimension:'Cognition',   label:'Swoosh 水的拟声' },
+        { page:'P3', beat:'意外发生',   dimension:'Emotion',     label:'Watch out! 警告套语' },
+        { page:'P4', beat:'情绪升级',   dimension:'Emotion',     label:'Scared + up/on the roof' },
+        { page:'P5', beat:'工具准备',   dimension:'Cognition',   label:'Get the ladder 动词框架' },
+        { page:'P6', beat:'攀爬(up)',   dimension:'ExecutiveFn', label:'Up up up 空间+坚持' },
+        { page:'P7', beat:'救援成功',   dimension:'Emotion',     label:'Well done! 表扬套语' },
+        { page:'P8', beat:'闭环收尾',   dimension:'Attention',   label:'Bye-bye + Nee-nah 呼应开头' }
+      ]
+    },
+    dailyLifeConnection:[
+      '街上看到消防车说 "Nee-nah! A fire engine!"',
+      '开水/水管旁警告 "Watch out! Hot!"',
+      '爬楼梯说 "Up, up, up!"',
+      '孩子完成事说 "Well done! Good job!"',
+      '出门挥手 "Bye-bye!"'
+    ],
+    extensionPlay:[
+      '椅子/沙发当消防车，拉警笛 Nee-nah nee-nah',
+      '假装水管 Swoosh 浇花 / 洗玩具',
+      '把玩偶放高处让孩子当消防员救下来',
+      '搭"梯子"（积木 / 椅子）说 "Up up up!"',
+      '睡前重演救援闭环（问题→工具→救援→表扬）'
     ]
   }
 ];
@@ -1695,14 +3547,18 @@ function renderTabs(){
 
 function renderBooks(){
   const mount = document.getElementById('books-mount');
-  mount.innerHTML = books.map(b => `
-    <section class="section" data-id="${b.id}">
+  mount.innerHTML = books.map(b => {
+    const isV4 = b.pages.some(p => p.development);
+    const initTier = isV4 ? DS.getStage(b.id) : '';
+    return `
+    <section class="section" data-id="${b.id}" data-v4="${isV4?'1':'0'}" data-tier="${initTier}" style="--book-color:${b.color}">
       <h2 class="book-title">
         <span class="dot" style="background:${b.color}"></span>
         ${b.emoji} ${b.title}
       </h2>
       <p class="book-sub">${b.subtitle}</p>
       ${b.redefine ? `<div class="book-redefine">${b.redefine}</div>` : ''}
+      ${renderDevelopmentMap(b)}
       ${(Array.isArray(b.storyLines) && b.storyLines.length) ? `
         <div class="story-lines">
           ${b.storyLines.map(sl => `
@@ -1718,9 +3574,11 @@ function renderBooks(){
         <b>亮点词汇</b>：${b.goldMine}<br>
         <b>玩法循环</b>：${b.play}
       </div>
+      ${renderBookTransfer(b)}
       ${b.pages.map(p => renderPage(p, b.klass)).join('')}
     </section>
-  `).join('');
+    `;
+  }).join('');
 
   // Bind why toggles
   mount.querySelectorAll('.why-toggle').forEach(t => {
@@ -1729,12 +3587,261 @@ function renderBooks(){
       t.nextElementSibling.classList.toggle('open');
     });
   });
+
+  // Bind Dev Map toggles
+  mount.querySelectorAll('.dev-map-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('open');
+      btn.nextElementSibling.classList.toggle('open');
+    });
+  });
 }
 
 function renderPage(p, klass){
-  // 新版：有 phrases 字段就走 v3 结构；旧版：保留原 script 单行渲染
+  // v4 DIAL：有 development 字段就走新框架
+  if (p.development) return renderPageV4(p, klass);
+  // v3：有 phrases 字段就走 v3 结构
   if (Array.isArray(p.phrases)) return renderPageV3(p, klass);
+  // Legacy 兜底
   return renderPageLegacy(p, klass);
+}
+
+/* ================= renderPageV4 · DIAL Framework ================= */
+function renderPageV4(p, klass){
+  const d = p.development || {};
+  const l = p.language || {};
+  const i = p.interaction || {};
+  const t = p.transfer || {};
+
+  const tierClass = (field, defaultTier) => `tier-${(field && field.tier) || defaultTier || 'mustDo'}`;
+
+  // 计算 layer 容器的 tier：取所有 field 中最"低"的 tier
+  // 若全部 field 都是 skip，整层就是 skip（初读+熟读时整层隐藏）
+  const layerTier = (fields) => {
+    const list = fields.filter(f => f && f.tier).map(f => f.tier);
+    if (list.length === 0) return 'mustDo';
+    if (list.includes('mustDo')) return 'mustDo';
+    if (list.includes('canDo')) return 'canDo';
+    return 'skip';
+  };
+
+  // Layer 1 · Development
+  const attHtml = d.attention ? `
+    <div class="dial-field ${tierClass(d.attention)}">
+      <span class="dial-label">👁️ 视觉焦点</span>
+      <div class="dial-value">${d.attention.target || ''}</div>
+      ${d.attention.antiTarget ? `<div class="dial-sub">避开：${d.attention.antiTarget}</div>` : ''}
+    </div>` : '';
+  const emoHtml = d.emotion ? `
+    <div class="dial-field ${tierClass(d.emotion)}">
+      <span class="dial-label">😊 情绪</span>
+      <div class="dial-value">${d.emotion.label || ''}</div>
+      ${d.emotion.cueForParent ? `<div class="dial-sub">家长演：${d.emotion.cueForParent}</div>` : ''}
+      ${d.emotion.childExpected ? `<div class="dial-sub">孩子回应：${d.emotion.childExpected}</div>` : ''}
+    </div>` : '';
+  const cogHtml = d.cognition ? `
+    <div class="dial-field ${tierClass(d.cognition, 'canDo')}">
+      <span class="dial-label">🧩 认知能力</span>
+      <div class="dial-value">${(d.cognition.skills||[]).join(' · ')}</div>
+    </div>` : '';
+  const efHtml = d.executiveFn ? `
+    <div class="dial-field ${tierClass(d.executiveFn)}">
+      <span class="dial-label">⚡ 执行功能</span>
+      <div class="dial-value">${d.executiveFn.demand || ''}</div>
+    </div>` : '';
+  const devTier = layerTier([d.attention, d.emotion, d.cognition, d.executiveFn]);
+  const devHtml = (attHtml+emoHtml+cogHtml+efHtml) ? `
+    <section class="dial-layer dial-development tier-${devTier}">
+      <div class="dial-layer-title">🧠 Layer 1 · 儿童发展</div>
+      ${attHtml}${emoHtml}${cogHtml}${efHtml}
+    </section>` : '';
+
+  // Layer 2 · Language
+  const vocabHtml = (l.coreVocab && l.coreVocab.items) ? `
+    <div class="dial-field ${tierClass(l.coreVocab)}">
+      <span class="dial-label">📝 核心词汇 (≤5)</span>
+      <div class="vocab-cards">
+        ${l.coreVocab.items.map(v => `
+          <div class="vocab-card">
+            <div class="v-en">${v.en}</div>
+            ${v.ipa ? `<div class="v-ipa">${v.ipa}</div>` : ''}
+            ${v.zh ? `<div class="v-zh">${v.zh}</div>` : ''}
+          </div>
+        `).join('')}
+      </div>
+    </div>` : '';
+  const chunksHtml = (l.coreChunks && l.coreChunks.items) ? `
+    <div class="dial-field ${tierClass(l.coreChunks)}">
+      <span class="dial-label">💬 核心 Chunks</span>
+      <div class="chunks-list">
+        ${l.coreChunks.items.map(c => `
+          <div class="chunk-item">
+            <span class="chunk-en">${c.en}</span>
+            ${c.ipa ? `<span class="chunk-ipa">${c.ipa}</span>` : ''}
+            ${c.zh ? `<span class="chunk-zh">${c.zh}</span>` : ''}
+            ${c.repeat ? `<span class="chunk-repeat">×${c.repeat}</span>` : ''}
+          </div>
+        `).join('')}
+      </div>
+    </div>` : '';
+  const repHtml = l.repetition ? `
+    <div class="dial-field ${tierClass(l.repetition)}">
+      <span class="dial-label">🔁 重复策略</span>
+      ${(l.repetition.highFreq||[]).length ? `<div class="repeat-hi">高频重复：${l.repetition.highFreq.join(' · ')}</div>` : ''}
+      ${(l.repetition.oneShot||[]).length ? `<div class="repeat-lo">一次即可：${l.repetition.oneShot.join(' · ')}</div>` : ''}
+    </div>` : '';
+  const langTier = layerTier([l.coreVocab, l.coreChunks, l.repetition]);
+  const langHtml = (vocabHtml+chunksHtml+repHtml) ? `
+    <section class="dial-layer dial-language tier-${langTier}">
+      <div class="dial-layer-title">🗣️ Layer 2 · 语言输入</div>
+      ${vocabHtml}${chunksHtml}${repHtml}
+    </section>` : '';
+
+  // Layer 3 · Interaction
+  const paHtml = (i.parentAction && i.parentAction.items) ? `
+    <div class="dial-field ${tierClass(i.parentAction)}">
+      <span class="dial-label">👨‍👩 家长动作（不是话）</span>
+      <ul class="action-list">${i.parentAction.items.map(x => `<li>${x}</li>`).join('')}</ul>
+    </div>` : '';
+  const cpHtml = i.childParticipation ? `
+    <div class="dial-field ${tierClass(i.childParticipation)}">
+      <span class="dial-label">🧒 孩子参与</span>
+      ${(i.childParticipation.types||[]).length ? `
+        <div class="participation-types">${i.childParticipation.types.map(x => `<span class="p-type">${x}</span>`).join('')}</div>
+      ` : ''}
+      ${i.childParticipation.script ? `<div class="dial-sub">${i.childParticipation.script}</div>` : ''}
+    </div>` : '';
+  const oqHtml = (i.openQuestions && i.openQuestions.items) ? `
+    <div class="dial-field ${tierClass(i.openQuestions, 'canDo')}">
+      <span class="dial-label">❓ 开放式提问 (≤2)</span>
+      ${i.openQuestions.items.map(q => `
+        <div class="qa-mini">
+          <div class="qa-ask">${q.ask}</div>
+          <div class="qa-expect">→ 期待：${q.expect}</div>
+          ${q.response ? `<div class="qa-response">回应：${q.response}</div>` : ''}
+        </div>
+      `).join('')}
+    </div>` : '';
+  const intTier = layerTier([i.parentAction, i.childParticipation, i.openQuestions]);
+  const intHtml = (paHtml+cpHtml+oqHtml) ? `
+    <section class="dial-layer dial-interaction tier-${intTier}">
+      <div class="dial-layer-title">🤝 Layer 3 · 互动契约</div>
+      ${paHtml}${cpHtml}${oqHtml}
+    </section>` : '';
+
+  // Layer 4 · Transfer
+  const dlHtml = t.dailyLife ? `
+    <div class="dial-field ${tierClass(t.dailyLife, 'skip')}">
+      <span class="dial-label">🏠 日常连接</span>
+      <div class="dial-value">${t.dailyLife.hint}</div>
+    </div>` : '';
+  const epHtml = t.extensionPlay ? `
+    <div class="dial-field ${tierClass(t.extensionPlay, 'skip')}">
+      <span class="dial-label">🎮 延伸游戏</span>
+      <div class="dial-value">${t.extensionPlay.hint}</div>
+    </div>` : '';
+  const trTier = layerTier([t.dailyLife, t.extensionPlay]);
+  const trHtml = (dlHtml+epHtml) ? `
+    <section class="dial-layer dial-transfer tier-${trTier}">
+      <div class="dial-layer-title">🌱 Layer 4 · 生活迁移</div>
+      ${dlHtml}${epHtml}
+    </section>` : '';
+
+  // Teaching Priority Engine（页顶汇总："这一页只做这 3 件事"）
+  const pr = p.priority || {};
+  const priorityHtml = (pr.mustDo || pr.canDo || pr.skip) ? `
+    <section class="dial-priority">
+      <div class="priority-header">🎯 这一页只做这几件事</div>
+      ${(pr.mustDo && pr.mustDo.length) ? `
+        <div class="priority-band band-must">
+          <div class="band-title"><span class="stars">⭐⭐⭐</span>必做 · 今天一定做</div>
+          <ol class="band-list">${pr.mustDo.map(x => `<li>${x}</li>`).join('')}</ol>
+        </div>
+      ` : ''}
+      ${(pr.canDo && pr.canDo.length) ? `
+        <div class="priority-band band-can tier-canDo">
+          <div class="band-title"><span class="stars">⭐⭐</span>可做 · 孩子状态好再做</div>
+          <ul class="band-list">${pr.canDo.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+      ` : ''}
+      ${(pr.skip && pr.skip.length) ? `
+        <div class="priority-band band-skip tier-skip">
+          <div class="band-title"><span class="stars">⭐</span>可跳过 · 以后再练</div>
+          <ul class="band-list">${pr.skip.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+      ` : ''}
+    </section>
+  ` : '';
+
+  // 阶段提示条
+  const tipHtml = `
+    <div class="dial-tips tip-first">📖 初读模式：先做好上面 3 件事 · 点顶部"熟读"解锁更多字段</div>
+    <div class="dial-tips tip-familiar">🌿 熟读模式：加入提问 + 情绪细节 · 点"精读"解锁生活迁移 + 原理</div>
+    <div class="dial-tips tip-deep">🌳 精读模式：全部展开 · 记得回归重点：${d.attention?.target || p.title}</div>
+  `;
+
+  return `
+    <div class="page v4 ${klass}" data-page="${p.num}">
+      <div class="page-head">
+        <span class="page-num">${p.num}</span>
+        <span class="page-title">${p.title}</span>
+      </div>
+      ${priorityHtml}
+      ${tipHtml}
+      ${devHtml}${langHtml}${intHtml}${trHtml}
+      ${p.why ? `<div class="why-toggle tier-skip">💡 为什么这样做</div><div class="why tier-skip">${p.why}</div>` : ''}
+    </div>
+  `;
+}
+
+/* ================= renderDevelopmentMap ================= */
+function renderDevelopmentMap(b){
+  if (!b.developmentMap || !b.developmentMap.nodes) return '';
+  return `
+    <div class="dev-map-wrap">
+      <button class="dev-map-btn" type="button">读之前先看发展路径</button>
+      <div class="dev-map">
+        ${b.developmentMap.theme ? `<div class="dev-map-theme">主题：${b.developmentMap.theme}</div>` : ''}
+        <div class="dev-map-track">
+          ${b.developmentMap.nodes.map(n => `
+            <div class="dev-map-node" data-dim="${n.dimension}">
+              <div class="n-page">${n.page}</div>
+              <div class="n-beat">${n.beat}</div>
+              <div class="n-label">${n.label}</div>
+            </div>
+          `).join('')}
+        </div>
+        <div class="dev-map-legend">
+          <span class="l-dim" data-dim="Emotion">情绪</span>
+          <span class="l-dim" data-dim="ExecutiveFn">执行功能</span>
+          <span class="l-dim" data-dim="Cognition">认知</span>
+          <span class="l-dim" data-dim="Attention">注意</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ================= renderBookTransfer (v4 book-level) ================= */
+function renderBookTransfer(b){
+  const hasTransfer = (b.dailyLifeConnection && b.dailyLifeConnection.length) || (b.extensionPlay && b.extensionPlay.length);
+  if (!hasTransfer) return '';
+  return `
+    <div class="book-transfer tier-skip">
+      ${(b.dailyLifeConnection && b.dailyLifeConnection.length) ? `
+        <div class="t-block">
+          <div class="t-title">🏠 全书生活迁移</div>
+          <ul>${b.dailyLifeConnection.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+      ` : ''}
+      ${(b.extensionPlay && b.extensionPlay.length) ? `
+        <div class="t-block">
+          <div class="t-title">🎮 全书延伸游戏</div>
+          <ul>${b.extensionPlay.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+      ` : ''}
+    </div>
+  `;
 }
 
 function renderPageV3(p, klass){
@@ -1822,7 +3929,79 @@ function switchTo(id){
   document.querySelectorAll('.section').forEach(s =>
     s.classList.toggle('active', s.dataset.id === id)
   );
+  syncStageSwitch(id);
+  maybeShowPromoteModal(id);
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function syncStageSwitch(id){
+  const sw = document.getElementById('stage-switch');
+  const section = document.querySelector('.section[data-id="'+id+'"]');
+  const isV4 = section && section.dataset.v4 === '1';
+  if (!isV4){ sw.hidden = true; return; }
+  sw.hidden = false;
+  const stage = DS.getStage(id);
+  sw.querySelectorAll('button').forEach(b => {
+    b.classList.toggle('active', b.dataset.stage === stage);
+  });
+  section.dataset.tier = stage;
+}
+
+function applyStage(id, stage, byUser){
+  DS.setStage(id, stage, byUser);
+  const section = document.querySelector('.section[data-id="'+id+'"]');
+  if (section) section.dataset.tier = stage;
+  document.querySelectorAll('#stage-switch button').forEach(b => {
+    b.classList.toggle('active', b.dataset.stage === stage);
+  });
+}
+
+function maybeShowPromoteModal(id){
+  // 只有 v4 书才有阶段感
+  const section = document.querySelector('.section[data-id="'+id+'"]');
+  if (!section || section.dataset.v4 !== '1') return;
+  if (!DS.atThreshold(id)) return;
+  const n = DS.getCount(id);
+  if (DS.isPromoted(id, n)) return;
+  showPromoteModal(id, n);
+}
+
+function showPromoteModal(id, n){
+  const book = books.find(b => b.id === id);
+  if (!book) return;
+  const nextStage = n === 3 ? 'familiar' : 'deep';
+  const nextLabel = n === 3 ? '🌿 熟读' : '🌳 精读';
+  const wrap = document.createElement('div');
+  wrap.className = 'promote-modal-backdrop';
+  wrap.innerHTML = `
+    <div class="promote-modal">
+      <div class="p-emoji">🌟</div>
+      <div class="p-title">你已经和宝宝读了 ${n} 次《${book.title}》</div>
+      <div class="p-desc">要不要升到 <b>${nextLabel}</b> 模式，多解锁一层建议？</div>
+      <div class="p-btns">
+        <button class="p-btn-primary" data-act="upgrade">升级到 ${nextLabel}</button>
+        <button class="p-btn-secondary" data-act="stay">还想再多读几次</button>
+        <button class="p-btn-off" data-act="off">不再自动升 · 使用手动切换</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(wrap);
+  wrap.addEventListener('click', e => {
+    const act = e.target.dataset && e.target.dataset.act;
+    if (!act) return;
+    if (act === 'upgrade') applyStage(id, nextStage, false);
+    else if (act === 'off') localStorage.setItem('dial.stageOverride.'+id, '1');
+    DS.markPromoted(id, n);
+    document.body.removeChild(wrap);
+  });
+}
+
+/* Count 手动 +1 helper（供以后加"我今天读完了"按钮用） */
+function markReadOnce(id){
+  const n = DS.bumpCount(id);
+  syncStageSwitch(id);
+  maybeShowPromoteModal(id);
+  return n;
 }
 
 /* Controls */
@@ -1850,6 +4029,15 @@ document.getElementById('btn-layers').addEventListener('click', function(){
     const el = document.getElementById('five-layers-block');
     if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
   }, 120);
+});
+
+// Stage-switch 手动切档
+document.getElementById('stage-switch').addEventListener('click', function(e){
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  const activeSection = document.querySelector('.section.active[data-v4="1"]');
+  if (!activeSection) return;
+  applyStage(activeSection.dataset.id, btn.dataset.stage, true);
 });
 
 renderTabs();
